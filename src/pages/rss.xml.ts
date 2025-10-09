@@ -6,7 +6,7 @@ export async function GET() {
     .sort((a,b)=>b.data.date.getTime()-a.data.date.getTime());
 
   return rss({
-    title: "Tech & Trek — Cheng",
+    title: "Tech & Trek",
     description: "AI, Space Tech, Outdoor, Thoughts, Startups, Money",
     site: import.meta.env.SITE,
     items: posts.map((p)=>({
