@@ -1,12 +1,19 @@
 ---
 import { getCollection } from "astro:content";
 import PostLayout from "../../layouts/PostLayout.astro";
+
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
   return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
 }
+
 const { post } = Astro.props;
-const { Content, data } = await post.render();
+
+// ✅ render only returns Content (and headings, etc.)
+const { Content } = await post.render();
+
+// ✅ frontmatter is on post.data
+const { data } = post;
 ---
 <PostLayout frontmatter={data}>
   <Content />
