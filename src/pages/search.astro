@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Search — Tech & Trek">
+  <div id="search" class="rounded-2xl border border-white/5 bg-surface p-6"></div>
+  <script src="/pagefind/pagefind-ui.js"></script>
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script is:inline>
+    new PagefindUI({ element: "#search" });
+  </script>
+</BaseLayout>

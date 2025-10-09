@@ -1,0 +1,24 @@
+{
+  "name": "cheng-blog",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && pagefind --site dist",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "astro": "^5.14.1"
+  },
+  "devDependencies": {
+    "@astrojs/image": "^0.18.0",
+    "@astrojs/mdx": "^4.3.6",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "pagefind": "^1.4.0",
+    "tailwindcss": "^4.1.14"
+  }
+}

@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: default inverted prose since we're dark-first */
+.prose {
+  --tw-prose-body: #d4d9e3;
+  --tw-prose-headings: #e8edf7;
+  --tw-prose-links: #22d3ee;
+}

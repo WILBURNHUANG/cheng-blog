@@ -1,0 +1,32 @@
+---
+const { title = "Cheng — Tech & Trek", description = "AI, Space Tech, Outdoor, Thoughts, Startups, Money" } = Astro.props;
+---
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.ico" />
+	<script defer data-domain="YOURDOMAIN.com" src="https://plausible.io/js/script.js"></script>
+  </head>
+  <body class="bg-bg text-text antialiased">
+    <header class="sticky top-0 z-50 border-b border-white/5 bg-bg/70 backdrop-blur">
+      <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <a href="/" class="font-semibold tracking-tight">Tech & Trek</a>
+        <div class="flex gap-4 text-sm text-muted">
+          <a href="/ai">AI</a><a href="/space-tech">Space Tech</a>
+          <a href="/outdoor-sports">Outdoor</a><a href="/thoughts">Thoughts</a>
+          <a href="/startups">Startups</a><a href="/money">Money</a>
+          <a href="/about">About</a>
+        </div>
+      </nav>
+    </header>
+    <main class="mx-auto max-w-6xl px-4 py-10">
+      <slot />
+    </main>
+    <footer class="mx-auto max-w-6xl px-4 py-12 text-sm text-muted border-t border-white/5">
+      © {new Date().getFullYear()} Cheng. All rights reserved.
+    </footer>
+  </body>
+</html>

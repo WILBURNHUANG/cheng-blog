@@ -1,0 +1,11 @@
+---
+const { post } = Astro.props;
+const { data, slug } = post;
+---
+<a href={`/posts/${slug}`} class="group block rounded-2xl border border-white/5 bg-surface p-4 hover:border-white/10">
+  {data.hero && <img src={data.hero} alt={data.title} class="mb-4 aspect-[4/3] w-full rounded-xl object-cover" loading="lazy" />}
+  <p class="text-xs text-muted">{data.category}</p>
+  <h3 class="mt-1 font-semibold">{data.title}</h3>
+  <p class="mt-1 text-sm text-muted line-clamp-2">{data.description}</p>
+  <p class="mt-2 text-xs text-muted">{data.date.toDateString()}</p>
+</a>
