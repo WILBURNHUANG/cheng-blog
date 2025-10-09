@@ -3,9 +3,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 <BaseLayout title="Search — Tech & Trek">
   <div id="search" class="rounded-2xl border border-white/5 bg-surface p-6"></div>
-  <script src="/pagefind/pagefind-ui.js"></script>
-  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+
+  <!-- Important: mark public assets as inline so Astro/Vite won't bundle them -->
+  <link is:inline href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+
+  <!-- Then instantiate the UI -->
   <script is:inline>
-    new PagefindUI({ element: "#search" });
+    // Wait for the CSS/JS to be available, then mount
+    window.addEventListener("DOMContentLoaded", () => {
+      // PagefindUI is exposed by pagefind-ui.js
+      new PagefindUI({ element: "#search" });
+    });
   </script>
 </BaseLayout>
