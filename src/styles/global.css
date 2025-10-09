@@ -1,12 +1,35 @@
 @import "tailwindcss";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Optional: default inverted prose since we're dark-first */
-.prose {
-  --tw-prose-body: #d4d9e3;
-  --tw-prose-headings: #e8edf7;
-  --tw-prose-links: #22d3ee;
+@layer base {
+  html {
+    font-family: "Inter", "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background-color: #050a19;
+    color: #f1f5ff;
+  }
+
+  body {
+    font-feature-settings: "ss01" on, "ss02" on;
+    letter-spacing: 0.01em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  .prose {
+    --tw-prose-body: #e6eeff;
+    --tw-prose-headings: #f1f5ff;
+    --tw-prose-links: #5ce1ff;
+    --tw-prose-bold: #f8fbff;
+    --tw-prose-quotes: #d0e0ff;
+  }
 }

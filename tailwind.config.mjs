@@ -1,25 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  // Tell Tailwind where to scan for class names
   content: [
     "./src/**/*.{astro,html,md,mdx,ts,tsx,js,jsx}",
   ],
-
-  // We’ll control dark mode manually by toggling a 'dark' class on <html>
   darkMode: "class",
-
   theme: {
     extend: {
-      // Your premium dark palette (adjust if you like)
       colors: {
-        bg: "#0C1117",       // page background
-        surface: "#0F1722",  // cards / surfaces
-        text: "#D4D9E3",     // primary text
-        muted: "#98A1B3",    // secondary text
-        accent: "#22D3EE"    // links / highlights (cyan)
+        bg: "#050A19",
+        surface: "#0A1530",
+        surfaceMuted: "#0F1D3D",
+        text: "#F1F5FF",
+        muted: "#9DB4D8",
+        accent: "#5CE1FF",
       },
-
-      // Optional: a nicer container helper
+      fontFamily: {
+        sans: ["'Inter'", "'Space Grotesk'", "system-ui", "-apple-system", "BlinkMacSystemFont", "'Segoe UI'", "sans-serif"],
+        display: ["'Space Grotesk'", "'Inter'", "system-ui", "sans-serif"],
+      },
       container: {
         center: true,
         padding: "1rem",
@@ -31,32 +29,36 @@ export default {
           "2xl": "1400px",
         },
       },
-
-      // Optional: typography tweaks for long-form MDX
       typography: {
         DEFAULT: {
           css: {
-            color: "#D4D9E3",
-            a: { color: "#22D3EE", textDecoration: "none" },
-            strong: { color: "#E6EBF5" },
-            code: { color: "#E6EBF5" },
-            blockquote: { color: "#C7CEDD", borderLeftColor: "rgba(255,255,255,0.1)" },
+            color: "#E6EEFF",
+            a: { color: "#5CE1FF", textDecoration: "none" },
+            strong: { color: "#F7FAFF" },
+            code: { color: "#F7FAFF" },
+            blockquote: {
+              color: "#D0E0FF",
+              borderLeftColor: "rgba(92,225,255,0.3)",
+              backgroundColor: "rgba(10,21,48,0.6)",
+            },
           },
         },
         invert: {
           css: {
-            color: "#D4D9E3",
-            a: { color: "#22D3EE" },
-            strong: { color: "#E6EBF5" },
-            code: { color: "#E6EBF5" },
-            blockquote: { color: "#C7CEDD", borderLeftColor: "rgba(255,255,255,0.1)" },
+            color: "#E6EEFF",
+            a: { color: "#5CE1FF" },
+            strong: { color: "#F7FAFF" },
+            code: { color: "#F7FAFF" },
+            blockquote: {
+              color: "#D0E0FF",
+              borderLeftColor: "rgba(92,225,255,0.3)",
+              backgroundColor: "rgba(10,21,48,0.6)",
+            },
           },
         },
       },
     },
   },
-
-  // Enable official plugins
   plugins: [
     require("@tailwindcss/typography"),
   ],
