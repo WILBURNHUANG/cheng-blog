@@ -1,10 +1,7 @@
 ---
 import "../styles/global.css";
 
-const {
-  title = "Cheng — Tech & Trek",
-  description = "AI, Space Tech, Outdoor, Thoughts, Startups, Money",
-} = Astro.props;
+const { title = "Cheng — Tech & Trek", description = "AI, Space Tech, Outdoor, Thoughts, Startups, Money" } = Astro.props;
 ---
 <html lang="en" class="dark">
   <head>
@@ -13,36 +10,31 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+        <script defer data-domain="YOURDOMAIN.com" src="https://plausible.io/js/script.js"></script>
   </head>
-  <body class="min-h-screen bg-gradient-to-br from-[#030a1a] via-[#050f24] to-[#0b1f3f] text-text antialiased">
-    <div class="relative flex min-h-screen flex-col overflow-hidden font-sans">
-      <div aria-hidden="true" class="pointer-events-none absolute -top-40 left-[-10%] h-[28rem] w-[28rem] rounded-full bg-accent/10 blur-3xl"></div>
-      <div aria-hidden="true" class="pointer-events-none absolute -bottom-48 right-[-15%] h-[32rem] w-[32rem] rounded-full bg-[#7c5cff]/10 blur-[120px]"></div>
+  <body class="min-h-screen bg-[#050d1f] text-text antialiased">
+    <div class="relative flex min-h-screen flex-col overflow-hidden">
+      <div aria-hidden="true" class="pointer-events-none absolute -top-24 left-1/2 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-sky-500/10 blur-3xl"></div>
+      <div aria-hidden="true" class="pointer-events-none absolute bottom-[-12rem] right-[-6rem] h-[26rem] w-[26rem] rounded-full bg-indigo-500/10 blur-3xl"></div>
 
-      <header class="sticky top-0 z-50 border-b border-white/10 bg-[rgba(8,17,37,0.85)] backdrop-blur-xl">
+      <header class="sticky top-0 z-50 border-b border-white/5 bg-[#060e1e]/80 backdrop-blur">
         <nav class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5">
-          <a href="/" class="flex items-center gap-3 text-sm font-semibold tracking-tight text-white">
-            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-accent/20 text-base text-accent shadow-[0_0_25px_rgba(92,225,255,0.3)]">CT</span>
-            <span class="font-display text-base">Tech & Trek</span>
+          <a href="/" class="flex items-center gap-2 text-sm font-semibold tracking-tight text-white">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/20 text-accent">CT</span>
+            Tech & Trek
           </a>
-          <div class="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.06] px-2 py-1 text-[13px] text-muted shadow-[0_10px_30px_rgba(3,12,26,0.35)] lg:flex">
-            <a href="/ai" class="rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">AI</a>
-            <a href="/space-tech" class="rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">Space Tech</a>
-            <a href="/outdoor-sports" class="rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">Outdoor</a>
-            <a href="/thoughts" class="rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">Thoughts</a>
-            <a href="/startups" class="rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">Startups</a>
-            <a href="/money" class="rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">Money</a>
-            <a href="/about" class="rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">About</a>
+          <div class="hidden items-center gap-2 rounded-full border border-white/5 bg-white/5 px-2 py-1 text-sm text-muted lg:flex">
+            <a href="/ai" class="rounded-full px-3 py-1 transition hover:text-white">AI</a>
+            <a href="/space-tech" class="rounded-full px-3 py-1 transition hover:text-white">Space Tech</a>
+            <a href="/outdoor-sports" class="rounded-full px-3 py-1 transition hover:text-white">Outdoor</a>
+            <a href="/thoughts" class="rounded-full px-3 py-1 transition hover:text-white">Thoughts</a>
+            <a href="/startups" class="rounded-full px-3 py-1 transition hover:text-white">Startups</a>
+            <a href="/money" class="rounded-full px-3 py-1 transition hover:text-white">Money</a>
+            <a href="/about" class="rounded-full px-3 py-1 transition hover:text-white">About</a>
           </div>
           <a
             href="/search"
-            class="inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/10 px-5 py-2 text-sm font-medium text-accent shadow-[0_0_30px_rgba(92,225,255,0.3)] transition hover:border-accent hover:bg-accent/20 hover:text-[#031020]"
+            class="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-medium text-accent shadow-[0_0_25px_rgba(34,211,238,0.25)] transition hover:border-accent/60 hover:bg-accent/20"
           >
             Browse
             <svg viewBox="0 0 20 20" fill="none" class="h-4 w-4">
@@ -52,25 +44,25 @@ const {
           </a>
         </nav>
         <div class="mx-auto w-full max-w-6xl px-6 pb-4 lg:hidden">
-          <div class="flex items-center gap-2 overflow-x-auto rounded-full border border-white/10 bg-white/[0.06] px-2 py-1 text-xs text-muted">
-            <a href="/ai" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">AI</a>
-            <a href="/space-tech" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">Space Tech</a>
-            <a href="/outdoor-sports" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">Outdoor</a>
-            <a href="/thoughts" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">Thoughts</a>
-            <a href="/startups" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">Startups</a>
-            <a href="/money" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">Money</a>
-            <a href="/about" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-white">About</a>
+          <div class="flex items-center gap-2 overflow-x-auto rounded-full border border-white/5 bg-white/5 px-2 py-1 text-xs text-muted">
+            <a href="/ai" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:text-white">AI</a>
+            <a href="/space-tech" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:text-white">Space Tech</a>
+            <a href="/outdoor-sports" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:text-white">Outdoor</a>
+            <a href="/thoughts" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:text-white">Thoughts</a>
+            <a href="/startups" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:text-white">Startups</a>
+            <a href="/money" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:text-white">Money</a>
+            <a href="/about" class="whitespace-nowrap rounded-full px-3 py-1 transition hover:text-white">About</a>
           </div>
         </div>
       </header>
 
-      <main class="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col gap-16 px-6 py-12">
+      <main class="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col gap-12 px-6 py-12">
         <slot />
       </main>
-      <footer class="relative z-10 border-t border-white/10 bg-[rgba(8,17,37,0.85)] backdrop-blur-xl">
+      <footer class="relative z-10 border-t border-white/5 bg-[#060e1e]/80">
         <div class="mx-auto flex w-full max-w-6xl flex-col gap-3 px-6 py-10 text-sm text-muted md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} Cheng. All rights reserved.</p>
-          <p class="text-xs">Exploring the intersections of intelligence, propulsion, and wilderness.</p>
+          <p class="text-xs">Exploring the intersections of artificial intelligence, space, and the outdoors.</p>
         </div>
       </footer>
     </div>
