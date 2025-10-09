@@ -1,0 +1,26 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1F3B73" />
+      <stop offset="50%" stop-color="#122647" />
+      <stop offset="100%" stop-color="#08142B" />
+    </linearGradient>
+    <radialGradient id="glow" cx="75%" cy="25%" r="60%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <circle cx="920" cy="180" r="260" fill="url(#glow)" />
+  <g opacity="0.4" transform="translate(0, 50)">
+    <path d="M0 520 C200 420 360 420 560 520 C720 600 880 600 1200 480 L1200 800 L0 800 Z" fill="#0C1F3A" />
+    <path d="M0 560 C220 460 400 460 620 560 C780 640 960 640 1200 520 L1200 800 L0 800 Z" fill="#0F294A" opacity="0.8" />
+    <path d="M0 610 C240 520 420 520 660 610 C840 680 1020 680 1200 560 L1200 800 L0 800 Z" fill="#13345B" opacity="0.85" />
+  </g>
+  <g opacity="0.8">
+    <rect x="470" y="220" width="260" height="260" rx="28" fill="#101B2E" stroke="#22D3EE" stroke-opacity="0.3" stroke-width="4" />
+    <rect x="505" y="255" width="190" height="190" rx="20" fill="#14243C" />
+    <rect x="540" y="290" width="120" height="120" rx="18" fill="#1B314F" />
+    <text x="600" y="360" text-anchor="middle" font-family="'Inter', 'Segoe UI', sans-serif" font-size="60" fill="#22D3EE">AI</text>
+  </g>
+</svg>

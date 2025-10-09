@@ -1,11 +1,49 @@
 ---
 const { post } = Astro.props;
 const { data, slug } = post;
+const formattedDate = data.date.toLocaleDateString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+});
 ---
-<a href={`/posts/${slug}`} class="group block rounded-2xl border border-white/5 bg-surface p-4 hover:border-white/10">
-  {data.hero && <img src={data.hero} alt={data.title} class="mb-4 aspect-[4/3] w-full rounded-xl object-cover" loading="lazy" />}
-  <p class="text-xs text-muted">{data.category}</p>
-  <h3 class="mt-1 font-semibold">{data.title}</h3>
-  <p class="mt-1 text-sm text-muted line-clamp-2">{data.description}</p>
-  <p class="mt-2 text-xs text-muted">{data.date.toDateString()}</p>
+<a
+  href={`/posts/${slug}`}
+  class="group flex h-full flex-col overflow-hidden rounded-3xl border border-white/5 bg-[#0a1625]/60 shadow-[0_20px_45px_rgba(4,16,32,0.35)] transition hover:-translate-y-1 hover:border-white/10"
+>
+  {data.hero ? (
+    <div class="relative overflow-hidden">
+      <img
+        src={data.hero}
+        alt={data.title}
+        class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#050d1f]/90 via-[#050d1f]/10 to-transparent"></div>
+      <div class="absolute bottom-4 left-4 flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-accent">
+        <span class="h-1 w-1 rounded-full bg-accent"></span>
+        {data.category}
+      </div>
+    </div>
+  ) : (
+    <div class="flex h-48 items-center justify-center bg-white/5">
+      <span class="text-xs uppercase tracking-[0.4em] text-muted">{data.category}</span>
+    </div>
+  )}
+  <div class="flex flex-1 flex-col gap-3 p-6">
+    <div class="flex items-center gap-3 text-xs text-muted">
+      <span>{formattedDate}</span>
+      {data.tags?.length ? <span class="h-1 w-1 rounded-full bg-white/20"></span> : null}
+      {data.tags?.length ? <span class="truncate">{data.tags.slice(0, 2).join(" • ")}</span> : null}
+    </div>
+    <h3 class="text-lg font-semibold text-white transition group-hover:text-accent">{data.title}</h3>
+    <p class="line-clamp-3 text-sm text-muted/90">{data.description}</p>
+    <div class="mt-auto flex items-center gap-2 text-sm font-medium text-accent">
+      Read article
+      <svg viewBox="0 0 20 20" fill="none" class="h-4 w-4">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 10h10" />
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m11 6 4 4-4 4" />
+      </svg>
+    </div>
+  </div>
 </a>
