@@ -1,35 +1,68 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import { Image } from "astro:assets";
 const { frontmatter } = Astro.props;
 const { title, description, date, updated, hero, tags, category } = frontmatter;
 ---
 <BaseLayout title={`${title} — Tech & Trek`} description={description}>
-  <article class="prose prose-invert max-w-3xl">
-    <p class="text-xs uppercase tracking-wide text-muted">{category}</p>
-    <h1 class="mb-2">{title}</h1>
-    <p class="!mt-0 text-muted text-sm">
-      {date.toDateString()}{updated ? ` • updated ${updated.toDateString()}` : ""}
-    </p>
-    {hero && <img src={hero} alt={title} class="rounded-2xl border border-white/5 my-6" loading="lazy" />}
-    <slot />
-    {tags?.length ? (
-      <div class="mt-10 flex flex-wrap gap-2">
-        {tags.map(t => <a href={`/tags/${t}`} class="rounded-full border border-white/10 px-3 py-1 text-xs text-muted hover:text-text">{t}</a>)}
+  <article class="mx-auto flex w-full max-w-4xl flex-col gap-12">
+    <header class="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[linear-gradient(140deg,rgba(10,21,48,0.85),rgba(23,33,72,0.7))] shadow-[0_35px_90px_rgba(6,15,36,0.55)]">
+      <div class="relative p-8 sm:p-12">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-1 text-[11px] font-medium uppercase tracking-[0.35em] text-accent">
+          <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
+          {category}
+        </span>
+        <h1 class="mt-5 text-4xl font-semibold text-white sm:text-5xl">{title}</h1>
+        {description && <p class="mt-4 max-w-3xl text-base text-muted sm:text-lg">{description}</p>}
+        <div class="mt-6 flex flex-wrap items-center gap-4 text-sm text-muted">
+          <span>{date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+          {updated ? (
+            <span class="text-xs uppercase tracking-wide text-muted">
+              Updated {updated.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+            </span>
+          ) : null}
+        </div>
+        {tags?.length ? (
+          <div class="mt-6 flex flex-wrap gap-2">
+            {tags.map((t) => (
+              <a
+                href={`/tags/${t}`}
+                class="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs text-muted transition hover:border-accent/60 hover:text-accent"
+              >
+                #{t}
+              </a>
+            ))}
+          </div>
+        ) : null}
+        {hero && (
+          <div class="mt-10 overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_25px_70px_rgba(3,12,32,0.45)]">
+            <img src={hero} alt={title} class="w-full object-cover" loading="lazy" />
+          </div>
+        )}
+        <div class="pointer-events-none absolute -top-24 right-[-8rem] h-64 w-64 rounded-full bg-accent/15 blur-3xl"></div>
       </div>
-    ) : null}
-	<section class="mt-10">
-	  <script src="https://giscus.app/client.js"
-		data-repo="YOUR_GITHUB_USERNAME/YOUR_REPO"
-		data-repo-id="REPO_ID"
-		data-category="General"
-		data-category-id="CATEGORY_ID"
-		data-mapping="pathname"
-		data-reactions-enabled="1"
-		data-theme="dark"
-		crossorigin="anonymous"
-		async>
-	  </script>
-	</section>
+    </header>
+
+    <div class="prose prose-invert max-w-none rounded-[2.5rem] border border-white/10 bg-[rgba(5,12,28,0.8)] p-8 sm:p-12">
+      <slot />
+    </div>
+
+    <section class="rounded-[2.5rem] border border-white/10 bg-[rgba(5,12,28,0.8)] p-8 sm:p-12">
+      <h2 class="text-lg font-semibold text-white">Join the discussion</h2>
+      <p class="mt-2 text-sm text-muted">Thoughts, critiques, and curiosities are all welcome.</p>
+      <div class="mt-6">
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="YOUR_GITHUB_USERNAME/YOUR_REPO"
+          data-repo-id="REPO_ID"
+          data-category="General"
+          data-category-id="CATEGORY_ID"
+          data-mapping="pathname"
+          data-reactions-enabled="1"
+          data-theme="dark"
+          crossorigin="anonymous"
+          async
+        ></script>
+      </div>
+    </section>
   </article>
 </BaseLayout>
