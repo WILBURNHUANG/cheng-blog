@@ -2,19 +2,107 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
 import { getCollection } from "astro:content";
-const posts = (await getCollection("posts", ({data}) => !data.draft))
-  .sort((a,b)=> b.data.date.getTime() - a.data.date.getTime())
+const posts = (await getCollection("posts", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 12);
+const [featured, ...rest] = posts;
+const highlights = rest.slice(0, 3);
+const recent = posts;
 ---
 <BaseLayout>
-  <section class="rounded-2xl border border-white/5 bg-[linear-gradient(180deg,#0f1722,transparent),url('/images/hero.webp')] bg-cover bg-center p-10">
-    <h1 class="text-3xl md:text-4xl font-extrabold max-w-2xl">Exploring the Frontiers of Tech, Space, and the Great Outdoors</h1>
-    <p class="mt-3 max-w-2xl text-muted">AI, space exploration, and mountain air — curated essays, experiments, and notes.</p>
-    <a href="/ai" class="mt-6 inline-block rounded-xl bg-accent px-4 py-2 text-black font-medium">Read Now</a>
+  <section class="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+    <div class="relative overflow-hidden rounded-3xl border border-white/5 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.22),_transparent_55%),_linear-gradient(135deg,_rgba(15,23,42,0.8),_rgba(6,14,30,0.95))] p-10">
+      <div class="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.3em] text-accent/80">
+        <span class="h-2 w-2 rounded-full bg-accent"></span>
+        Field Notes
+      </div>
+      <h1 class="mt-4 max-w-xl text-3xl font-semibold text-white md:text-5xl">
+        Exploring the Frontiers of Tech, Space, and the Great Outdoors
+      </h1>
+      <p class="mt-4 max-w-xl text-base text-muted md:text-lg">
+        Essays and experiments from the bleeding edge of AI, orbital innovation, and alpine adventure.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a
+          href={featured ? `/posts/${featured.slug}` : "/thoughts"}
+          class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-2 text-sm font-semibold text-[#041018] shadow-[0_10px_35px_rgba(34,211,238,0.35)] transition hover:translate-y-[1px]"
+        >
+          Read featured story
+          <svg viewBox="0 0 20 20" fill="none" class="h-4 w-4">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 10h10" />
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m11 6 4 4-4 4" />
+          </svg>
+        </a>
+        <a href="/search" class="inline-flex items-center gap-2 text-sm text-muted transition hover:text-white">
+          Browse the archive
+          <svg viewBox="0 0 20 20" fill="none" class="h-4 w-4">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m8 5 4 5-4 5" />
+          </svg>
+        </a>
+      </div>
+      {featured?.data.hero && (
+        <img
+          src={featured.data.hero}
+          alt={featured.data.title}
+          loading="lazy"
+          class="pointer-events-none absolute -right-16 bottom-0 hidden w-[360px] translate-y-12 rounded-[2.5rem] border border-white/5 shadow-[0_25px_90px_rgba(15,23,42,0.55)] lg:block"
+        />
+      )}
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <div class="rounded-3xl border border-white/5 bg-[#0a1625]/60 p-6">
+        <div class="flex items-center justify-between">
+          <h2 class="text-sm font-semibold tracking-wide text-white/90">Recent Drops</h2>
+          <a href="/thoughts" class="text-xs text-muted transition hover:text-white">See all</a>
+        </div>
+        <div class="mt-5 space-y-5">
+          {(highlights.length ? highlights : posts.slice(0, 3)).map((post) => (
+            <a href={`/posts/${post.slug}`} class="group flex items-start gap-4 rounded-2xl p-3 transition hover:bg-white/5">
+              {post.data.hero ? (
+                <img src={post.data.hero} alt="" class="h-14 w-14 flex-none rounded-xl object-cover" loading="lazy" />
+              ) : (
+                <div class="h-14 w-14 flex-none rounded-xl bg-white/10"></div>
+              )}
+              <div class="flex-1">
+                <p class="text-xs uppercase tracking-[0.2em] text-muted">{post.data.category}</p>
+                <p class="mt-1 text-sm font-medium text-white transition group-hover:text-accent">{post.data.title}</p>
+                <p class="mt-1 text-xs text-muted">
+                  {post.data.date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="rounded-3xl border border-white/5 bg-gradient-to-br from-white/5 to-white/[0.02] p-6">
+        <h2 class="text-sm font-semibold text-white/90">Stay in the loop</h2>
+        <p class="mt-2 text-sm text-muted">Monthly dispatches from the mountains to the launchpad. No noise.</p>
+        <a
+          href="mailto:cheng@example.com"
+          class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20"
+        >
+          Join the newsletter
+          <svg viewBox="0 0 20 20" fill="none" class="h-4 w-4">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m5 7 5 4 5-4" />
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.5 6.75 10 10.5l5.5-3.75" />
+          </svg>
+        </a>
+      </div>
+    </div>
   </section>
 
-  <h2 class="mt-10 mb-4 text-lg text-muted">Recent Posts</h2>
-  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {posts.map(p => <PostCard post={p} />)}
-  </div>
+  <section class="space-y-6">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="text-xs uppercase tracking-[0.3em] text-muted">Latest writing</p>
+        <h2 class="text-2xl font-semibold text-white">Recent Posts</h2>
+      </div>
+      <a href="/search" class="text-sm text-muted transition hover:text-white">View the full archive →</a>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+      {recent.map((post) => <PostCard post={post} />)}
+    </div>
+  </section>
 </BaseLayout>
