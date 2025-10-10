@@ -7,7 +7,7 @@ export async function GET() {
 
   return rss({
     title: "Tech & Trek",
-    description: "AI, Space Tech, Outdoor, Thoughts, Startups, Money",
+    description: "AI, Space Tech, Outdoor, Lesson Learned, Side Hustles",
     site: import.meta.env.SITE,
     items: posts.map((p)=>({
       title: p.data.title,

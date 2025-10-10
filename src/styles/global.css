@@ -32,4 +32,9 @@
     --tw-prose-bold: #f8fbff;
     --tw-prose-quotes: #d0e0ff;
   }
+
+  .prose p,
+  .prose li {
+    line-height: 1.85;
+  }
 }

@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const gallery = [
+  {
+    src: "/images/about/glacier.jpg",
+    alt: "Will standing by a glacier-fed lake surrounded by snow-capped peaks."
+  },
+  {
+    src: "/images/about/coastline.jpg",
+    alt: "Will geared up on a rugged coastal trail with hiking poles and backpack."
+  },
+  {
+    src: "/images/about/ridge.jpg",
+    alt: "Will hiking along an alpine ridge with mountains in the distance."
+  }
+];
+---
+
+<BaseLayout title="About — Tech & Trek" description="Meet Will, the engineer behind Tech & Trek.">
+  <section class="mx-auto grid w-full max-w-5xl gap-10 rounded-3xl border border-white/5 bg-[#060f1f]/70 p-10 shadow-[0_20px_60px_rgba(4,14,32,0.55)] lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+    <div class="space-y-6">
+      <p class="text-sm font-medium uppercase tracking-[0.3em] text-accent/90">Behind the Notebook</p>
+      <h1 class="text-3xl font-semibold text-white md:text-4xl">Hey, I&rsquo;m Will.</h1>
+      <p class="text-base text-muted md:text-lg">
+        I&rsquo;m Will—an engineer in the space &amp; navigation world who&rsquo;s obsessed with how AI is reshaping
+        everything. Outside work you&rsquo;ll find me in the mountains: hiking, climbing, backpacking, running, and
+        snowboarding. I also shoot photos and devour films. Tech &amp; Trek is where I publish deep dives, field notes,
+        and personal experiments. Cheers!
+      </p>
+      <div class="grid gap-3 text-sm text-muted/90">
+        <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/15 text-accent">
+            🚀
+          </span>
+          <div>
+            <p class="font-medium text-white">Space &amp; Navigation Engineer</p>
+            <p class="text-xs text-muted/80">Driving autonomy and precision guidance systems.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/15 text-accent">
+            🧭
+          </span>
+          <div>
+            <p class="font-medium text-white">Mountain Movement</p>
+            <p class="text-xs text-muted/80">Hiking, climbing, trail running, snowboarding, and long-haul backpacks.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/15 text-accent">
+            🎥
+          </span>
+          <div>
+            <p class="font-medium text-white">Camera Always Packed</p>
+            <p class="text-xs text-muted/80">Documenting ridgelines, night skies, and real-world experiments.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid gap-4">
+      {gallery.map((photo) => (
+        <div class="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#050d1f]/60">
+          <img src={photo.src} alt={photo.alt} loading="lazy" class="h-full w-full object-cover" />
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

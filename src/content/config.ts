@@ -8,7 +8,7 @@ const posts = defineCollection({
     // ⬇️ use date types (matches how Astro parses unquoted dates)
     date: z.date(),
     updated: z.date().optional(),
-    category: z.enum(["AI","Space Tech","Outdoor Sports","Thoughts","Startups","Money"]),
+    category: z.enum(["AI","Space Tech","Outdoor Sports","Lesson Learned","Side Hustles"]),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
     hero: z.string().optional(),
