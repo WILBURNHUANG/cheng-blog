@@ -1,0 +1,78 @@
+﻿---
+title: "Agentic AI Workflows, Explained (with a tiny n8n demo)"
+description: "A friendly intro to agentic AI—what it is, how it differs from classic automation, and a copy-able n8n example to get started."
+date: 2025-10-11
+category: "AI"
+tags: ["Agents", "n8n", "LangGraph", "CrewAI"]
+hero: "/images/agentic-ai-n8n.jpg"
+draft: false
+---
+
+Agentic AI isn’t magic—it’s just automation that can **decide** what to do next. Instead of marching down a fixed flow, an agent can reason, pick a tool, and try again if the first attempt flops. That tiny bit of autonomy is why it feels different from old-school “if this then that.”
+
+![A simple node graph with an AI agent choosing tools](/images/agentic-ai-n8n.jpg "Agentic AI in one picture: a decision-maker in the loop")
+
+## Agentic vs. classic automation
+Classic automation is a conveyor belt: step 1 → step 2 → step 3. Agentic workflows add a brain between steps. The agent reads the situation, picks a tool (search, API, docs), and loops until it reaches the goal—or asks you for help when it’s stuck.
+
+## The 10-minute n8n demo (copy this)
+Goal: “Summarize the latest 3 AI headlines and drop them in Google Sheets every morning.”
+
+**What you’ll build**
+- Trigger: Cron (08:30 daily)
+- **AI Agent** node
+- Tools:
+  - Web Search / HTTP Request (fetch headlines)
+  - Google Sheets (append rows)
+
+**Steps**
+1. **Trigger** → add a **Cron** node for 08:30.  
+2. **AI Agent** → model: your OpenAI/other key. System goal:  
+   > “Find 3 fresh AI news items with source links. Return a table with title, source, summary, url.”  
+   Add a polite refusal if nothing looks credible.
+3. **Tool sub-nodes**:  
+   - **HTTP Request** to a news API or search endpoint. Expose only GET with safe params.  
+   - **Google Sheets**: select your sheet; map fields: `title | source | summary | url | date`.
+4. **Guardrails**  
+   - Keep tool scopes minimal (read-only where possible).  
+   - Add a conditional: if fewer than 2 valid links → send me a Slack/Email instead of writing the sheet.  
+5. **Test & observe**  
+   - Run once manually.  
+   - Check the Agent’s intermediate thoughts/logs in the execution view.  
+   - If summaries are fluffy, tighten the system goal and cap length (e.g., “≤ 40 words”).
+
+**Why n8n first?** It’s fast to wire tools, the **AI Agent** node picks which tool to call, and you can see every step. When you need heavier control (concurrency, state machines, retries), jump to code frameworks like **LangGraph** or **CrewAI**.
+
+## When to level up (beyond no-code)
+- **LangGraph** (Python): stateful graphs, human-in-the-loop, great debugging for “agent got stuck” moments.  
+- **CrewAI**: coordinate multiple specialist agents (researcher, writer, editor) with shared objectives.
+
+If your flows start needing memory across days, complex branching, or per-tool evaluators, that’s your sign to graduate.
+
+## Gotchas & governance
+- **Start narrow.** One clear goal beats a vague “do everything” agent.  
+- **Least privilege.** Only wire the tools you truly need; use read-only where possible.  
+- **Log everything.** Keep execution logs; review early runs before scheduling.  
+- **Don’t believe the brochure.** Lots of tools claim “agentic.” Measure outcomes and keep a human checkpoint on day one.
+
+## FAQ
+**Do I need to code?**  
+Not to start. n8n gets you a working agentic loop fast. If you need custom memory/state or bigger graphs, try LangGraph or CrewAI.
+
+**Is it safe to let an agent run daily?**  
+Treat agents like smart interns—give them limited access, monitor their first runs, and add alerts when outputs look off.
+
+**What’s the difference between this and Zapier/IFTTT?**  
+Zapier-style flows are fixed. Agentic flows let the system choose tools and adapt mid-run.
+
+**Can I repurpose this for my blog?**  
+Yep. Swap the news tool for your Notion/Docs, have the agent outline a post, and write to a “Ideas” Google Sheet.
+
+## Wrap-up
+If you want, I’ll turn this into a reusable template in my repo and wire a “one-click” import. And if this helped, buy me a coffee—or check my gear picks below ☕.
+
+{/* Optional Affiliate Block */}
+{/*
+import AmazonPicks from "@/components/AmazonPicks.astro"
+<AmazonPicks title="Coffee fuels blog posts ☕" asinList={["B0C12345","B08XYZ"]} tag="yourtag-20" />
+*/}
