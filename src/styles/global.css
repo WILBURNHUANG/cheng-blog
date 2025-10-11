@@ -37,4 +37,149 @@
   .prose li {
     line-height: 1.85;
   }
+
+  .affiliate-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.25rem;
+    background: rgba(10, 21, 48, 0.55);
+    padding: 1.25rem 1.5rem;
+  }
+
+  @media (max-width: 540px) {
+    .affiliate-card {
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+      text-align: center;
+    }
+  }
+
+  .affiliate-card__image {
+    width: clamp(6.5rem, 16vw, 8rem);
+    border-radius: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #040b18;
+    padding: 0.45rem;
+    display: block;
+  }
+
+  .affiliate-card__body {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .affiliate-card__title {
+    font-size: clamp(0.95rem, 0.85rem + 0.3vw, 1.2rem);
+    font-weight: 600;
+    color: #f1f5ff;
+    margin: 0;
+  }
+
+  .affiliate-card__description {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #a9b8d8;
+  }
+
+  .affiliate-card__features {
+    margin: 0;
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.3rem;
+    font-size: 0.82rem;
+    color: #c0cee8;
+    list-style: disc;
+  }
+
+  @media (max-width: 540px) {
+    .affiliate-card__features {
+      justify-items: start;
+      text-align: left;
+    }
+  }
+
+  .affiliate-card__footer {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .affiliate-card__price {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 0.9rem;
+  }
+
+  .affiliate-card__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid rgba(92, 225, 255, 0.4);
+    background: rgba(92, 225, 255, 0.12);
+    color: #5ce1ff;
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .affiliate-card__button:hover {
+    background: rgba(92, 225, 255, 0.22);
+    border-color: rgba(92, 225, 255, 0.6);
+    color: #c8f3ff;
+  }
+
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .prose h2 {
+    font-size: clamp(1.5rem, 1.2rem + 0.8vw, 2rem);
+  }
+
+  .prose h3 {
+    font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.6rem);
+  }
+
+  .prose p + p {
+    margin-top: 1.5rem;
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .prose ul {
+    list-style: disc;
+  }
+
+  .prose ol {
+    list-style: decimal;
+  }
+
+  .prose li + li {
+    margin-top: 0.6rem;
+  }
+
+  .prose blockquote {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.25rem 1.5rem;
+    border-left: 3px solid rgba(92, 225, 255, 0.4);
+    background: rgba(10, 21, 48, 0.55);
+  }
 }
