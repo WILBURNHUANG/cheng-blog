@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  const uniqueTags = new Set<string>();
+
+  for (const post of posts) {
+    for (const tag of post.data.tags ?? []) {
+      uniqueTags.add(tag);
+    }
+  }
+
+  return Array.from(uniqueTags).map((tag) => ({
+    params: { tag: encodeURIComponent(tag) },
+    props: { tag },
+  }));
+}
+
+interface PageProps {
+  tag: string;
+}
+
+const rawParam = Astro.params.tag ?? "";
+const decodedParam = decodeURIComponent(rawParam);
+const { tag } = Astro.props as PageProps;
+const activeTag = tag ?? decodedParam;
+
+const posts = (await getCollection("posts", ({ data }) => {
+  if (data.draft) return false;
+  return Array.isArray(data.tags) && data.tags.includes(activeTag);
+})).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<BaseLayout
+  title={`${activeTag} — Tech & Trek`}
+  description={`Posts, reports, and breakdowns tagged "${activeTag}" from Tech & Trek.`}
+>
+  <section class="mx-auto flex w-full max-w-5xl flex-col gap-8">
+    <header class="rounded-3xl border border-white/5 bg-[#0a1625]/70 p-8 shadow-[0_25px_90px_rgba(4,16,32,0.35)]">
+      <p class="text-xs uppercase tracking-[0.35em] text-accent">Tag</p>
+      <h1 class="mt-4 text-3xl font-semibold text-white sm:text-4xl">#{activeTag}</h1>
+      <p class="mt-2 text-sm text-muted">
+        Articles and field reports exploring topics related to {activeTag}.
+      </p>
+    </header>
+    {posts.length === 0 ? (
+      <p class="rounded-3xl border border-white/5 bg-[#060f1f]/80 p-8 text-muted">
+        No posts have been published with this tag yet. Check back soon for fresh coverage.
+      </p>
+    ) : (
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => <PostCard post={post} />)}
+      </div>
+    )}
+  </section>
+</BaseLayout>
