@@ -1,0 +1,89 @@
+name: Daily Tech & GNSS News Post
+
+on:
+  schedule:
+    # Run daily at 8:00 AM UTC (adjust timezone as needed)
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+    # Allow manual trigger from GitHub Actions UI
+    inputs:
+      force_generate:
+        description: 'Force generate even if post exists'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  generate-post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install anthropic
+
+      - name: Check if post already exists
+        id: check-post
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+          POST_FILE="src/content/posts/${TODAY}-daily-tech-gnss-news.mdx"
+          if [ -f "$POST_FILE" ] && [ "${{ github.event.inputs.force_generate }}" != "true" ]; then
+            echo "Post already exists for today: $POST_FILE"
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate daily blog post
+        if: steps.check-post.outputs.exists != 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python scripts/generate_daily_post.py
+
+      - name: Commit and push new post
+        if: steps.check-post.outputs.exists != 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          TODAY=$(date +%Y-%m-%d)
+          POST_FILE="src/content/posts/${TODAY}-daily-tech-gnss-news.mdx"
+
+          if [ -f "$POST_FILE" ]; then
+            git add "$POST_FILE"
+            git commit -m "Add daily tech & GNSS news digest for ${TODAY}
+
+            Automated daily blog post generation.
+
+            Co-Authored-By: Claude <noreply@anthropic.com>"
+            git push
+            echo "Successfully committed and pushed new post!"
+          else
+            echo "No new post file found to commit"
+            exit 1
+          fi
+
+      - name: Summary
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+          if [ "${{ steps.check-post.outputs.exists }}" == "true" ]; then
+            echo "### Skipped - Post Already Exists" >> $GITHUB_STEP_SUMMARY
+            echo "A post for ${TODAY} already exists." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### Daily Post Generated Successfully" >> $GITHUB_STEP_SUMMARY
+            echo "Generated and published: ${TODAY}-daily-tech-gnss-news.mdx" >> $GITHUB_STEP_SUMMARY
+          fi
