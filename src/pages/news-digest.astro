@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import { getCollection } from "astro:content";
+const posts = (await getCollection("posts", ({data}) => !data.draft && data.category === "News Digest"))
+  .sort((a,b)=> b.data.date.getTime() - a.data.date.getTime());
+---
+<BaseLayout title="News Digest — Tech & Trek">
+  <h1 class="text-2xl font-bold mb-6">Daily Tech & GNSS News Digest</h1>
+  <p class="text-muted mb-8">Daily curated news from Bloomberg Technology, Inside GNSS, and GPS World covering the latest in AI, semiconductors, big tech, and precision positioning technology.</p>
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {posts.map(p => <PostCard post={p} />)}
+  </div>
+</BaseLayout>
