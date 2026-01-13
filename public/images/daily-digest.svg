@@ -1,0 +1,67 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1F3B73" />
+      <stop offset="50%" stop-color="#122647" />
+      <stop offset="100%" stop-color="#08142B" />
+    </linearGradient>
+    <radialGradient id="glow1" cx="25%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glow2" cx="75%" cy="70%" r="40%">
+      <stop offset="0%" stop-color="#818CF8" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <circle cx="280" cy="220" r="200" fill="url(#glow1)" />
+  <circle cx="920" cy="580" r="180" fill="url(#glow2)" />
+
+  <!-- Satellite/GNSS representation -->
+  <g transform="translate(850, 150)" opacity="0.9">
+    <ellipse cx="100" cy="100" rx="80" ry="20" fill="none" stroke="#22D3EE" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="8,4" />
+    <ellipse cx="100" cy="100" rx="60" ry="60" fill="none" stroke="#22D3EE" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="6,3" />
+    <circle cx="100" cy="100" r="8" fill="#22D3EE" />
+    <line x1="100" y1="92" x2="100" y2="60" stroke="#22D3EE" stroke-width="2" />
+    <polygon points="100,55 95,65 105,65" fill="#22D3EE" />
+  </g>
+
+  <!-- News/Document stack -->
+  <g transform="translate(180, 280)" opacity="0.85">
+    <rect x="0" y="40" width="180" height="220" rx="12" fill="#101B2E" stroke="#22D3EE" stroke-opacity="0.25" stroke-width="2" />
+    <rect x="15" y="25" width="180" height="220" rx="12" fill="#14243C" stroke="#22D3EE" stroke-opacity="0.3" stroke-width="2" />
+    <rect x="30" y="10" width="180" height="220" rx="12" fill="#1B314F" stroke="#22D3EE" stroke-opacity="0.4" stroke-width="2" />
+    <!-- Text lines -->
+    <rect x="50" y="40" width="120" height="8" rx="4" fill="#22D3EE" opacity="0.6" />
+    <rect x="50" y="60" width="140" height="4" rx="2" fill="#94A3B8" opacity="0.4" />
+    <rect x="50" y="72" width="130" height="4" rx="2" fill="#94A3B8" opacity="0.4" />
+    <rect x="50" y="84" width="100" height="4" rx="2" fill="#94A3B8" opacity="0.4" />
+    <rect x="50" y="108" width="110" height="6" rx="3" fill="#818CF8" opacity="0.5" />
+    <rect x="50" y="124" width="140" height="4" rx="2" fill="#94A3B8" opacity="0.4" />
+    <rect x="50" y="136" width="120" height="4" rx="2" fill="#94A3B8" opacity="0.4" />
+    <rect x="50" y="160" width="130" height="6" rx="3" fill="#22D3EE" opacity="0.5" />
+    <rect x="50" y="176" width="100" height="4" rx="2" fill="#94A3B8" opacity="0.4" />
+    <rect x="50" y="188" width="140" height="4" rx="2" fill="#94A3B8" opacity="0.4" />
+  </g>
+
+  <!-- Central text -->
+  <g>
+    <text x="600" y="420" text-anchor="middle" font-family="'Inter', 'Segoe UI', sans-serif" font-size="48" font-weight="600" fill="#ffffff">Daily Digest</text>
+    <text x="600" y="470" text-anchor="middle" font-family="'Inter', 'Segoe UI', sans-serif" font-size="24" fill="#22D3EE" opacity="0.8">Tech &amp; GNSS News</text>
+  </g>
+
+  <!-- Wave decoration -->
+  <g opacity="0.4" transform="translate(0, 50)">
+    <path d="M0 520 C200 420 360 420 560 520 C720 600 880 600 1200 480 L1200 800 L0 800 Z" fill="#0C1F3A" />
+    <path d="M0 560 C220 460 400 460 620 560 C780 640 960 640 1200 520 L1200 800 L0 800 Z" fill="#0F294A" opacity="0.8" />
+    <path d="M0 610 C240 520 420 520 660 610 C840 680 1020 680 1200 560 L1200 800 L0 800 Z" fill="#13345B" opacity="0.85" />
+  </g>
+
+  <!-- Signal waves from satellite -->
+  <g transform="translate(950, 250)" opacity="0.6">
+    <path d="M0 0 Q30 30 0 60" stroke="#22D3EE" stroke-width="2" fill="none" opacity="0.5" />
+    <path d="M15 -10 Q55 30 15 70" stroke="#22D3EE" stroke-width="2" fill="none" opacity="0.4" />
+    <path d="M30 -20 Q80 30 30 80" stroke="#22D3EE" stroke-width="2" fill="none" opacity="0.3" />
+  </g>
+</svg>

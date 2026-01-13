@@ -38,7 +38,7 @@ const isGiscusConfigured = Object.values(giscusConfig).every(Boolean);
           <div class="mt-6 flex flex-wrap gap-2">
             {tags.map((t) => (
               <a
-                href={`/tags/${t}`}
+                href={`/tags/${encodeURIComponent(t)}`}
                 class="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-muted transition hover:border-accent/60 hover:text-accent"
               >
                 #{t}
