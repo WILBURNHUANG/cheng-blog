@@ -1,0 +1,40 @@
+name: Send Daily News Email
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/content/posts/*-daily-tech-gnss-news.mdx'
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Get changed files
+        id: changed
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep 'daily-tech-gnss-news.mdx' | head -1)
+          echo "file=$CHANGED" >> $GITHUB_OUTPUT
+
+      - name: Send email notification
+        if: steps.changed.outputs.file != ''
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          EMAIL_SUBSCRIBERS: ${{ secrets.EMAIL_SUBSCRIBERS }}
+          POST_FILE: ${{ steps.changed.outputs.file }}
+          SITE_URL: https://techntrek.is-a.dev
+        run: python scripts/send-daily-email.py
