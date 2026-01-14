@@ -5,6 +5,12 @@ on:
     branches: [main]
     paths:
       - 'src/content/posts/*-daily-tech-gnss-news.mdx'
+  workflow_dispatch:
+    inputs:
+      post_file:
+        description: 'Post file path (e.g., src/content/posts/2026-01-13-daily-tech-gnss-news.mdx)'
+        required: true
+        default: 'src/content/posts/2026-01-13-daily-tech-gnss-news.mdx'
 
 jobs:
   send-email:
@@ -23,18 +29,24 @@ jobs:
       - name: Install dependencies
         run: pip install pyyaml
 
-      - name: Get changed files
+      - name: Get changed files (push trigger)
         id: changed
+        if: github.event_name == 'push'
         run: |
           CHANGED=$(git diff --name-only HEAD~1 HEAD | grep 'daily-tech-gnss-news.mdx' | head -1)
           echo "file=$CHANGED" >> $GITHUB_OUTPUT
 
+      - name: Set file (manual trigger)
+        id: manual
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "file=${{ github.event.inputs.post_file }}" >> $GITHUB_OUTPUT
+
       - name: Send email notification
-        if: steps.changed.outputs.file != ''
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           EMAIL_SUBSCRIBERS: ${{ secrets.EMAIL_SUBSCRIBERS }}
-          POST_FILE: ${{ steps.changed.outputs.file }}
+          POST_FILE: ${{ steps.changed.outputs.file || steps.manual.outputs.file }}
           SITE_URL: https://techntrek.is-a.dev
         run: python scripts/send-daily-email.py
