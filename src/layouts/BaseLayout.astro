@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { Analytics } from "@vercel/analytics/astro";
 
 const { title = "Tech & Trek", description = "AI, Space Tech, Outdoor, Lesson Learned, Side Hustles" } = Astro.props;
 ---
@@ -65,5 +66,6 @@ const { title = "Tech & Trek", description = "AI, Space Tech, Outdoor, Lesson Le
         </div>
       </footer>
     </div>
+    <Analytics />
   </body>
 </html>
