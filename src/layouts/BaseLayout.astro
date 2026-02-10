@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { Analytics } from "@vercel/analytics/astro";
+import Analytics from "@vercel/analytics/astro";
 
 const { title = "Tech & Trek", description = "AI, Space Tech, Outdoor, Lesson Learned, Side Hustles" } = Astro.props;
 ---
@@ -12,6 +12,7 @@ const { title = "Tech & Trek", description = "AI, Space Tech, Outdoor, Lesson Le
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.ico" />
         <script defer data-domain="YOURDOMAIN.com" src="https://plausible.io/js/script.js"></script>
+    <Analytics />
   </head>
   <body class="min-h-screen bg-[#050d1f] text-text antialiased">
     <div class="relative flex min-h-screen flex-col overflow-hidden">
@@ -66,6 +67,5 @@ const { title = "Tech & Trek", description = "AI, Space Tech, Outdoor, Lesson Le
         </div>
       </footer>
     </div>
-    <Analytics />
   </body>
 </html>
