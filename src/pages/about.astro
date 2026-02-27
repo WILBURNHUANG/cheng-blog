@@ -1,70 +1,176 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const gallery = [
-  {
-    src: "/images/about/glacier.jpg",
-    alt: "Will standing by a glacier-fed lake surrounded by snow-capped peaks."
-  },
-  {
-    src: "/images/about/coastline.jpg",
-    alt: "Will geared up on a rugged coastal trail with hiking poles and backpack."
-  },
-  {
-    src: "/images/about/ridge.jpg",
-    alt: "Will hiking along an alpine ridge with mountains in the distance."
-  }
-];
 ---
 
-<BaseLayout title="About — Tech & Trek" description="Meet Will, the engineer behind Tech & Trek.">
-  <section class="mx-auto grid w-full max-w-5xl gap-10 rounded-3xl border border-white/5 bg-[#060f1f]/70 p-10 shadow-[0_20px_60px_rgba(4,14,32,0.55)] lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
-    <div class="space-y-6">
-      <p class="text-sm font-medium uppercase tracking-[0.3em] text-accent/90">Behind the Notebook</p>
-      <h1 class="text-3xl font-semibold text-white md:text-4xl">Hey, I&rsquo;m Will.</h1>
-      <p class="text-base text-muted md:text-lg">
-        I&rsquo;m Will—an engineer in the space &amp; navigation world who&rsquo;s obsessed with how AI is reshaping
-        everything. Outside work you&rsquo;ll find me in the mountains: hiking, climbing, backpacking, running, and
-        snowboarding. I also shoot photos and devour films. Tech &amp; Trek is where I publish deep dives, field notes,
-        and personal experiments. Cheers!
-      </p>
-      <div class="grid gap-3 text-sm text-muted/90">
-        <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
-          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/15 text-accent">
-            🚀
-          </span>
-          <div>
-            <p class="font-medium text-white">Space &amp; Navigation Engineer</p>
-            <p class="text-xs text-muted/80">Driving autonomy and precision guidance systems.</p>
-          </div>
+<BaseLayout title="About — Tech & Trek" description="Cheng Huang — Geomatics engineer with 5+ years of experience in GNSS positioning, multi-sensor fusion, and navigation system performance analysis.">
+  <div class="mx-auto max-w-5xl space-y-12">
+
+    <!-- Hero Section -->
+    <section class="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+      <div class="space-y-6">
+        <div class="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.3em] text-accent/80">
+          <span class="h-2 w-2 rounded-full bg-accent"></span>
+          About Me
         </div>
-        <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
-          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/15 text-accent">
-            🧭
-          </span>
-          <div>
-            <p class="font-medium text-white">Mountain Movement</p>
-            <p class="text-xs text-muted/80">Hiking, climbing, trail running, snowboarding, and long-haul backpacks.</p>
+        <h1 class="text-4xl font-semibold text-white md:text-5xl">
+          Hey, I'm Cheng.
+        </h1>
+        <p class="text-lg text-muted leading-relaxed">
+          Geomatics engineer with <span class="text-white">5+ years of experience</span> in
+          GNSS positioning, multi-sensor fusion, and navigation system performance analysis. Currently a
+          <span class="text-accent">GNSS Field Application Engineer at Quectel</span>, previously at
+          <span class="text-accent">NovAtel | Hexagon</span> working on GNSS/INS product evaluation and competitive benchmarking.
+        </p>
+        <p class="text-muted">
+          I hold an M.Sc. in Geomatics Engineering from the University of Calgary, where my thesis on
+          visual-inertial-wheel odometry was published at <span class="text-accent">ION GNSS+ 2020</span>.
+          When I'm not analyzing positioning data, you'll find me exploring alpine trails and capturing
+          the journey through photography.
+        </p>
+      </div>
+      <div class="relative">
+        <img
+          src="/images/about/glacier.jpg"
+          alt="Cheng by a glacier-fed lake"
+          class="rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(4,14,32,0.55)]"
+        />
+        <div class="pointer-events-none absolute -bottom-6 -right-6 h-32 w-32 rounded-full bg-accent/10 blur-3xl"></div>
+      </div>
+    </section>
+
+    <!-- Technical Expertise Section -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold text-white">Technical Expertise</h2>
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="rounded-2xl border border-white/5 bg-[#060f1f]/70 p-6 transition hover:border-white/10">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-accent/15 text-accent">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
           </div>
+          <h3 class="font-semibold text-white">GNSS / RTK / PPP</h3>
+          <p class="mt-2 text-sm text-muted">Satellite positioning, correction services, high-precision navigation, multi-constellation integration</p>
         </div>
-        <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
-          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/15 text-accent">
-            🎥
-          </span>
-          <div>
-            <p class="font-medium text-white">Camera Always Packed</p>
-            <p class="text-xs text-muted/80">Documenting ridgelines, night skies, and real-world experiments.</p>
+        <div class="rounded-2xl border border-white/5 bg-[#060f1f]/70 p-6 transition hover:border-white/10">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-accent/15 text-accent">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+            </svg>
           </div>
+          <h3 class="font-semibold text-white">Sensor Fusion / INS</h3>
+          <p class="mt-2 text-sm text-muted">IMU integration, visual-inertial odometry, Kalman filtering, multi-sensor navigation systems</p>
+        </div>
+        <div class="rounded-2xl border border-white/5 bg-[#060f1f]/70 p-6 transition hover:border-white/10">
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-accent/15 text-accent">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white">Software Development</h3>
+          <p class="mt-2 text-sm text-muted">C++, Python, RTKLIB, OpenCV, algorithm implementation, real-time systems</p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="grid gap-4">
-      {gallery.map((photo) => (
-        <div class="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#050d1f]/60">
-          <img src={photo.src} alt={photo.alt} loading="lazy" class="h-full w-full object-cover" />
+    <!-- Featured Projects Section -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold text-white">Featured Research</h2>
+      <div class="grid gap-6 lg:grid-cols-2">
+
+        <!-- Project 1: Master's Thesis (Clickable) -->
+        <a
+          href="https://www.ion.org/publications/abstract.cfm?articleID=17543"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group block overflow-hidden rounded-2xl border border-white/5 bg-[#060f1f]/70 transition hover:border-accent/30 hover:shadow-[0_0_30px_rgba(92,225,255,0.1)]"
+        >
+          <div class="aspect-video overflow-hidden">
+            <img
+              src="/images/about/vio-sensor-platform.png"
+              alt="Vehicle-mounted sensor platform for visual-inertial odometry"
+              class="h-full w-full object-cover transition group-hover:scale-105"
+            />
+          </div>
+          <div class="p-6">
+            <div class="mb-2 flex items-center gap-2">
+              <span class="rounded-full bg-accent/15 px-2 py-0.5 text-xs font-medium text-accent">Master's Thesis</span>
+              <span class="rounded-full bg-white/5 px-2 py-0.5 text-xs text-muted">ION GNSS+ 2020</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white group-hover:text-accent transition">
+              Robust Wheel-Aided Visual-Inertial Odometry for Winter Navigation
+            </h3>
+            <p class="mt-2 text-sm text-muted">
+              Solving GPS-denied navigation in urban canyons and harsh Canadian winters. Achieved
+              <span class="text-white font-medium">98.8% error reduction</span> (150.6m → 1.8m) using tightly-coupled MSCKF with wheel odometry.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-muted">C++</span>
+              <span class="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-muted">MSCKF</span>
+              <span class="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-muted">IMU</span>
+              <span class="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-muted">CANBUS</span>
+            </div>
+            <div class="mt-4 flex items-center gap-1 text-xs text-accent">
+              <span>View Publication</span>
+              <svg class="h-3 w-3 transition group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Project 2: Undergrad Thesis (Non-clickable) -->
+        <div class="overflow-hidden rounded-2xl border border-white/5 bg-[#060f1f]/70">
+          <div class="aspect-video overflow-hidden">
+            <img
+              src="/images/about/gpsbds-solutions.png"
+              alt="GPS/BDS positioning solution comparison plots"
+              class="h-full w-full object-cover"
+            />
+          </div>
+          <div class="p-6">
+            <div class="mb-2 flex items-center gap-2">
+              <span class="rounded-full bg-accent/15 px-2 py-0.5 text-xs font-medium text-accent">Undergrad Thesis</span>
+              <span class="rounded-full bg-white/5 px-2 py-0.5 text-xs text-muted">June 2018</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">
+              Single-Frequency GPS/BDS Short-Baseline Attitude Determination
+            </h3>
+            <p class="mt-2 text-sm text-muted">
+              Achieving sub-degree accuracy with low-cost single-frequency receivers. Reached
+              <span class="text-white font-medium">96.1% fix rate</span> (vs 70.4% GPS-only) and
+              <span class="text-white font-medium">0.88° yaw accuracy</span> using baseline-constrained LAMBDA.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-muted">C++</span>
+              <span class="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-muted">RTKLIB</span>
+              <span class="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-muted">LAMBDA</span>
+              <span class="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-muted">EKF</span>
+            </div>
+          </div>
         </div>
-      ))}
-    </div>
-  </section>
+
+      </div>
+    </section>
+
+    <!-- Blog Focus Areas -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold text-white">What I Write About</h2>
+      <div class="grid gap-4 sm:grid-cols-3">
+        <a href="/categories/ai" class="group rounded-2xl border border-white/5 bg-[#060f1f]/70 p-5 transition hover:border-accent/30">
+          <h3 class="font-semibold text-white group-hover:text-accent transition">AI & Machine Learning</h3>
+          <p class="mt-1 text-sm text-muted">Deep learning, computer vision, and their applications in navigation</p>
+        </a>
+        <a href="/categories/space-tech" class="group rounded-2xl border border-white/5 bg-[#060f1f]/70 p-5 transition hover:border-accent/30">
+          <h3 class="font-semibold text-white group-hover:text-accent transition">Space & Satellites</h3>
+          <p class="mt-1 text-sm text-muted">GNSS constellations, LEO satellites, and space-based positioning</p>
+        </a>
+        <a href="/categories/outdoor-sports" class="group rounded-2xl border border-white/5 bg-[#060f1f]/70 p-5 transition hover:border-accent/30">
+          <h3 class="font-semibold text-white group-hover:text-accent transition">Outdoor Adventures</h3>
+          <p class="mt-1 text-sm text-muted">Alpine exploration, trail running, and backcountry photography</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
 </BaseLayout>
