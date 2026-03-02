@@ -1,0 +1,368 @@
+---
+title: "Inside Jammertest 2025: What Europe's Largest GNSS Stress Test Reveals About Resilient Positioning"
+description: "A technical deep-dive into Jammertest 2025—the attack methodologies, receiver performance comparisons, and defense technologies shaping the future of GNSS resilience."
+date: 2026-03-02
+category: "Space Tech"
+tags: ["GNSS", "Jamming/Spoofing", "PNT", "Navigation", "Cybersecurity"]
+hero: "/images/jammertest-2025/hero-bleik-andoya.jpg"
+draft: false
+---
+
+At nearly 70 degrees North and 300 km inside the Arctic Circle, the small village of Bleik on Norway's Andøya island seems an unlikely place for cutting-edge technology warfare. But for one week each September, this remote fishing community transforms into ground zero for the world's most realistic GNSS interference testing. **Jammertest 2025** brought together **360 participants from 120 organizations across 20+ countries**—and the findings carry urgent implications for anyone relying on satellite positioning and timing.
+
+This isn't theoretical research. The test scenarios replicated exactly what's happening right now across the Baltic, Eastern Europe, and the Mediterranean. And the results reveal both sobering vulnerabilities and promising paths forward.
+
+## Why Jammertest Matters Now More Than Ever
+
+### The Geopolitical Reality
+
+GNSS interference has evolved from an edge-case concern to a daily operational reality. Commercial aircraft routinely encounter GPS jamming and spoofing across:
+
+- **Baltic Sea region**: Persistent interference affecting civilian aviation and maritime operations
+- **Eastern Europe**: Systematic GNSS denial zones affecting cross-border transportation
+- **Mediterranean**: Documented spoofing incidents affecting cruise ships and commercial vessels
+- **Middle East**: High-intensity electronic warfare impacting civilian infrastructure
+
+The European Space Agency puts it bluntly: *"Interference is the consequence of the success of satellite navigation."* The more we depend on GNSS, the more attractive a target it becomes.
+
+![GPS interference map showing jamming activity across Europe, with red and yellow hexagons indicating areas of reported navigation accuracy issues](/images/jammertest-2025/gpsjam-preview.png "Real-time GPS interference monitoring from GPSJAM.org shows persistent jamming activity across Europe")
+
+### The Economic Stakes
+
+Independent studies estimate **GNSS outage costs at up to €1 billion per day** for major European economies. This isn't hyperbole—timing synchronization alone underpins:
+
+- **Financial markets**: Trade timestamps and high-frequency trading
+- **Power grids**: Phase synchronization across interconnected networks
+- **Telecommunications**: 5G networks and timing-critical backhaul
+- **Transportation**: Air traffic control, railway signaling, maritime navigation
+
+When your timing is off by three minutes (as happened to one receiver during Jammertest spoofing tests), the cascading effects can be catastrophic.
+
+---
+
+## The Test Environment: Where Mountains Meet the Sea
+
+![Aerial view of Jammertest 2025 test site at Bleik, Andøya, Norway showing the dramatic Arctic landscape](/images/jammertest-2025/testnor-header.jpg "Jammertest test site at Bleik, Andøya—where mountains contain interference and the sea provides safe transmission zones. Photo: David Jensen")
+
+Jammertest's location isn't accidental. The geography creates a natural laboratory:
+
+- **Eastern mountains** act as barriers containing interference signals
+- **Western coastline** opens toward the Norwegian Sea for maritime testing
+- **Sparse population** minimizes civilian impact
+- **Arctic latitude** provides unique multipath and ionospheric conditions
+
+The 2025 event ran **September 11-19**, with testing active from 08:00 to 22:00 daily across multiple zones: Grunnvatnet, surrounding roads, Andenes Airport (September 18), and offshore areas near Bleiksøya (September 16-18).
+
+Seven Norwegian government agencies partnered to host: the **Public Roads Administration**, **Communications Authority**, **Defense Research Establishment**, **Metrology Service**, **Space Agency**, **Mapping Authority**, and **Avinor** (civil aviation).
+
+![GNSS antennas and receivers deployed during field testing at Jammertest](/images/jammertest-2025/esa-antennas.jpg "ESA's antenna array during Jammertest field testing—from consumer-grade to military-specification equipment. Photo: S. Chazbeck/ESA")
+
+---
+
+## Attack Methodologies: How GNSS Gets Broken
+
+Jammertest 2025 featured approximately **100 interference scenarios**—significantly more complex than previous years. Understanding these attack vectors is essential for building resilient systems.
+
+### Jamming: Denial Through Noise
+
+Jamming overwhelms receivers with interference, blocking legitimate signals. The test program included:
+
+**Continuous-Wave (CW) Jamming**
+- Fixed-frequency interference at **47 dBm (~50 watts)**
+- Targeted individual bands: L1, L2, L5, E6
+- Swept from approximately 1150 MHz to 1620 MHz
+
+**Chirp Jamming**
+- Rapidly sweeping frequency interference
+- More effective against adaptive receivers
+- Tests receiver agility and filtering capabilities
+
+**Selective Multi-Band Jamming**
+- Sequential high-power campaigns across frequency ranges
+- Simulates targeted denial of specific constellations
+- Forces receivers to adapt with remaining signals
+
+**Handheld Jammer Scenarios**
+- Low-power, close-proximity interference
+- Simulates common commercial jamming devices
+- Tests near-field receiver resilience
+
+### Spoofing: Deception Through Fake Signals
+
+Spoofing broadcasts false GNSS signals to mislead receivers. Jammertest tested both major variants:
+
+**Coherent Spoofing**
+- Aligns with genuine satellite signals
+- Gradually takes over receiver tracking loops
+- Much harder to detect—appears as signal continuation
+- Tested with both real and synthetic ephemeris data
+
+**Incoherent Spoofing**
+- Doesn't align with genuine signals
+- Creates obvious discontinuities
+- Easier to detect but still dangerous if detection is weak
+
+**Mobile Spoofing**
+- False trajectories during driving tests
+- Simulated incorrect vehicle positions
+- Tested receiver response to gradually shifting positions
+
+**Time Spoofing**
+- Manipulated GNSS time signals
+- Forced sudden clock jumps (minutes to years)
+- Critical for timing-dependent infrastructure
+
+### Meaconing: Replay Attacks
+
+Meaconing captures, delays, and rebroadcasts authentic signals. This creates legitimate-looking but misleading positioning data—particularly dangerous because the signals themselves are genuine.
+
+---
+
+## Receiver Performance: Who Held the Line?
+
+Multiple manufacturers tested their equipment under identical conditions. The results reveal significant performance disparities.
+
+### Septentrio: AIM+ and OSNMA Validation
+
+Septentrio's receivers with **AIM+ (Advanced Interference Mitigation)** technology demonstrated:
+
+**Under Chirp Jamming:**
+- Detected and mitigated interference
+- Maintained **centimeter-level accuracy**
+- Competitor receivers showed errors from several meters to **>10 meters**
+
+![Graph comparing GNSS receiver performance under jamming conditions, showing Septentrio maintaining accuracy while competitors show significant errors](/images/jammertest-2025/septentrio-jamming-comparison.png "Static jamming test results: Septentrio (top) maintains centimeter-level accuracy while competitors show meter-level errors under identical conditions")
+
+**During Circular Spoofing Tests:**
+- Successfully rejected false positioning signals
+- Raised spoofing flags to alert operators
+- Competitors either accepted spoofed data or provided no warning
+
+![Graph showing spoofing detection performance with Septentrio rejecting false signals while competitors follow spoofed trajectory](/images/jammertest-2025/septentrio-spoofing-detection.png "Circular spoofing test: Septentrio (blue) detects and rejects the spoof while the competitor (orange) follows the false circular trajectory")
+
+**Time Spoofing Scenario:**
+- Maintained accurate timing throughout
+- Competitor receiver displayed time **three minutes in the past**
+
+![Graph comparing timing receiver performance during spoofing attack, showing Septentrio maintaining accurate time while competitor shows 3-minute offset](/images/jammertest-2025/septentrio-timing-spoofing.png "Time spoofing results: Septentrio timing module (blue) holds accurate time while the competitor (orange) is spoofed 3 minutes into the past—catastrophic for critical infrastructure")
+
+**OSNMA (Open Service Navigation Message Authentication) Validation:**
+- Successfully authenticated Galileo signals
+- Flagged spoofing attempts in real-time
+- Demonstrated end-to-end cryptographic protection
+
+![Screenshot showing Galileo OSNMA authentication flag in action during Jammertest spoofing scenario](/images/jammertest-2025/septentrio-osnma-flag.jpg "OSNMA authentication in action: The receiver flags spoofed Galileo signals in real-time, providing definitive signal authenticity verification")
+
+### u-blox: Integrity Over Continuity
+
+The **u-blox ZED-X20P** followed a specific design philosophy: protect integrity even at the cost of continuity.
+
+**Under Coherent Position Spoofing (GPS-only and Galileo-only):**
+- Detected spoofing attacks
+- Entered a **no-fix state** to preserve integrity
+- Competing receivers followed spoofed trajectories and reported false positions
+
+The key insight: when facing high-fidelity spoofing that closely mimics real signals, **entering no-fix is the correct response**. Reporting a deceptive location is worse than reporting no location.
+
+### SBG Systems: Anti-Jam Antenna Evaluation
+
+SBG Systems conducted extensive testing of passive and **CRPA (Controlled Reception Pattern Antenna)** systems:
+
+**Test Activities:**
+- Field driving tests near and within jammed zones
+- Mobile spoofing evaluations with adjusted configurations
+- High-latitude gyrocompassing trials
+
+**Key Outcomes:**
+- Collected **terabytes of data** for post-event analysis
+- Validated INS (Inertial Navigation System) coasting during GNSS denial
+- Demonstrated tight-coupling benefits under interference
+
+### UAV Navigation-Grupo Oesía: Drone Resilience
+
+Their flight control solution for unmanned aircraft was tested against:
+
+- Partial GNSS disruptions
+- Full signal denial
+- Sophisticated spoofing attempts
+- Multi-scenario jamming
+
+The results validated their guidance, navigation, and control solution under conditions now observed in real-world conflict zones.
+
+---
+
+## Defense Technologies: What Actually Works
+
+Jammertest 2025 validated several approaches to GNSS resilience.
+
+### Multi-Frequency Reception
+
+When specific bands face interference, receivers leveraging multiple frequencies can maintain positioning:
+
+- **L1/E1**: Primary civilian band (~1575.42 MHz)
+- **L2**: Legacy GPS (~1227.60 MHz)
+- **L5/E5**: Modernized signal (~1176.45 MHz)
+- **E6**: Galileo High Accuracy Service (~1278.75 MHz)
+
+Receivers using **all available frequencies** showed substantially better resilience than single-band units.
+
+### Galileo OSNMA
+
+The Open Service Navigation Message Authentication proved its value:
+
+- **Cryptographic verification** of navigation data
+- **Detection of spoofed Galileo signals**
+- **End-to-end authentication** from satellite to receiver
+
+OSNMA doesn't prevent jamming, but it definitively identifies whether received signals are authentic—critical for spoofing defense.
+
+### AIM+ and Similar Anti-Jam Technology
+
+Advanced interference mitigation combines:
+
+- **Pulse blanking**: Removing impulsive interference
+- **Notch filtering**: Excising narrowband jammers
+- **Adaptive algorithms**: Real-time response to changing interference
+
+Septentrio's AIM+ maintained centimeter accuracy under conditions that pushed competitors to meter-level errors.
+
+### CRPA (Controlled Reception Pattern Antenna)
+
+Null-steering antenna arrays can:
+
+- Identify jammer direction
+- Create antenna pattern nulls toward interference sources
+- Maintain reception from legitimate satellites
+
+SBG Systems' CRPA testing demonstrated this approach's value under real-world conditions.
+
+### INS Integration (Sensor Fusion)
+
+When GNSS fails, **inertial navigation systems** provide bridging:
+
+- Gyroscopes and accelerometers track motion without external signals
+- Tight coupling with GNSS improves overall solution quality
+- INS coasting buys time during GNSS denial
+
+The key is **tight integration**—loose coupling isn't enough under extended denial.
+
+### Conservative Detection Philosophy
+
+Perhaps the most important finding: **integrity must trump continuity**.
+
+When facing sophisticated spoofing:
+1. Detect the anomaly
+2. Flag the warning
+3. Enter no-fix state if necessary
+4. **Never report false positions as valid**
+
+Receivers that accepted spoofed trajectories without warning represent a greater risk than those that entered protective no-fix states.
+
+---
+
+## ESA's Perspective: 100 TB of Reality
+
+The European Space Agency participated for the third consecutive year, with specific objectives:
+
+**Testing Activities:**
+- Evaluated EGNOS and Galileo signal robustness
+- Assessed antenna performance (consumer-grade to military-specification)
+- Tested novel receiver technologies from ESA programs
+- Monitored next-generation EGNOS ground receivers
+
+**Data Collection:**
+Over **100 TB of data** were recorded and are now available for replay at the ESA Navigation Laboratory. This enables:
+
+- Post-event analysis by industry partners
+- Validation of new equipment against real interference
+- Development of improved mitigation algorithms
+
+Rafael Lucas of ESA emphasized that costs of GNSS outages "could reach billions of euros daily for Europe." This isn't about protecting gadgets—it's about protecting critical infrastructure.
+
+---
+
+## Key Technical Takeaways
+
+### For Receiver Designers
+
+1. **Multi-layer detection is mandatory**—no single technique catches all attacks
+2. **Integrity beats continuity** when facing sophisticated spoofing
+3. **OSNMA adoption should accelerate**—it works in the real world
+4. **AIM+ class technology delivers**—the performance gap is quantifiable
+5. **Test in realistic conditions**—laboratory testing isn't enough
+
+### For System Integrators
+
+1. **Budget for multi-frequency, authenticated receivers**—the premium is justified
+2. **Integrate INS tightly**—loose coupling won't survive extended denial
+3. **Consider CRPA for high-value applications**—the physics work
+4. **Plan for graceful degradation**—what happens when GNSS fails?
+5. **Implement integrity monitoring**—don't just use position data blindly
+
+### For Infrastructure Operators
+
+1. **Timing is the soft spot**—three-minute time spoofing is catastrophic for finance/telecom
+2. **Redundancy is non-negotiable**—single-source PNT is single-source failure
+3. **Consider eLORAN and other backups**—diverse signal sources matter
+4. **Monitor for interference continuously**—detection enables response
+
+---
+
+## The Bigger Picture: Resilience as the New Standard
+
+![Participants gathered at Jammertest 2025, showing the scale of international collaboration](/images/jammertest-2025/testnor-participants.webp "360 participants from 120 organizations across 20+ countries gathered for Jammertest 2025")
+
+Jammertest's head captured the event's philosophy: *"The goal is that every receiver is knocked out at some point during the campaign."* This isn't about finding perfect equipment—it's about understanding failure modes and building appropriate responses.
+
+The 2025 event demonstrated that **resilient GNSS isn't built in the lab—it's proven in the field**. The scenarios tested weren't hypothetical; they're happening daily across conflict zones and, increasingly, in civilian airspace.
+
+The industry response is encouraging:
+- **OSNMA is ready** and validated
+- **AIM+ class technology delivers** measurable performance advantages
+- **Multi-frequency receivers** show clear resilience benefits
+- **Conservative detection philosophies** protect against sophisticated spoofing
+
+But gaps remain:
+- Many deployed receivers lack modern anti-interference capabilities
+- Timing infrastructure often relies on single-source GNSS
+- Authentication adoption is slower than threat evolution
+- Integration testing rarely includes realistic interference scenarios
+
+---
+
+## What Comes Next
+
+Jammertest has become an annual fixture, with each year bringing more complex scenarios and broader participation. The 2025 results will shape:
+
+- **Procurement requirements** for critical infrastructure
+- **Receiver development roadmaps** at major manufacturers
+- **Certification standards** for safety-critical applications
+- **Policy discussions** about GNSS backup mandates
+
+For those building or operating systems that depend on GNSS, the message is clear: **test under realistic interference, demand multi-layer protection, and never assume signals are genuine**.
+
+The invisible infrastructure that keeps our world synchronized is under active attack. Jammertest 2025 showed both the severity of the threat and the viability of the defense. The question now is implementation speed.
+
+---
+
+## TL;DR
+
+- **Jammertest 2025** in Arctic Norway tested ~100 interference scenarios against GNSS receivers from major manufacturers
+- **Coherent spoofing** is the scariest threat—receivers that detected it and entered no-fix state performed better than those that followed fake trajectories
+- **Septentrio's AIM+** maintained centimeter accuracy under chirp jamming while competitors showed meter-level errors
+- **Galileo OSNMA** successfully authenticated signals and detected spoofing in real-world conditions
+- **Time spoofing** proved devastating—one receiver showed time 3 minutes in the past, catastrophic for finance/telecom
+- **Multi-frequency, authenticated receivers with INS integration** represent current best practice
+- **100 TB of data** now available at ESA for industry analysis
+
+---
+
+## Sources
+
+- [Septentrio: Results from Jammertest 2025](https://www.septentrio.com/en/learn-more/insights/results-jammertest-2025-withstanding-gps-jamming-and-spoofing)
+- [u-blox: Jamming and Spoofing Detection at Jammertest 2025](https://www.u-blox.com/en/blogs/tech/gnss-jamming-spoofing-detection-jammertest-2025-andoya)
+- [Net Insight: Jammertest 2025 GNSS Resilience Testing](https://netinsight.net/jammertest25-gnss-testing/)
+- [SBG Systems: Jammertest 2025 Participation](https://www.sbg-systems.com/news/jammertest-2025/)
+- [ESA: Navigating Through Interference at Jammertest](https://www.esa.int/Applications/Satellite_navigation/Navigating_through_interference_at_Jammertest)
+- [Official Jammertest 2025 Event Page](https://jammertest.no/jammertest-2025/)
+- [MDPI: Jammertest Open GNSS Interference Test Arena](https://www.mdpi.com/2673-4591/126/1/20)
