@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="toolsBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#111827;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1f2937;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#toolsBg)"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="bold">AI Agent Tools Landscape (2026)</text>
+
+  <!-- Claude Code -->
+  <rect x="40" y="70" width="140" height="160" rx="10" fill="#d97706" fill-opacity="0.15" stroke="#d97706" stroke-width="2"/>
+  <text x="110" y="95" text-anchor="middle" fill="#d97706" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">Claude Code</text>
+  <text x="110" y="115" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="10">Agent-first CLI</text>
+  <line x1="60" y1="125" x2="160" y2="125" stroke="#d97706" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="110" y="145" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">Skills + Hooks</text>
+  <text x="110" y="162" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">MCP Native</text>
+  <text x="110" y="179" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">Terminal UX</text>
+  <rect x="55" y="195" width="110" height="25" rx="4" fill="#d97706" fill-opacity="0.3"/>
+  <text x="110" y="212" text-anchor="middle" fill="#d97706" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">$1B+ ARR</text>
+
+  <!-- Cursor -->
+  <rect x="200" y="70" width="140" height="160" rx="10" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-width="2"/>
+  <text x="270" y="95" text-anchor="middle" fill="#3b82f6" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">Cursor</text>
+  <text x="270" y="115" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="10">IDE-first Editor</text>
+  <line x1="220" y1="125" x2="320" y2="125" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="270" y="145" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">8 Parallel Agents</text>
+  <text x="270" y="162" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">Composer Model</text>
+  <text x="270" y="179" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">VS Code Base</text>
+  <rect x="215" y="195" width="110" height="25" rx="4" fill="#3b82f6" fill-opacity="0.3"/>
+  <text x="270" y="212" text-anchor="middle" fill="#3b82f6" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">$29B Valuation</text>
+
+  <!-- OpenClaw -->
+  <rect x="360" y="70" width="140" height="160" rx="10" fill="#ef4444" fill-opacity="0.15" stroke="#ef4444" stroke-width="2"/>
+  <text x="430" y="95" text-anchor="middle" fill="#ef4444" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">OpenClaw</text>
+  <text x="430" y="115" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="10">Local-first Agent</text>
+  <line x1="380" y1="125" x2="480" y2="125" stroke="#ef4444" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="430" y="145" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">Open Source</text>
+  <text x="430" y="162" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">Messaging Apps</text>
+  <text x="430" y="179" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">Heartbeat Scheduler</text>
+  <rect x="375" y="195" width="110" height="25" rx="4" fill="#ef4444" fill-opacity="0.3"/>
+  <text x="430" y="212" text-anchor="middle" fill="#ef4444" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">247K Stars</text>
+
+  <!-- n8n -->
+  <rect x="520" y="70" width="140" height="160" rx="10" fill="#ec4899" fill-opacity="0.15" stroke="#ec4899" stroke-width="2"/>
+  <text x="590" y="95" text-anchor="middle" fill="#ec4899" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">n8n</text>
+  <text x="590" y="115" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="10">Visual Workflows</text>
+  <line x1="540" y1="125" x2="640" y2="125" stroke="#ec4899" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="590" y="145" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">No-Code + Code</text>
+  <text x="590" y="162" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">400+ Integrations</text>
+  <text x="590" y="179" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">LangChain Support</text>
+  <rect x="535" y="195" width="110" height="25" rx="4" fill="#ec4899" fill-opacity="0.3"/>
+  <text x="590" y="212" text-anchor="middle" fill="#ec4899" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">177K Stars</text>
+
+  <!-- Devin -->
+  <rect x="680" y="70" width="100" height="160" rx="10" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="2"/>
+  <text x="730" y="95" text-anchor="middle" fill="#10b981" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">Devin</text>
+  <text x="730" y="115" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="10">AI Engineer</text>
+  <line x1="695" y1="125" x2="765" y2="125" stroke="#10b981" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="730" y="145" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">Full Autonomy</text>
+  <text x="730" y="162" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">Own Browser</text>
+  <text x="730" y="179" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="10">Own Shell</text>
+  <rect x="690" y="195" width="80" height="25" rx="4" fill="#10b981" fill-opacity="0.3"/>
+  <text x="730" y="212" text-anchor="middle" fill="#10b981" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">$73M ARR</text>
+
+  <!-- Common thread -->
+  <rect x="40" y="250" width="740" height="50" rx="8" fill="#6366f1" fill-opacity="0.1" stroke="#6366f1" stroke-width="1"/>
+  <text x="400" y="275" text-anchor="middle" fill="#6366f1" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">Common Thread: All Speak MCP</text>
+  <text x="400" y="292" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="11">Same tool ecosystem, different interaction paradigms</text>
+
+  <!-- Use case recommendations -->
+  <text x="400" y="330" text-anchor="middle" fill="#666" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">Best For:</text>
+
+  <text x="110" y="355" text-anchor="middle" fill="#d97706" font-family="system-ui, sans-serif" font-size="10">Power users</text>
+  <text x="110" y="370" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="9">Terminal workflows</text>
+
+  <text x="270" y="355" text-anchor="middle" fill="#3b82f6" font-family="system-ui, sans-serif" font-size="10">Developers</text>
+  <text x="270" y="370" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="9">IDE integration</text>
+
+  <text x="430" y="355" text-anchor="middle" fill="#ef4444" font-family="system-ui, sans-serif" font-size="10">Privacy-focused</text>
+  <text x="430" y="370" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="9">Local control</text>
+
+  <text x="590" y="355" text-anchor="middle" fill="#ec4899" font-family="system-ui, sans-serif" font-size="10">Non-developers</text>
+  <text x="590" y="370" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="9">Visual building</text>
+
+  <text x="730" y="355" text-anchor="middle" fill="#10b981" font-family="system-ui, sans-serif" font-size="10">Delegation</text>
+  <text x="730" y="370" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="9">Full autonomy</text>
+
+  <!-- Legend -->
+  <text x="400" y="420" text-anchor="middle" fill="#555" font-family="system-ui, sans-serif" font-size="9">Data as of March 2026 | ARR = Annual Recurring Revenue</text>
+</svg>
