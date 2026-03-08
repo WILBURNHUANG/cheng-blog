@@ -23,6 +23,22 @@ Before diving into the technical details, here's the landscape at a glance:
 - **Decimeter-level** (PPP) — Global coverage, but requires patience (15-30 min)
 - **Centimeter-level** (RTK, NRTK, PPP-RTK, PPK) — Requires base stations, networks, or post-processing
 
+### Quick Reference
+
+| Solution | Accuracy | Time | Range |
+|:---------|:--------:|:----:|:-----:|
+| SPP | 5-10 m | ⚡ | Global |
+| SBAS | 1-3 m | ⚡ | Regional |
+| DGNSS | 0.5-2 m | ⚡ | 50 km |
+| PPP | 10-30 cm | 🕐 | Global |
+| PPP-AR | &lt;5 cm | 🕐 | Global |
+| RTK | 1-2 cm | ⚡ | 20 km |
+| NRTK | 2-3 cm | ⚡ | Network |
+| PPP-RTK | 2-3 cm | ⚡ | Regional |
+| PPK | 1-2 cm | 📊 | 50 km |
+
+⚡ = Instant/Seconds &nbsp; 🕐 = Minutes &nbsp; 📊 = Post-process
+
 The trade-off: **more accuracy requires more infrastructure, more complexity, or more patience**. Let's understand why.
 
 ---
