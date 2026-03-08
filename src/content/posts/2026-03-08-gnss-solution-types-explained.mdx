@@ -16,17 +16,33 @@ If you've ever wondered why your drone needs RTK, why your survey crew talks abo
 
 Before diving into the technical details, here's the landscape at a glance:
 
-| Solution Type | Accuracy | Convergence Time | Coverage | Infrastructure Needed |
-|--------------|----------|------------------|----------|----------------------|
-| **SPP** | 5–10 m | Instant | Global | None |
-| **SBAS** | 1–3 m | Instant | Regional | None (free broadcast) |
-| **DGNSS** | 0.5–2 m | Instant | ~50 km from base | Base station + data link |
-| **PPP (Float)** | 10–30 cm | 15–30 min | Global | Correction service |
-| **PPP-AR** | < 5 cm | 3–15 min | Global | AR correction service |
-| **RTK** | 1–2 cm | Seconds | ~20 km from base | Base station + data link |
-| **NRTK** | 2–3 cm | Seconds | Network coverage | CORS subscription |
-| **PPP-RTK** | 2–3 cm | < 1 min | Regional | SSR correction service |
-| **PPK** | 1–2 cm | Post-processing | ~50 km from base | Post-processing software |
+### Accuracy & Convergence
+
+| Solution | Accuracy | Convergence |
+|----------|----------|-------------|
+| **SPP** | 5–10 m | Instant |
+| **SBAS** | 1–3 m | Instant |
+| **DGNSS** | 0.5–2 m | Instant |
+| **PPP** | 10–30 cm | 15–30 min |
+| **PPP-AR** | < 5 cm | 3–15 min |
+| **RTK** | 1–2 cm | Seconds |
+| **NRTK** | 2–3 cm | Seconds |
+| **PPP-RTK** | 2–3 cm | < 1 min |
+| **PPK** | 1–2 cm | Post-process |
+
+### Coverage & Requirements
+
+| Solution | Coverage | What You Need |
+|----------|----------|---------------|
+| **SPP** | Global | Receiver only |
+| **SBAS** | Regional | SBAS receiver |
+| **DGNSS** | ~50 km | Base + data link |
+| **PPP** | Global | Correction service |
+| **PPP-AR** | Global | AR service |
+| **RTK** | ~20 km | Base + data link |
+| **NRTK** | Network area | CORS subscription |
+| **PPP-RTK** | Regional | SSR service |
+| **PPK** | ~50 km | Post-processing SW |
 
 The trade-offs are clear: **more accuracy requires more infrastructure, more complexity, or more patience**. Let's understand why.
 
