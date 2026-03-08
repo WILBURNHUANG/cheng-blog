@@ -1,0 +1,113 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <linearGradient id="meterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="decimeterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="centimeterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.05"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+
+  <!-- Chart area -->
+  <g transform="translate(100, 40)">
+    <!-- Accuracy zones -->
+    <rect x="0" y="0" width="650" height="100" fill="url(#meterGrad)"/>
+    <rect x="0" y="100" width="650" height="120" fill="url(#decimeterGrad)"/>
+    <rect x="0" y="220" width="650" height="180" fill="url(#centimeterGrad)"/>
+
+    <!-- Zone labels -->
+    <text x="635" y="50" fill="#ef4444" font-size="12" font-family="system-ui" text-anchor="end" opacity="0.8">METER</text>
+    <text x="635" y="160" fill="#f59e0b" font-size="12" font-family="system-ui" text-anchor="end" opacity="0.8">DECIMETER</text>
+    <text x="635" y="310" fill="#22c55e" font-size="12" font-family="system-ui" text-anchor="end" opacity="0.8">CENTIMETER</text>
+
+    <!-- Grid lines -->
+    <line x1="0" y1="100" x2="650" y2="100" stroke="#475569" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/>
+    <line x1="0" y1="220" x2="650" y2="220" stroke="#475569" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/>
+
+    <!-- Vertical grid (convergence zones) -->
+    <line x1="150" y1="0" x2="150" y2="400" stroke="#475569" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+    <line x1="350" y1="0" x2="350" y2="400" stroke="#475569" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+    <line x1="500" y1="0" x2="500" y2="400" stroke="#475569" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+
+    <!-- X-axis labels -->
+    <text x="75" y="430" fill="#94a3b8" font-size="13" font-family="system-ui" text-anchor="middle">Instant</text>
+    <text x="250" y="430" fill="#94a3b8" font-size="13" font-family="system-ui" text-anchor="middle">Seconds</text>
+    <text x="425" y="430" fill="#94a3b8" font-size="13" font-family="system-ui" text-anchor="middle">Minutes</text>
+    <text x="575" y="430" fill="#94a3b8" font-size="13" font-family="system-ui" text-anchor="middle">Post-process</text>
+
+    <!-- X-axis title -->
+    <text x="325" y="460" fill="#e2e8f0" font-size="14" font-family="system-ui" text-anchor="middle" font-weight="600">CONVERGENCE TIME →</text>
+
+    <!-- Y-axis labels -->
+    <text x="-15" y="50" fill="#94a3b8" font-size="12" font-family="system-ui" text-anchor="end">5-10 m</text>
+    <text x="-15" y="90" fill="#94a3b8" font-size="12" font-family="system-ui" text-anchor="end">1-3 m</text>
+    <text x="-15" y="130" fill="#94a3b8" font-size="12" font-family="system-ui" text-anchor="end">0.5 m</text>
+    <text x="-15" y="180" fill="#94a3b8" font-size="12" font-family="system-ui" text-anchor="end">10-30 cm</text>
+    <text x="-15" y="250" fill="#94a3b8" font-size="12" font-family="system-ui" text-anchor="end">5 cm</text>
+    <text x="-15" y="340" fill="#94a3b8" font-size="12" font-family="system-ui" text-anchor="end">1-2 cm</text>
+
+    <!-- Y-axis title -->
+    <text x="-70" y="200" fill="#e2e8f0" font-size="14" font-family="system-ui" text-anchor="middle" font-weight="600" transform="rotate(-90, -70, 200)">← ACCURACY</text>
+
+    <!-- Solution bubbles -->
+    <!-- SPP - 5-10m, instant -->
+    <circle cx="75" cy="45" r="28" fill="#ef4444" opacity="0.9"/>
+    <text x="75" y="50" fill="white" font-size="13" font-family="system-ui" text-anchor="middle" font-weight="600">SPP</text>
+
+    <!-- SBAS - 1-3m, instant -->
+    <circle cx="75" cy="130" r="28" fill="#f97316" opacity="0.9"/>
+    <text x="75" y="135" fill="white" font-size="13" font-family="system-ui" text-anchor="middle" font-weight="600">SBAS</text>
+
+    <!-- DGNSS - 0.5-2m, instant -->
+    <circle cx="75" cy="175" r="28" fill="#eab308" opacity="0.9"/>
+    <text x="75" y="180" fill="white" font-size="12" font-family="system-ui" text-anchor="middle" font-weight="600">DGNSS</text>
+
+    <!-- RTK - 1-2cm, seconds -->
+    <circle cx="250" cy="340" r="32" fill="#22c55e" opacity="0.9"/>
+    <text x="250" y="345" fill="white" font-size="14" font-family="system-ui" text-anchor="middle" font-weight="700">RTK</text>
+
+    <!-- NRTK - 2-3cm, seconds -->
+    <circle cx="320" cy="320" r="30" fill="#10b981" opacity="0.9"/>
+    <text x="320" y="325" fill="white" font-size="12" font-family="system-ui" text-anchor="middle" font-weight="600">NRTK</text>
+
+    <!-- PPP-RTK - 2-3cm, <1min -->
+    <circle cx="400" cy="320" r="30" fill="#14b8a6" opacity="0.9"/>
+    <text x="400" y="316" fill="white" font-size="10" font-family="system-ui" text-anchor="middle" font-weight="600">PPP-</text>
+    <text x="400" y="330" fill="white" font-size="10" font-family="system-ui" text-anchor="middle" font-weight="600">RTK</text>
+
+    <!-- PPP - 10-30cm, 15-30min -->
+    <circle cx="480" cy="180" r="28" fill="#0ea5e9" opacity="0.9"/>
+    <text x="480" y="185" fill="white" font-size="13" font-family="system-ui" text-anchor="middle" font-weight="600">PPP</text>
+
+    <!-- PPP-AR - <5cm, 3-15min -->
+    <circle cx="420" cy="250" r="28" fill="#06b6d4" opacity="0.9"/>
+    <text x="420" y="246" fill="white" font-size="10" font-family="system-ui" text-anchor="middle" font-weight="600">PPP-</text>
+    <text x="420" y="260" fill="white" font-size="10" font-family="system-ui" text-anchor="middle" font-weight="600">AR</text>
+
+    <!-- PPK - 1-2cm, post-process -->
+    <circle cx="575" cy="340" r="30" fill="#8b5cf6" opacity="0.9"/>
+    <text x="575" y="345" fill="white" font-size="13" font-family="system-ui" text-anchor="middle" font-weight="600">PPK</text>
+
+    <!-- Axes -->
+    <line x1="0" y1="400" x2="650" y2="400" stroke="#64748b" stroke-width="2"/>
+    <line x1="0" y1="0" x2="0" y2="400" stroke="#64748b" stroke-width="2"/>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(100, 12)">
+    <text x="0" y="0" fill="#f8fafc" font-size="16" font-family="system-ui" font-weight="700">GNSS Solution Comparison: Accuracy vs Convergence Time</text>
+  </g>
+</svg>

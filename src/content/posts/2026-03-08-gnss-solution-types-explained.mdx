@@ -16,35 +16,14 @@ If you've ever wondered why your drone needs RTK, why your survey crew talks abo
 
 Before diving into the technical details, here's the landscape at a glance:
 
-### Accuracy & Convergence
+![GNSS Solution Comparison: Accuracy vs Convergence Time](/images/gnss-solutions/accuracy-convergence-chart.svg "The fundamental trade-off: better accuracy requires either more time, more infrastructure, or both")
 
-| Solution | Accuracy | Convergence |
-|----------|----------|-------------|
-| **SPP** | 5–10 m | Instant |
-| **SBAS** | 1–3 m | Instant |
-| **DGNSS** | 0.5–2 m | Instant |
-| **PPP** | 10–30 cm | 15–30 min |
-| **PPP-AR** | < 5 cm | 3–15 min |
-| **RTK** | 1–2 cm | Seconds |
-| **NRTK** | 2–3 cm | Seconds |
-| **PPP-RTK** | 2–3 cm | < 1 min |
-| **PPK** | 1–2 cm | Post-process |
+**The pattern is clear:**
+- **Meter-level** (SPP, SBAS, DGNSS) — Instant, minimal infrastructure
+- **Decimeter-level** (PPP) — Global coverage, but requires patience (15-30 min)
+- **Centimeter-level** (RTK, NRTK, PPP-RTK, PPK) — Requires base stations, networks, or post-processing
 
-### Coverage & Requirements
-
-| Solution | Coverage | What You Need |
-|----------|----------|---------------|
-| **SPP** | Global | Receiver only |
-| **SBAS** | Regional | SBAS receiver |
-| **DGNSS** | ~50 km | Base + data link |
-| **PPP** | Global | Correction service |
-| **PPP-AR** | Global | AR service |
-| **RTK** | ~20 km | Base + data link |
-| **NRTK** | Network area | CORS subscription |
-| **PPP-RTK** | Regional | SSR service |
-| **PPK** | ~50 km | Post-processing SW |
-
-The trade-offs are clear: **more accuracy requires more infrastructure, more complexity, or more patience**. Let's understand why.
+The trade-off: **more accuracy requires more infrastructure, more complexity, or more patience**. Let's understand why.
 
 ---
 
