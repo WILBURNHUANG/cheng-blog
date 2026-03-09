@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const techStack = ["Swift", "SwiftUI", "ARKit", "SceneKit", "LiDAR", "Core ML"];
+const appColor = "#0EA5E9";
+const appColorLight = "rgba(14, 165, 233, 0.15)";
+---
+
+<BaseLayout title="BestFit — Tech & Trek" description="LiDAR-powered snowboard boot fitting app for iPhone Pro.">
+  <div class="mx-auto w-full max-w-3xl space-y-8">
+
+    <!-- Header -->
+    <section class="rounded-3xl border border-white/5 bg-[#060f1f]/70 p-8 shadow-[0_20px_60px_rgba(4,14,32,0.55)] lg:p-10">
+      <div class="flex flex-wrap items-center gap-4 mb-6">
+        <span
+          class="inline-flex h-14 w-14 items-center justify-center rounded-2xl text-2xl"
+          style={`background: ${appColorLight}; color: ${appColor};`}
+        >
+          📱
+        </span>
+        <div>
+          <h1 class="text-2xl font-semibold text-white md:text-3xl">BestFit</h1>
+          <p class="text-muted">LiDAR-powered snowboard boot fitting — right from your iPhone.</p>
+        </div>
+        <span
+          class="ml-auto rounded-full px-3 py-1 text-xs font-medium"
+          style={`background: ${appColorLight}; color: ${appColor};`}
+        >
+          In Development
+        </span>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="flex flex-wrap gap-2 mb-8">
+        {techStack.map((tech) => (
+          <span
+            class="rounded-full px-3 py-1 text-xs font-medium"
+            style={`background: ${appColorLight}; color: ${appColor};`}
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      <!-- Description -->
+      <div class="space-y-4 text-base text-muted md:text-lg">
+        <p>
+          An iOS app that uses the LiDAR scanner on iPhone Pro to scan your feet and recommend snowboard boots that actually fit. It captures 3D foot measurements, runs them through a matching algorithm against a database of boot specs, and gives you data-driven recommendations instead of guesswork.
+        </p>
+      </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="rounded-3xl border border-white/5 bg-[#060f1f]/70 p-8 shadow-[0_20px_60px_rgba(4,14,32,0.55)] lg:p-10">
+      <h2 class="mb-6 text-xl font-semibold text-white">Key Features</h2>
+      <ul class="space-y-3 text-muted">
+        <li class="flex items-start gap-3">
+          <span style={`color: ${appColor};`}>•</span>
+          <span><span class="text-white font-medium">3D foot scanning</span> with intelligent auto-detection (DBSCAN clustering)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span style={`color: ${appColor};`}>•</span>
+          <span><span class="text-white font-medium">Interactive 3D foot viewer</span> (SceneKit) with point cloud, wireframe, and solid rendering modes</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span style={`color: ${appColor};`}>•</span>
+          <span><span class="text-white font-medium">Boot matching algorithm</span> based on length, width, instep, arch, and volume</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span style={`color: ${appColor};`}>•</span>
+          <span><span class="text-white font-medium">Accuracy targets:</span> ±3mm length, ±4mm width</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span style={`color: ${appColor};`}>•</span>
+          <span><span class="text-white font-medium">B2C focus</span> with future B2B expansion for retail shops</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span style={`color: ${appColor};`}>•</span>
+          <span><span class="text-white font-medium">Platform:</span> iOS (requires LiDAR-equipped iPhone 12 Pro+)</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Screenshots Placeholder -->
+    <section class="rounded-3xl border border-white/5 bg-[#060f1f]/70 p-8 shadow-[0_20px_60px_rgba(4,14,32,0.55)] lg:p-10">
+      <h2 class="mb-6 text-xl font-semibold text-white">Screenshots</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {[1, 2, 3].map(() => (
+          <div
+            class="aspect-[9/16] rounded-2xl border border-white/10 flex items-center justify-center"
+            style={`background: ${appColorLight};`}
+          >
+            <span class="text-sm text-muted/60">Coming Soon</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Development Updates Placeholder -->
+    <section class="rounded-3xl border border-white/5 bg-[#060f1f]/70 p-8 shadow-[0_20px_60px_rgba(4,14,32,0.55)] lg:p-10">
+      <h2 class="mb-4 text-xl font-semibold text-white">Development Updates</h2>
+      <p class="text-muted mb-4">Blog posts about the development journey will appear here.</p>
+      <div class="rounded-xl border border-dashed border-white/10 p-8 text-center">
+        <p class="text-sm text-muted/60">More coming soon</p>
+      </div>
+    </section>
+
+    <!-- Back Link -->
+    <a
+      href="/about"
+      class="inline-flex items-center gap-2 text-sm text-muted hover:text-accent transition-colors"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+      </svg>
+      Back to About
+    </a>
+
+  </div>
+</BaseLayout>
