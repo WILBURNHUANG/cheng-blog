@@ -1,0 +1,133 @@
+<svg viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" font-family="'Inter', 'Segoe UI', sans-serif">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#4338ca"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#059669"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+    <filter id="s3">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="440" fill="url(#bg3)" rx="16"/>
+
+  <!-- Title -->
+  <text x="400" y="36" text-anchor="middle" fill="#f1f5f9" font-size="18" font-weight="700" letter-spacing="0.5">Scaling autoresearch: Experiments &amp; Results</text>
+  <text x="400" y="56" text-anchor="middle" fill="#64748b" font-size="12">Single GPU overnight vs. 16-GPU cluster (8 hours) — SkyPilot experiment</text>
+
+  <!-- ═══ Chart 1: Experiments Count ═══ -->
+  <!-- Chart area background -->
+  <rect x="40" y="72" width="340" height="290" rx="10" fill="#0d1b2a" stroke="#1e3a5f" stroke-width="1"/>
+  <text x="210" y="96" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">Experiments Run</text>
+
+  <!-- Y axis grid lines -->
+  <line x1="100" y1="110" x2="360" y2="110" stroke="#1e293b" stroke-width="1"/>
+  <line x1="100" y1="145" x2="360" y2="145" stroke="#1e293b" stroke-width="1"/>
+  <line x1="100" y1="180" x2="360" y2="180" stroke="#1e293b" stroke-width="1"/>
+  <line x1="100" y1="215" x2="360" y2="215" stroke="#1e293b" stroke-width="1"/>
+  <line x1="100" y1="250" x2="360" y2="250" stroke="#1e293b" stroke-width="1"/>
+  <line x1="100" y1="285" x2="360" y2="285" stroke="#1e293b" stroke-width="1"/>
+  <line x1="100" y1="320" x2="360" y2="320" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Y axis labels -->
+  <text x="95" y="113" text-anchor="end" fill="#475569" font-size="10">1000</text>
+  <text x="95" y="148" text-anchor="end" fill="#475569" font-size="10">800</text>
+  <text x="95" y="183" text-anchor="end" fill="#475569" font-size="10">600</text>
+  <text x="95" y="218" text-anchor="end" fill="#475569" font-size="10">400</text>
+  <text x="95" y="253" text-anchor="end" fill="#475569" font-size="10">200</text>
+  <text x="95" y="288" text-anchor="end" fill="#475569" font-size="10">100</text>
+
+  <!-- Bar: Single GPU overnight ~100 experiments -->
+  <!-- Scale: 910 max → 210px height. 100/910 * 210 = ~23px -->
+  <rect x="140" y="297" width="60" height="23" rx="4" fill="url(#bar1)" filter="url(#s3)"/>
+  <text x="170" y="293" text-anchor="middle" fill="#a5b4fc" font-size="12" font-weight="700">100</text>
+  <text x="170" y="340" text-anchor="middle" fill="#94a3b8" font-size="10">1 GPU</text>
+  <text x="170" y="352" text-anchor="middle" fill="#64748b" font-size="9">overnight</text>
+
+  <!-- Bar: 16-GPU cluster 8 hours → 910 experiments -->
+  <!-- 910/910 * 210 = 210px -->
+  <rect x="240" y="110" width="60" height="210" rx="4" fill="url(#bar2)" filter="url(#s3)"/>
+  <text x="270" y="105" text-anchor="middle" fill="#6ee7b7" font-size="12" font-weight="700">910</text>
+  <text x="270" y="340" text-anchor="middle" fill="#94a3b8" font-size="10">16 GPUs</text>
+  <text x="270" y="352" text-anchor="middle" fill="#64748b" font-size="9">8 hours</text>
+
+  <!-- 9x label -->
+  <rect x="178" y="185" width="52" height="22" rx="4" fill="#1c3a2e" stroke="#10b981" stroke-width="1"/>
+  <text x="204" y="200" text-anchor="middle" fill="#6ee7b7" font-size="12" font-weight="700">9× more</text>
+
+  <!-- ═══ Chart 2: val_bpb Improvement ═══ -->
+  <rect x="420" y="72" width="340" height="290" rx="10" fill="#0d1b2a" stroke="#1e3a5f" stroke-width="1"/>
+  <text x="590" y="96" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">val_bpb Improvement (lower = better)</text>
+
+  <!-- Grid lines -->
+  <line x1="480" y1="120" x2="740" y2="120" stroke="#1e293b" stroke-width="1"/>
+  <line x1="480" y1="175" x2="740" y2="175" stroke="#1e293b" stroke-width="1"/>
+  <line x1="480" y1="230" x2="740" y2="230" stroke="#1e293b" stroke-width="1"/>
+  <line x1="480" y1="285" x2="740" y2="285" stroke="#1e293b" stroke-width="1"/>
+  <line x1="480" y1="320" x2="740" y2="320" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Y axis labels (val_bpb scale 0.960 to 1.050) -->
+  <text x="475" y="123" text-anchor="end" fill="#475569" font-size="10">0.960</text>
+  <text x="475" y="178" text-anchor="end" fill="#475569" font-size="10">0.970</text>
+  <text x="475" y="233" text-anchor="end" fill="#475569" font-size="10">0.990</text>
+  <text x="475" y="288" text-anchor="end" fill="#475569" font-size="10">1.003</text>
+
+  <!-- Baseline annotation line -->
+  <line x1="480" y1="283" x2="740" y2="283" stroke="#ef444455" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="742" y="287" fill="#f87171" font-size="9">baseline</text>
+
+  <!-- Bar: Single GPU - from 1.003 to ~1.95 val_bpb improvement (karpathy's overnight: 2.02→1.80) -->
+  <!-- We'll show absolute val_bpb values -->
+  <!-- Scale: 0.960 to 1.010, range = 0.050, chart height 163px (120 to 283) -->
+  <!-- 1 unit = 163/0.050 = 3260 px per unit  -->
+
+  <!-- Single GPU result: val_bpb 1.003 → 0.985 (approximate, 11% efficiency gain) -->
+  <!-- At 0.985: y = 283 - (1.003-0.985)/0.050 * 163 = 283 - 58.7 = 224 -->
+  <rect x="520" y="224" width="60" height="59" rx="4" fill="url(#bar1)" filter="url(#s3)"/>
+  <text x="550" y="219" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="700">0.985</text>
+  <text x="550" y="340" text-anchor="middle" fill="#94a3b8" font-size="10">1 GPU</text>
+  <text x="550" y="352" text-anchor="middle" fill="#64748b" font-size="9">overnight</text>
+
+  <!-- 16-GPU result: val_bpb 1.003 → 0.974 -->
+  <!-- At 0.974: y = 283 - (1.003-0.974)/0.050 * 163 = 283 - 94.5 = 188.5 -->
+  <rect x="620" y="188" width="60" height="95" rx="4" fill="url(#bar2)" filter="url(#s3)"/>
+  <text x="650" y="183" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="700">0.974</text>
+  <text x="650" y="340" text-anchor="middle" fill="#94a3b8" font-size="10">16 GPUs</text>
+  <text x="650" y="352" text-anchor="middle" fill="#64748b" font-size="9">8 hours</text>
+
+  <!-- Improvement label -->
+  <rect x="556" y="148" width="82" height="22" rx="4" fill="#1c3a2e" stroke="#10b981" stroke-width="1"/>
+  <text x="597" y="163" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="700">−2.87% more</text>
+
+  <!-- ═══ Bottom stats row ═══ -->
+  <rect x="40" y="374" width="720" height="52" rx="10" fill="#0d1b2a" stroke="#1e3a5f" stroke-width="1"/>
+
+  <!-- Stat 1 -->
+  <text x="145" y="396" text-anchor="middle" fill="#64748b" font-size="11">Single GPU · overnight</text>
+  <text x="145" y="414" text-anchor="middle" fill="#a5b4fc" font-size="13" font-weight="700">~100 experiments · free</text>
+
+  <line x1="290" y1="382" x2="290" y2="418" stroke="#1e3a5f" stroke-width="1"/>
+
+  <!-- Stat 2 -->
+  <text x="400" y="396" text-anchor="middle" fill="#64748b" font-size="11">16 GPUs · 8 hours (SkyPilot)</text>
+  <text x="400" y="414" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="700">910 experiments · ~$300</text>
+
+  <line x1="510" y1="382" x2="510" y2="418" stroke="#1e3a5f" stroke-width="1"/>
+
+  <!-- Stat 3 -->
+  <text x="655" y="396" text-anchor="middle" fill="#64748b" font-size="11">Emergent agent behavior</text>
+  <text x="655" y="414" text-anchor="middle" fill="#fcd34d" font-size="13" font-weight="700">H100 screening → H200 validation</text>
+</svg>

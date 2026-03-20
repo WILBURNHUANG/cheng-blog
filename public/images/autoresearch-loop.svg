@@ -1,0 +1,126 @@
+<svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" font-family="'Inter', 'Segoe UI', sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#059669"/>
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="100%" style="stop-color:#dc2626"/>
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="520" fill="url(#bgGrad)" rx="16"/>
+
+  <!-- Title -->
+  <text x="400" y="38" text-anchor="middle" fill="#f1f5f9" font-size="18" font-weight="700" letter-spacing="0.5">The autoresearch Agent Loop</text>
+  <text x="400" y="58" text-anchor="middle" fill="#64748b" font-size="12">~12 experiments/hour · ~100 overnight · runs until interrupted</text>
+
+  <!-- ─── Node: Human writes program.md ─── -->
+  <rect x="270" y="78" width="260" height="54" rx="10" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="400" y="100" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="600">HUMAN</text>
+  <text x="400" y="118" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">Write program.md</text>
+  <text x="400" y="134" text-anchor="middle" fill="#64748b" font-size="10">Define metric · constraints · search strategy</text>
+
+  <!-- Arrow down -->
+  <line x1="400" y1="132" x2="400" y2="162" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- ─── Node: Agent reads program.md ─── -->
+  <rect x="270" y="164" width="260" height="52" rx="10" fill="#1e1e3f" stroke="#6366f1" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="400" y="185" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="600">AGENT</text>
+  <text x="400" y="203" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">Read program.md → Propose change</text>
+  <text x="400" y="218" text-anchor="middle" fill="#64748b" font-size="10">Analyze results.tsv · select next hypothesis</text>
+
+  <!-- Arrow down -->
+  <line x1="400" y1="216" x2="400" y2="248" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- ─── Node: Modify train.py ─── -->
+  <rect x="270" y="250" width="260" height="52" rx="10" fill="#1e1e3f" stroke="#6366f1" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="400" y="271" text-anchor="middle" fill="#a5b4fc" font-size="11" font-weight="600">AGENT</text>
+  <text x="400" y="289" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">Modify train.py</text>
+  <text x="400" y="304" text-anchor="middle" fill="#64748b" font-size="10">Architecture · optimizer · hyperparams · schedule</text>
+
+  <!-- Arrow down -->
+  <line x1="400" y1="302" x2="400" y2="334" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- ─── Node: Run train.py (5 min) ─── -->
+  <rect x="258" y="336" width="284" height="58" rx="10" fill="#1c2a1e" stroke="#10b981" stroke-width="2" filter="url(#shadow)"/>
+  <!-- Clock icon -->
+  <circle cx="284" cy="365" r="12" fill="none" stroke="#10b981" stroke-width="1.5"/>
+  <line x1="284" y1="357" x2="284" y2="365" stroke="#10b981" stroke-width="1.5"/>
+  <line x1="284" y1="365" x2="290" y2="365" stroke="#10b981" stroke-width="1.5"/>
+  <text x="400" y="358" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="600">GPU TRAINING</text>
+  <text x="400" y="376" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">Run train.py — Fixed 5-min budget</text>
+  <text x="400" y="392" text-anchor="middle" fill="#64748b" font-size="10">Wall-clock time · any architecture · fair comparison</text>
+
+  <!-- Arrow down -->
+  <line x1="400" y1="394" x2="400" y2="426" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- ─── Diamond: val_bpb improved? ─── -->
+  <polygon points="400,428 480,458 400,488 320,458" fill="#1e293b" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
+  <text x="400" y="454" text-anchor="middle" fill="#fcd34d" font-size="12" font-weight="700">val_bpb</text>
+  <text x="400" y="470" text-anchor="middle" fill="#fcd34d" font-size="12" font-weight="700">improved?</text>
+
+  <!-- YES branch → right → KEEP -->
+  <line x1="480" y1="458" x2="570" y2="458" stroke="#10b981" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <rect x="572" y="430" width="148" height="56" rx="10" fill="#1c2a1e" stroke="#10b981" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="646" y="449" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="600">YES ✓</text>
+  <text x="646" y="466" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">git commit</text>
+  <text x="646" y="482" text-anchor="middle" fill="#64748b" font-size="10">Log to results.tsv · advance branch</text>
+
+  <!-- NO branch → left → REVERT -->
+  <line x1="320" y1="458" x2="230" y2="458" stroke="#ef4444" stroke-width="2" marker-end="url(#arrowRed)"/>
+  <rect x="82" y="430" width="148" height="56" rx="10" fill="#2a1c1e" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="156" y="449" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="600">NO ✗</text>
+  <text x="156" y="466" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="700">git checkout</text>
+  <text x="156" y="482" text-anchor="middle" fill="#64748b" font-size="10">Revert train.py · log failure</text>
+
+  <!-- Loop back arrows from both branches up to "Propose change" -->
+  <!-- From KEEP (right) up -->
+  <path d="M 720 458 Q 750 458 750 280 Q 750 164 530 190" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowGreen)"/>
+
+  <!-- From REVERT (left) up -->
+  <path d="M 82 458 Q 50 458 50 280 Q 50 190 270 190" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowRed)"/>
+
+  <!-- Loop labels -->
+  <text x="755" y="320" fill="#6ee7b7" font-size="10" font-weight="600" transform="rotate(90, 755, 320)">next experiment</text>
+  <text x="45" y="320" fill="#fca5a5" font-size="10" font-weight="600" transform="rotate(-90, 45, 320)">next experiment</text>
+
+  <!-- Bottom stats bar -->
+  <rect x="20" y="500" width="760" height="1" fill="#334155"/>
+  <text x="160" y="516" text-anchor="middle" fill="#64748b" font-size="11">⏱ ~5 min / experiment</text>
+  <text x="400" y="516" text-anchor="middle" fill="#64748b" font-size="11">🔁 ~12 experiments / hour</text>
+  <text x="640" y="516" text-anchor="middle" fill="#64748b" font-size="11">🌙 ~100 experiments overnight</text>
+</svg>

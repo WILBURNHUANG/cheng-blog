@@ -1,0 +1,271 @@
+---
+title: "Karpathy's autoresearch: 630 Lines That Automate the Researcher"
+description: "How Andrej Karpathy built a deceptively simple Python tool that runs 100 ML experiments overnight — and what its elegant constraints reveal about the future of AI research."
+date: 2026-03-20
+category: "AI"
+tags: ["AI", "Machine Learning", "Open Source", "Autonomous Agents", "LLM", "Research"]
+hero: "/images/agentic_ai.png"
+draft: false
+---
+
+There's a specific kind of elegance in knowing what to leave out.
+
+When Andrej Karpathy released [autoresearch](https://github.com/karpathy/autoresearch) in early March 2026, the tech world initially fixated on the headline: *AI runs 100 experiments while you sleep.* But the more interesting story is in the decisions Karpathy made about what the tool would *not* do. No cloud abstractions. No distributed training. No configuration files. No framework. Just **630 lines of Python**, a 5-minute clock, and one metric to minimize.
+
+That's the whole thing. And it works remarkably well.
+
+## The Constraint Manifesto
+
+Before diving into the code, it's worth sitting with the design philosophy for a moment — because the constraints aren't limitations, they're the product.
+
+Karpathy's core insight is that autonomous AI research agents fail not because they lack capability, but because they lack *comparability*. If an agent can change model size, batch size, architecture, and optimizer all at once, how do you know which change helped? And if one run trains for 10 minutes and another for 45 because the agent added more layers, how do you compare them?
+
+His solution: a **fixed 5-minute wall-clock time budget** for every single experiment. The agent can change anything it wants in `train.py` — model depth, optimizer, learning rate schedule, attention mechanism — and the training run will always stop after exactly 5 minutes of GPU compute (startup and compilation time excluded). That gives you roughly **12 experiments per hour**, or **~100 overnight**.
+
+The second constraint is equally deliberate: **one file, one metric**. The agent can only modify `train.py`. It cannot touch `prepare.py` (data loading), install new packages, or change the evaluation harness. The single objective is minimizing `val_bpb` — validation bits per byte — a metric that's vocabulary-size-independent, meaning architectural changes that shrink or grow the vocabulary still produce fairly comparable numbers.
+
+This is what Karpathy means when he calls it "programming the research org in Markdown." The human's job shifts from running experiments to writing the instructions that define *how* the agent should run them.
+
+## The Three-File Architecture
+
+The entire project lives in three files:
+
+```
+autoresearch/
+├── prepare.py   # Data prep — DO NOT TOUCH
+├── train.py     # The agent's playground
+└── program.md   # Your instructions to the agent
+```
+
+![The autoresearch three-file architecture: prepare.py feeds data, train.py is the agent's canvas, program.md is the human's instruction layer](/images/autoresearch-architecture.svg "Three files, one agent, 100 experiments overnight")
+
+**`prepare.py`** is a one-time setup script that downloads the FineWeb-Edu dataset, trains a BPE tokenizer, and prepares binary shards for fast loading. You run it once and forget it.
+
+**`train.py`** is where all the action happens — and where the agent writes code. At ~630 lines, it contains a full GPT implementation with rotary positional embeddings, causal self-attention with sliding windows, ReLU-squared activations in the MLP, and a custom dual optimizer. We'll unpack the interesting parts below.
+
+**`program.md`** is the most novel piece. It's a Markdown file that you — the human researcher — write in natural language to guide the agent's behavior. Karpathy calls it "the research org code." Think of it as a job description for your AI teammate, specifying what to optimize, what's off-limits, and how to handle failures.
+
+## Inside `train.py`: What the Agent Actually Edits
+
+Let's go through the technically interesting parts of the training script — the parts an agent would actually reason about and modify.
+
+### The Time Budget Mechanism
+
+The most important piece of infrastructure in the whole project is the time budget check inside the training loop:
+
+```python
+TIME_BUDGET = 5 * 60  # 5 minutes in seconds
+
+while True:
+    torch.cuda.synchronize()
+    t0 = time.time()
+
+    for micro_step in range(grad_accum_steps):
+        with autocast_ctx:
+            loss = model(x, y)
+        train_loss = loss.detach()
+        loss = loss / grad_accum_steps
+        loss.backward()
+        x, y, epoch = next(train_loader)
+
+    # ... optimizer step ...
+
+    if step > 10 and total_training_time >= TIME_BUDGET:
+        break
+```
+
+The `TIME_BUDGET` is wall-clock time, not steps — this is critical. A larger model that runs fewer steps per second and a tiny model that blazes through millions of steps both get exactly 5 minutes of compute. The training loop is therefore a **fair race**: whatever configuration learns the most in 300 seconds wins.
+
+### The Dual Optimizer: Muon + AdamW
+
+The default optimizer setup is one of the more technically sophisticated choices in the codebase, and it's also one of the first things an agent might tune. `train.py` uses two optimizers simultaneously:
+
+- **[Muon](https://github.com/KellerJordan/Muon)** for the weight matrices (attention projections, MLP weights)
+- **AdamW** for scalars, embeddings, and biases
+
+Muon is a variant of momentum SGD that applies a Newton-Schulz orthogonalization step to the gradient before updating, which approximately normalizes the update by the square root of the gradient covariance. It tends to outperform AdamW on matrix weights for transformer training — but it's not appropriate for all parameter types, which is why the codebase applies them selectively.
+
+```python
+# Separate parameter groups for different optimizers
+muon_params = [p for name, p in model.named_parameters()
+               if p.ndim >= 2 and 'embedding' not in name]
+adamw_params = [p for name, p in model.named_parameters()
+                if p not in muon_params]
+
+optimizer = CombinedOptimizer([
+    Muon(muon_params, lr=0.02, momentum=0.95),
+    torch.optim.AdamW(adamw_params, lr=3e-4, betas=(0.9, 0.95))
+])
+```
+
+When the SkyPilot team scaled autoresearch to a GPU cluster, they found that one of the single biggest improvements the agent discovered was tuning `muon_beta2` from `0.95` to `0.98`. That one number change, found autonomously, smoothed the gradient normalization and allowed the model to take larger effective steps late in training.
+
+### The val_bpb Metric
+
+After the training loop ends, the script evaluates on a held-out validation set and reports **validation bits per byte**. This is the negative log-likelihood of the text under the model, expressed in bits per byte of UTF-8 encoded text rather than per token. The key advantage: it's **vocabulary-independent**.
+
+If the agent tries a character-level model (one token = one character) against a BPE model (one token = ~4 characters), the per-token loss numbers are not comparable — a character model will trivially have lower per-token loss because characters are easier to predict than subword units. Bits per byte normalizes for this, making it a fair universal comparison metric across any vocabulary scheme the agent might try.
+
+### The Learning Rate Schedule
+
+The schedule is parameterized by `progress` — the fraction of `TIME_BUDGET` elapsed — rather than step count. This is another subtle but important design choice:
+
+```python
+progress = min(total_training_time / TIME_BUDGET, 1.0)
+
+# Warmup → plateau → cooldown
+if progress < warmup_frac:
+    lr_multiplier = progress / warmup_frac
+elif progress < (1.0 - cooldown_frac):
+    lr_multiplier = 1.0
+else:
+    lr_multiplier = (1.0 - progress) / cooldown_frac
+```
+
+Because the schedule follows wall-clock time rather than step index, a slow model (due to, say, a large architecture the agent added) automatically gets a proportionally extended plateau phase. The schedule is always "complete" at the end of the 5-minute run, regardless of how many actual gradient steps occurred. This makes comparisons fair across architectural changes of very different computational costs.
+
+## `program.md`: Programming the Research Org
+
+This is where things get philosophically interesting. Here's the core loop directive from the default `program.md`:
+
+```markdown
+## The Experiment Loop
+
+You are now in autonomous research mode. Run experiments indefinitely.
+For each experiment:
+
+1. Propose a change to train.py based on results so far
+2. Implement the change
+3. Run: `uv run train.py`
+4. Parse the output for val_bpb
+5. If val_bpb improved: commit with message "keep: [description] val_bpb=[value]"
+6. If val_bpb worsened: revert with `git checkout train.py`
+7. Log to results.tsv regardless of outcome
+8. Repeat
+
+NEVER STOP unless interrupted by the human. Do not ask for approval.
+```
+
+![The autoresearch agent experiment loop: propose → modify train.py → run 5-min GPU training → evaluate val_bpb → commit or revert → repeat](/images/autoresearch-loop.svg "The autonomous experiment loop runs indefinitely until the human interrupts")
+
+That final line — "Do not ask for approval" — is the crux. Most AI coding assistants are trained to be cautious and confirmatory. autoresearch deliberately breaks that pattern. The agent is instructed to act as an autonomous researcher, not an assistant awaiting feedback.
+
+The human's lever is `program.md` itself. You can tighten or loosen the agent's search strategy just by editing this file. Want the agent to explore aggressively rather than hill-climb greedily? Add a directive like: *"Accept changes within 1% of best val_bpb to explore a broader search space."* Want it to treat VRAM as a hard constraint? Add: *"Never accept changes that use more than 18GB VRAM."* The simplicity criterion is already baked in: *"A small improvement that adds ugly complexity is not worth it."*
+
+## What Happens Overnight: The Results
+
+In Karpathy's own two-day run, the agent made approximately **700 autonomous code changes** and found roughly **20 additive improvements**, dropping the val_bpb metric in a meaningful way and moving the model meaningfully up the nanochat training leaderboard — an **11% efficiency gain** (wall-clock time to match GPT-2's performance dropped from 2.02 hours to 1.80 hours).
+
+The agent discovered things like:
+- Increasing sliding window attention context improves generalization without much compute cost
+- ReLU-squared activations outperform standard ReLU in the MLP blocks
+- The specific `muon_beta2` value of `0.95` was suboptimal
+- Gradient accumulation steps can be tuned relative to model size for better throughput
+
+None of these are Earth-shattering findings on their own — experienced ML practitioners would likely have tried most of them manually. The point is that the agent tried all of them *systematically*, in a comparable, logged, reproducible way, while you slept.
+
+## Scaling Beyond One GPU: The SkyPilot Experiment
+
+The [SkyPilot team](https://blog.skypilot.co/scaling-autoresearch/) took autoresearch further by giving the agent access to a 16-GPU cluster instead of a single H100. The results reveal something fundamental about how parallel search changes the nature of optimization.
+
+With 16 GPUs running simultaneous experiments:
+- **910 experiments in 8 hours** (vs. ~100 on a single GPU overnight)
+- **val_bpb dropped from 1.003 to 0.974** — a **2.87% improvement**
+- **9x speedup** to reach the same result quality as sequential search
+
+But the more interesting finding is qualitative. Parallel search fundamentally changes the *strategy*. Instead of sequential hill-climbing — where each experiment builds on the last best result — the agent started running "factorial grids": testing 10-13 experiments simultaneously with different combinations of hyperparameters, catching interaction effects that a one-at-a-time approach would completely miss.
+
+The agent also independently discovered that H100 and H200 GPUs have different performance characteristics and developed a **two-tier screening strategy** — run ideas cheaply on H100s first, then validate winners on the faster H200s. Nobody told it to do this. It emerged from the agent observing performance differences in its own logs.
+
+**Total cost for the 8-hour GPU cluster run: ~$300.** For the quality of research output produced, that's a strikingly low number.
+
+![Experiments run and val_bpb improvement: single GPU overnight vs 16-GPU cluster over 8 hours](/images/autoresearch-scale.svg "910 experiments at GPU-cluster scale vs ~100 on a single GPU overnight")
+
+## The uditgoenka Extension: autoresearch as a Claude Code Skill
+
+Once you understand autoresearch's core loop — *constrain the search space, fix the metric, let the agent run* — you start to see how the pattern generalizes. That's exactly what [uditgoenka's fork](https://github.com/uditgoenka/autoresearch) does: it repackages the autoresearch philosophy as a general-purpose Claude Code skill that can be applied to *any* measurable optimization problem.
+
+The structure is a Claude Code plugin:
+
+```
+claude-plugin/
+├── commands/
+│   ├── autoresearch.md          # Main command
+│   └── autoresearch/
+│       ├── ship.md              # Shipping workflows
+│       ├── plan.md              # Interactive metric definition
+│       ├── security.md          # Security audit mode
+│       ├── debug.md             # Bug hunting
+│       ├── fix.md               # Error repair
+│       ├── scenario.md          # Scenario exploration
+│       └── predict.md           # Prediction tasks
+└── skills/autoresearch/
+    ├── SKILL.md                 # Core execution logic
+    └── references/              # 10 protocol documents
+```
+
+The core insight of this extension is that Karpathy's three components — **a measurable metric, a constrained scope, and an autonomous loop** — generalize far beyond ML training. You can apply the same pattern to:
+
+- **Code optimization**: metric = benchmark runtime, scope = one function, loop = profile → modify → benchmark → keep/revert
+- **Security auditing**: metric = number of vulnerabilities found, scope = a module, loop = scan → fix → rescan
+- **Test coverage**: metric = line coverage %, scope = a module, loop = generate test → run → keep if coverage improves
+
+The `/autoresearch:plan` command is particularly useful for newcomers — it's an interactive wizard that guides you through defining your metric and constraints before launching the autonomous loop. This is the friction point that the original autoresearch leaves to the user (you have to write `program.md` yourself), and the skill package makes it accessible to anyone.
+
+## What This Actually Means
+
+autoresearch is not going to replace ML researchers — at least not the ones doing genuinely novel work. What it replaces is the *mechanical part* of the research loop: the part where you run an experiment, wait for results, tweak a number, run again, wait, tweak. That loop is a significant fraction of what "doing research" looks like in practice, and it's the part that doesn't require human insight.
+
+Karpathy's framing is precise: **you're not writing code, you're writing the research org.** The human's contribution is the design of `program.md` — the constraints, the objectives, the search strategy. Get that right, and the agent handles the execution at a scale no individual researcher can match manually.
+
+The deeper implication is about what "a good idea" means in this context. In a world where you can run 100 experiments overnight, the value of a single clever hypothesis goes down. The value of a *good metric* and *well-scoped constraints* goes way up. The bottleneck shifts from "who has the best intuitions" to "who can write the best program.md."
+
+That's a subtle but profound shift in what research skill looks like.
+
+---
+
+## Getting Started
+
+Setup takes about 10 minutes:
+
+```bash
+# Install uv (if you don't have it)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Clone and install
+git clone https://github.com/karpathy/autoresearch
+cd autoresearch
+uv sync
+
+# One-time data prep (~2 min)
+uv run prepare.py
+
+# Verify a single training run works (~5 min)
+uv run train.py
+
+# Launch Claude Code in the repo and hand it program.md
+claude
+```
+
+Then tell your Claude Code agent: *"Read program.md and begin the experiment loop."* That's it. Come back in the morning.
+
+For the generalized version without the ML training setup, install uditgoenka's Claude Code skill package and use `/autoresearch:plan` to define your custom metric and scope.
+
+---
+
+## TL;DR
+
+- **What it is**: A 630-line Python tool that lets an AI agent run autonomous ML experiments overnight, using a fixed 5-minute time budget per run and a single optimization metric (`val_bpb`)
+- **Why the constraints matter**: A fixed time budget makes all experiments comparable regardless of model size or architecture — the agent can change anything and the numbers still mean something
+- **The clever part**: `program.md` lets you "program the research org in Markdown" — the human defines strategy, the agent executes at scale
+- **Real results**: 100 experiments overnight, 11% efficiency improvement; at GPU-cluster scale (16 GPUs), 910 experiments in 8 hours for ~$300
+- **The bigger pattern**: [uditgoenka's extension](https://github.com/uditgoenka/autoresearch) shows the core loop — *fixed metric + constrained scope + autonomous iteration* — generalizes to any measurable optimization problem beyond ML
+
+## Sources
+
+- [karpathy/autoresearch — GitHub](https://github.com/karpathy/autoresearch)
+- [uditgoenka/autoresearch — GitHub](https://github.com/uditgoenka/autoresearch)
+- [Scaling Karpathy's Autoresearch: What Happens When the Agent Gets a GPU Cluster — SkyPilot Blog](https://blog.skypilot.co/scaling-autoresearch/)
+- [Andrej Karpathy Open-Sources Autoresearch — MarkTechPost](https://www.marktechpost.com/2026/03/08/andrej-karpathy-open-sources-autoresearch-a-630-line-python-tool-letting-ai-agents-run-autonomous-ml-experiments-on-single-gpus/)
+- [autoresearch DeepWiki — Custom Research Programs](https://deepwiki.com/karpathy/autoresearch/8.3-custom-research-programs)
+- [Karpathy autoresearch Explained — Datasciencedojo](https://datasciencedojo.com/blog/karpathy-autoresearch-explained/)
