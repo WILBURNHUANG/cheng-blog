@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f0f1a"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#d4a574" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="line1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d4a574" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="line2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d4a574" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#60a5fa" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="line3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d4a574" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#34d399" stop-opacity="0.3"/>
+    </linearGradient>
+    <filter id="glowFilter">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.05" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="0" x2="0" y2="630"/><line x1="60" y1="0" x2="60" y2="630"/>
+    <line x1="120" y1="0" x2="120" y2="630"/><line x1="180" y1="0" x2="180" y2="630"/>
+    <line x1="240" y1="0" x2="240" y2="630"/><line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="360" y1="0" x2="360" y2="630"/><line x1="420" y1="0" x2="420" y2="630"/>
+    <line x1="480" y1="0" x2="480" y2="630"/><line x1="540" y1="0" x2="540" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/><line x1="660" y1="0" x2="660" y2="630"/>
+    <line x1="720" y1="0" x2="720" y2="630"/><line x1="780" y1="0" x2="780" y2="630"/>
+    <line x1="840" y1="0" x2="840" y2="630"/><line x1="900" y1="0" x2="900" y2="630"/>
+    <line x1="960" y1="0" x2="960" y2="630"/><line x1="1020" y1="0" x2="1020" y2="630"/>
+    <line x1="1080" y1="0" x2="1080" y2="630"/><line x1="1140" y1="0" x2="1140" y2="630"/>
+    <line x1="0" y1="60" x2="1200" y2="60"/><line x1="0" y1="120" x2="1200" y2="120"/>
+    <line x1="0" y1="180" x2="1200" y2="180"/><line x1="0" y1="240" x2="1200" y2="240"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="360" x2="1200" y2="360"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/><line x1="0" y1="480" x2="1200" y2="480"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+  </g>
+
+  <!-- Central AI node (Claude) -->
+  <circle cx="340" cy="315" r="72" fill="#1e1e36" stroke="url(#glow)" stroke-width="2.5" filter="url(#glowFilter)"/>
+  <circle cx="340" cy="315" r="56" fill="#252545" stroke="#d4a574" stroke-width="1" opacity="0.5"/>
+  <!-- Terminal icon -->
+  <text x="340" y="305" text-anchor="middle" fill="#d4a574" font-family="monospace" font-size="16" font-weight="bold">&gt;_</text>
+  <text x="340" y="330" text-anchor="middle" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="600">Claude</text>
+  <text x="340" y="348" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="11">Code</text>
+
+  <!-- Connection lines -->
+  <path d="M 412 280 Q 520 220 680 160" stroke="url(#line1)" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.7"/>
+  <path d="M 412 295 Q 530 270 680 250" stroke="url(#line1)" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.7"/>
+  <path d="M 412 315 Q 540 315 680 340" stroke="url(#line2)" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.7"/>
+  <path d="M 412 335 Q 530 365 680 430" stroke="url(#line2)" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.7"/>
+  <path d="M 412 350 Q 520 410 680 510" stroke="url(#line3)" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.7"/>
+
+  <!-- Role nodes -->
+  <!-- CEO Review -->
+  <g filter="url(#softGlow)">
+    <rect x="680" y="130" width="200" height="56" rx="12" fill="#1e1e36" stroke="#c084fc" stroke-width="1.5"/>
+    <circle cx="706" cy="158" r="14" fill="#2d1f4e"/>
+    <text x="706" y="163" text-anchor="middle" fill="#c084fc" font-size="14">C</text>
+    <text x="732" y="153" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="600">/plan-ceo-review</text>
+    <text x="732" y="172" fill="#888" font-family="system-ui, sans-serif" font-size="11">Product Strategy</text>
+  </g>
+
+  <!-- Eng Review -->
+  <g filter="url(#softGlow)">
+    <rect x="680" y="220" width="200" height="56" rx="12" fill="#1e1e36" stroke="#818cf8" stroke-width="1.5"/>
+    <circle cx="706" cy="248" r="14" fill="#1f2548"/>
+    <text x="706" y="253" text-anchor="middle" fill="#818cf8" font-size="14">E</text>
+    <text x="732" y="243" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="600">/plan-eng-review</text>
+    <text x="732" y="262" fill="#888" font-family="system-ui, sans-serif" font-size="11">Architecture Lock</text>
+  </g>
+
+  <!-- Code Review -->
+  <g filter="url(#softGlow)">
+    <rect x="680" y="310" width="200" height="56" rx="12" fill="#1e1e36" stroke="#60a5fa" stroke-width="1.5"/>
+    <circle cx="706" cy="338" r="14" fill="#1a2844"/>
+    <text x="706" y="343" text-anchor="middle" fill="#60a5fa" font-size="14">R</text>
+    <text x="732" y="333" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="600">/review</text>
+    <text x="732" y="352" fill="#888" font-family="system-ui, sans-serif" font-size="11">Paranoid Code Review</text>
+  </g>
+
+  <!-- QA -->
+  <g filter="url(#softGlow)">
+    <rect x="680" y="400" width="200" height="56" rx="12" fill="#1e1e36" stroke="#34d399" stroke-width="1.5"/>
+    <circle cx="706" cy="428" r="14" fill="#1a3a2e"/>
+    <text x="706" y="433" text-anchor="middle" fill="#34d399" font-size="14">Q</text>
+    <text x="732" y="423" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="600">/qa</text>
+    <text x="732" y="442" fill="#888" font-family="system-ui, sans-serif" font-size="11">Browser Testing</text>
+  </g>
+
+  <!-- Ship -->
+  <g filter="url(#softGlow)">
+    <rect x="680" y="490" width="200" height="56" rx="12" fill="#1e1e36" stroke="#fbbf24" stroke-width="1.5"/>
+    <circle cx="706" cy="518" r="14" fill="#3a3018"/>
+    <text x="706" y="523" text-anchor="middle" fill="#fbbf24" font-size="14">S</text>
+    <text x="732" y="513" fill="#e0e0e0" font-family="system-ui, sans-serif" font-size="13" font-weight="600">/ship</text>
+    <text x="732" y="532" fill="#888" font-family="system-ui, sans-serif" font-size="11">Release &amp; Deploy</text>
+  </g>
+
+  <!-- Arrow hint -->
+  <polygon points="660,158 672,158 672,153 680,160 672,167 672,162 660,162" fill="#c084fc" opacity="0.5"/>
+  <polygon points="660,248 672,248 672,243 680,250 672,257 672,252 660,252" fill="#818cf8" opacity="0.5"/>
+  <polygon points="660,338 672,338 672,333 680,340 672,347 672,342 660,342" fill="#60a5fa" opacity="0.5"/>
+  <polygon points="660,428 672,428 672,423 680,430 672,437 672,432 660,432" fill="#34d399" opacity="0.5"/>
+  <polygon points="660,518 672,518 672,513 680,520 672,527 672,522 660,522" fill="#fbbf24" opacity="0.5"/>
+
+  <!-- Title -->
+  <text x="600" y="72" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="36" font-weight="700" letter-spacing="-0.5">
+    <tspan fill="#d4a574">G</tspan><tspan>Stack</tspan>
+  </text>
+  <text x="600" y="100" text-anchor="middle" fill="#888" font-family="system-ui, sans-serif" font-size="15">One AI. Fifteen Specialists. Zero Excuses.</text>
+
+  <!-- Pipeline label -->
+  <text x="340" y="420" text-anchor="middle" fill="#555" font-family="monospace" font-size="11">Think → Plan → Build</text>
+  <text x="340" y="438" text-anchor="middle" fill="#555" font-family="monospace" font-size="11">Review → Test → Ship</text>
+
+  <!-- Stats badge -->
+  <rect x="920" y="135" width="120" height="36" rx="8" fill="#1a1a2e" stroke="#d4a574" stroke-width="1" opacity="0.8"/>
+  <text x="980" y="158" text-anchor="middle" fill="#d4a574" font-family="monospace" font-size="12" font-weight="bold">20K+ Stars</text>
+
+  <!-- GitHub corner accent -->
+  <rect x="920" y="185" width="120" height="36" rx="8" fill="#1a1a2e" stroke="#888" stroke-width="1" opacity="0.5"/>
+  <text x="980" y="208" text-anchor="middle" fill="#888" font-family="monospace" font-size="11">MIT License</text>
+</svg>
