@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="480" rx="12" fill="url(#bg4)"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="700">IP3, P1dB, and Linearity — Why They Matter for GNSS</text>
+
+  <!-- Chart: Output Power vs Input Power -->
+  <g transform="translate(80, 65)">
+    <!-- Grid -->
+    <rect x="0" y="0" width="380" height="340" fill="#0f172a" rx="4" stroke="#334155" stroke-width="1"/>
+
+    <!-- Grid lines -->
+    <line x1="0" y1="68" x2="380" y2="68" stroke="#1e293b" stroke-width="1"/>
+    <line x1="0" y1="136" x2="380" y2="136" stroke="#1e293b" stroke-width="1"/>
+    <line x1="0" y1="204" x2="380" y2="204" stroke="#1e293b" stroke-width="1"/>
+    <line x1="0" y1="272" x2="380" y2="272" stroke="#1e293b" stroke-width="1"/>
+
+    <line x1="76" y1="0" x2="76" y2="340" stroke="#1e293b" stroke-width="1"/>
+    <line x1="152" y1="0" x2="152" y2="340" stroke="#1e293b" stroke-width="1"/>
+    <line x1="228" y1="0" x2="228" y2="340" stroke="#1e293b" stroke-width="1"/>
+    <line x1="304" y1="0" x2="304" y2="340" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Axes -->
+    <line x1="0" y1="340" x2="380" y2="340" stroke="#94a3b8" stroke-width="1"/>
+    <line x1="0" y1="0" x2="0" y2="340" stroke="#94a3b8" stroke-width="1"/>
+
+    <!-- Axis labels -->
+    <text x="190" y="370" text-anchor="middle" fill="#94a3b8" font-size="11">Input Power (dBm)</text>
+    <text x="-30" y="170" text-anchor="middle" fill="#94a3b8" font-size="11" transform="rotate(-90, -30, 170)">Output Power (dBm)</text>
+
+    <!-- Input power labels -->
+    <text x="0" y="358" text-anchor="middle" fill="#64748b" font-size="9">-40</text>
+    <text x="76" y="358" text-anchor="middle" fill="#64748b" font-size="9">-30</text>
+    <text x="152" y="358" text-anchor="middle" fill="#64748b" font-size="9">-20</text>
+    <text x="228" y="358" text-anchor="middle" fill="#64748b" font-size="9">-10</text>
+    <text x="304" y="358" text-anchor="middle" fill="#64748b" font-size="9">0</text>
+    <text x="380" y="358" text-anchor="middle" fill="#64748b" font-size="9">+10</text>
+
+    <!-- Ideal linear response (1:1 slope with gain) -->
+    <line x1="0" y1="272" x2="380" y2="0" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.6"/>
+    <text x="340" y="20" fill="#4ade80" font-size="10" opacity="0.6">Ideal linear</text>
+
+    <!-- Actual fundamental (compresses near P1dB) -->
+    <path d="M0,272 L76,204 L152,136 L190,104 L220,82 L250,68 L280,60 L310,56 L340,54 L370,53"
+          fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="375" y="48" fill="#3b82f6" font-size="10" font-weight="600">Fund.</text>
+
+    <!-- IM3 products (3:1 slope) -->
+    <path d="M0,340 L76,318 L152,250 L190,210 L220,172 L250,140 L280,112 L310,90 L340,72 L370,58"
+          fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-dasharray="4,2"/>
+    <text x="375" y="65" fill="#ef4444" font-size="10" font-weight="600">IM3</text>
+
+    <!-- P1dB point -->
+    <circle cx="228" cy="82" r="5" fill="none" stroke="#fbbf24" stroke-width="2"/>
+    <line x1="228" y1="82" x2="228" y2="68" stroke="#fbbf24" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="228" y="62" text-anchor="middle" fill="#fbbf24" font-size="9">1 dB</text>
+    <line x1="228" y1="90" x2="228" y2="340" stroke="#fbbf24" stroke-width="1" stroke-dasharray="3,3" opacity="0.3"/>
+    <rect x="195" y="96" width="66" height="18" rx="4" fill="#fbbf24" opacity="0.15"/>
+    <text x="228" y="109" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700">P1dB</text>
+
+    <!-- IIP3 point (where lines would intersect) -->
+    <circle cx="340" cy="30" r="5" fill="none" stroke="#ef4444" stroke-width="2"/>
+    <line x1="340" y1="38" x2="340" y2="340" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,3" opacity="0.3"/>
+    <rect x="310" y="14" width="60" height="18" rx="4" fill="#ef4444" opacity="0.15"/>
+    <text x="340" y="27" text-anchor="middle" fill="#ef4444" font-size="10" font-weight="700">IIP3</text>
+
+    <!-- Annotation: ~10 dB relationship -->
+    <line x1="232" y1="335" x2="336" y2="335" stroke="#94a3b8" stroke-width="1"/>
+    <line x1="232" y1="330" x2="232" y2="340" stroke="#94a3b8" stroke-width="1"/>
+    <line x1="336" y1="330" x2="336" y2="340" stroke="#94a3b8" stroke-width="1"/>
+    <text x="284" y="332" text-anchor="middle" fill="#94a3b8" font-size="9">~10 dB</text>
+
+    <!-- Slope annotations -->
+    <text x="55" y="245" fill="#3b82f6" font-size="9" transform="rotate(-36, 55, 245)">slope = 1</text>
+    <text x="100" y="305" fill="#ef4444" font-size="9" transform="rotate(-55, 100, 305)">slope = 3</text>
+  </g>
+
+  <!-- Right side: Practical GNSS scenarios -->
+  <g transform="translate(510, 70)">
+    <text x="0" y="0" fill="#e2e8f0" font-size="14" font-weight="700">GNSS Interference Scenarios</text>
+
+    <!-- Scenario 1: Clean environment -->
+    <rect x="0" y="20" width="360" height="85" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1"/>
+    <circle cx="20" cy="50" r="8" fill="#4ade80" opacity="0.3"/>
+    <text x="20" y="54" text-anchor="middle" fill="#4ade80" font-size="12">✓</text>
+    <text x="38" y="42" fill="#4ade80" font-size="12" font-weight="600">Clean Open Sky</text>
+    <text x="38" y="60" fill="#94a3b8" font-size="10">No strong interferers nearby</text>
+    <text x="38" y="76" fill="#94a3b8" font-size="10">IIP3 = -15 dBm sufficient</text>
+    <text x="38" y="92" fill="#64748b" font-size="9">IM3 products well below noise floor</text>
+
+    <!-- Scenario 2: Near cell tower -->
+    <rect x="0" y="118" width="360" height="95" rx="8" fill="#1e293b" stroke="#fbbf24" stroke-width="1"/>
+    <circle cx="20" cy="153" r="8" fill="#fbbf24" opacity="0.3"/>
+    <text x="20" y="157" text-anchor="middle" fill="#fbbf24" font-size="12">⚠</text>
+    <text x="38" y="142" fill="#fbbf24" font-size="12" font-weight="600">Near Cell Tower (-30 dBm leakage)</text>
+    <text x="38" y="160" fill="#94a3b8" font-size="10">IIP3 = -1 dBm → IM3 at -88 dBm ✓</text>
+    <text x="38" y="176" fill="#ef4444" font-size="10">IIP3 = -15 dBm → IM3 at -60 dBm ✗</text>
+    <text x="38" y="196" fill="#64748b" font-size="9">Low-power mode fails, normal mode survives</text>
+
+    <!-- Scenario 3: Active jamming -->
+    <rect x="0" y="226" width="360" height="95" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="20" cy="261" r="8" fill="#ef4444" opacity="0.3"/>
+    <text x="20" y="265" text-anchor="middle" fill="#ef4444" font-size="12">✗</text>
+    <text x="38" y="250" fill="#ef4444" font-size="12" font-weight="600">Jamming (+10 dBm source)</text>
+    <text x="38" y="268" fill="#94a3b8" font-size="10">Even with 60 dB OOB rejection:</text>
+    <text x="38" y="284" fill="#94a3b8" font-size="10">-50 dBm at LNA input → compression</text>
+    <text x="38" y="302" fill="#ef4444" font-size="9">P1dB and pre-filtering are critical</text>
+
+    <!-- Key takeaway -->
+    <rect x="0" y="335" width="360" height="55" rx="8" fill="#3b82f6" opacity="0.1" stroke="#3b82f6" stroke-width="1"/>
+    <text x="180" y="357" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="700">Key Relationship</text>
+    <text x="180" y="378" text-anchor="middle" fill="#e2e8f0" font-size="12">P1dB ≈ IIP3 - 10 dB (rule of thumb)</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="450" y="465" text-anchor="middle" fill="#64748b" font-size="10">IM3 Power = 3 × P_in - 2 × IIP3 | For every 1 dB increase in interferer power, IM3 products grow by 3 dB</text>
+</svg>

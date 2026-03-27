@@ -1,0 +1,392 @@
+---
+title: "GNSS RF Parameters Demystified: From Antenna to Position Fix"
+description: "A practical guide to every RF parameter that matters in GNSS receiver design—noise figure, IP3, P1dB, C/N0, antenna gain, axial ratio, and more."
+date: 2026-03-27
+category: "Space Tech"
+tags: ["GNSS", "RF", "Antenna", "Hardware", "Receiver Design", "Signal Processing"]
+hero: "/images/pnt.jpg"
+draft: false
+---
+
+You're selecting components for a GNSS receiver. The RF front-end IC datasheet says **NF 1.4 dB**, **IIP3 -1.1 dBm**, **110 dB cascaded gain**. The antenna spec lists **5.5 dBi gain**, **axial ratio < 3 dB**, **VSWR 1.5:1**. But what do these numbers actually *mean* for your positioning performance?
+
+If you've ever stared at a GNSS front-end datasheet and wondered how a 0.5 dB difference in noise figure translates to real-world accuracy—or why your IP3 spec matters when GNSS signals are already buried in noise—this guide is for you. We'll walk through every critical RF parameter from antenna element to ADC output, explain what each one does, and connect them to the thing that actually matters: **how well your receiver can determine its position**.
+
+## The Signal Chain: Big Picture
+
+Before we dive into individual parameters, let's understand the journey a GNSS signal takes from satellite to position fix:
+
+![GNSS RF Signal Chain — From satellite transmission through antenna, LNA, filter, mixer, PGA, and ADC to digital baseband](/images/gnss-rf-params/signal-chain.svg "The complete GNSS RF signal chain with gain and noise figure at each stage")
+
+The signal arriving at your antenna is incredibly weak—around **-130 dBm** (that's 10⁻¹⁶ watts). It's about **20 dB below the thermal noise floor**. Your entire RF chain has one job: amplify this signal by ~110 dB while adding as little noise and distortion as possible, then digitize it cleanly so the baseband processor can extract pseudoranges.
+
+Every parameter we'll discuss either helps or hurts this mission.
+
+---
+
+## Part 1: RF Front-End Parameters
+
+### Noise Figure (NF)
+
+**What it is:** The ratio of the signal-to-noise ratio at the input to the SNR at the output, expressed in dB. A perfect, noiseless component has NF = 0 dB.
+
+**Why it matters for GNSS:** Since GNSS signals arrive below the noise floor, every fraction of a dB of added noise directly reduces your carrier-to-noise density ratio (**C/N0**), which is the single most important metric for positioning quality. The relationship is straightforward:
+
+> **C/N0 (dB-Hz) = Signal Power (dBm) - Noise Density (dBm/Hz)**
+
+Where noise density = **-174 dBm/Hz + NF (dB)**. So a 1 dB increase in noise figure means a 1 dB drop in C/N0.
+
+**Typical values:**
+| Component | Noise Figure |
+|:----------|:------------|
+| External LNA (standalone) | 0.5 – 1.2 dB |
+| RF front-end IC (LNA1, passive ant.) | 0.8 – 1.5 dB |
+| RF front-end IC (LNA2, active ant.) | 1.5 – 2.5 dB |
+| Cascaded receiver chain | 1.4 – 3.0 dB |
+
+**Real example — MAX2769C (Analog Devices):** This popular GNSS RF front-end IC offers two LNA inputs. LNA1 (for passive antennas) achieves **0.8 dB NF** with **19 dB gain** at 4 mA bias. LNA2 (for active antennas with external LNA) has **1.5 dB NF** with lower gain. The total cascaded noise figure is **1.4 dB**.
+
+**Practical impact:** A receiver with NF = 1.4 dB vs. one with NF = 3.0 dB means a **1.6 dB difference in C/N0** on every satellite. That translates to:
+- Reduced tracking sensitivity (~1.6 dB fewer satellites acquired in weak conditions)
+- Higher code and carrier tracking noise
+- Longer time-to-first-fix (TTFF) in cold-start scenarios
+- Degraded positioning in urban canyons where every dB counts
+
+**The Friis formula** tells us why the first stage matters most:
+
+> **NF_total = NF₁ + (NF₂ - 1)/G₁ + (NF₃ - 1)/(G₁·G₂) + ...**
+
+With sufficient gain in the first LNA stage (say, 15–20 dB), the noise contribution of subsequent stages becomes negligible. This is why the **LNA noise figure is the most critical spec** in the entire chain.
+
+![IP3, P1dB, and linearity explained with practical GNSS interference scenarios](/images/gnss-rf-params/ip3-linearity.svg "Understanding linearity: the relationship between P1dB, IIP3, and real-world interference tolerance")
+
+### IIP3 — Input Third-Order Intercept Point
+
+**What it is:** IIP3 is the theoretical input power level where the desired signal and the third-order intermodulation (IM3) products would be equal in power—if the amplifier didn't compress first. It's a figure of merit for **linearity**.
+
+**Why you should care:** When two strong interferers at frequencies f₁ and f₂ enter your front-end, they generate intermodulation products at **2f₁ - f₂** and **2f₂ - f₁**. If these products land in your GNSS band, they raise the noise floor and degrade C/N0—even if the interferers themselves are out-of-band.
+
+**The math:**
+> **IM3 power (dBm) = 3 × P_in - 2 × IIP3**
+
+So for every 1 dB increase in interferer power, IM3 products grow by **3 dB**. Higher IIP3 = better interference tolerance.
+
+**Typical values:**
+| Component | IIP3 |
+|:----------|:-----|
+| MAX2769C LNA1 (4mA mode) | -1.1 dBm |
+| MAX2769C LNA1 (1mA low-power mode) | -15 dBm |
+| High-linearity discrete LNA | +5 to +15 dBm |
+
+**When IIP3 matters most:**
+- Near cellular base stations (LTE bands are close to L1/L5)
+- In vehicles with multiple antennas and transmitters
+- In environments with intentional or unintentional jamming
+- Dual/multi-band receivers where in-band interference from one band can affect another
+
+**When it matters less:** In clean RF environments with good pre-filtering, a modest IIP3 of -1 dBm is usually sufficient. Don't over-specify linearity at the cost of higher current draw.
+
+### P1dB — 1 dB Compression Point
+
+**What it is:** The input (or output) power level at which the gain drops by 1 dB from its small-signal (linear) value. Beyond P1dB, the amplifier saturates and distortion grows rapidly.
+
+**Relationship to IIP3:** As a rule of thumb, **P1dB ≈ IIP3 - 10 dB** for microwave amplifiers. This isn't exact—it depends on the device topology—but it's a good first-order estimate.
+
+**Why it matters:** P1dB defines the **upper limit of your dynamic range**. If a strong interferer drives the LNA past its P1dB, the entire receiver saturates. The AGC can't save you because gain compression happens *before* the AGC loop acts.
+
+**Practical scenario:** A cellular signal at -20 dBm leaks into your GNSS front-end. If your LNA's input P1dB is -15 dBm, you're already in compression. The LNA gain drops, noise figure degrades, and intermod products spike. Your receiver may lose lock entirely.
+
+### Gain
+
+**What it is:** The amplification provided by each stage, expressed in dB.
+
+**Target for GNSS:** The total gain from antenna input to ADC must bring the signal from ~-130 dBm to a level that fills the ADC's input range. For a typical 2-bit ADC with a few hundred mV full-scale, you need approximately **100–115 dB** of total gain.
+
+This gain is distributed across stages:
+| Stage | Typical Gain |
+|:------|:------------|
+| External LNA (if active antenna) | 15 – 40 dB |
+| Front-end IC LNA | 15 – 20 dB |
+| Mixer + IF amp | 30 – 40 dB |
+| PGA (AGC-controlled) | 0 – 60 dB (variable) |
+
+**Too much gain before filtering** = overloading from interferers. **Too little gain in the first stage** = noise figure dominated by later stages. It's a balancing act.
+
+### AGC — Automatic Gain Control
+
+**What it is:** A feedback loop that adjusts the PGA gain to keep the ADC input at the optimal level, maintaining the best quantization signal-to-noise ratio.
+
+**Why it matters:** The AGC keeps the **quantization ratio k = L/σ** (quantization threshold divided by noise standard deviation) at its optimal value. If the RF environment changes—an interferer appears, temperature drifts, or antenna gain varies with orientation—the AGC compensates in real time.
+
+**Limitation:** Classical AGC performs poorly against continuous-wave (CW) interference. A strong narrowband jammer can cause the AGC to reduce gain, dragging down all GNSS signals by ~10 dB at a 20 dB jammer-to-noise ratio. Advanced receivers mitigate this with notch filters or pulse blanking before the AGC loop.
+
+### ADC Resolution (Quantization Bits)
+
+**What it is:** The number of bits used to digitize the IF or baseband signal.
+
+**Impact on SNR:**
+| ADC Bits | Quantization Loss |
+|:---------|:-----------------|
+| 1 bit (sign only) | ~3.5 dB |
+| 2 bits | ~1.5 dB |
+| 3 bits | ~0.5 dB |
+| 4+ bits | < 0.2 dB |
+
+**Why 2-3 bits is the sweet spot:** Beyond 3 bits, the SNR improvement is marginal for standard GNSS processing. However, higher-resolution ADCs (8-12 bits) become valuable for **anti-jamming** applications, where you need the dynamic range to detect and excise interferers without crushing the GNSS signals.
+
+**Sampling rate matters too.** The Nyquist theorem requires sampling at twice the signal bandwidth. For GPS L1 C/A code (bandwidth ~4 MHz), you need at least 8 MHz sampling. For wideband signals like Galileo E1 CBOC (~24 MHz bandwidth), you need ~50 MHz. Importantly, the sampling frequency should **not** be a multiple of 1.023 MHz (the GNSS chip rate) to avoid spectral aliasing artifacts.
+
+### Receiver Sensitivity
+
+**What it is:** The minimum signal power at the antenna port that allows the receiver to acquire and track satellites. Usually specified as **acquisition sensitivity** (cold start) and **tracking sensitivity** (maintaining lock).
+
+**How NF determines sensitivity:**
+
+> **Sensitivity (dBm) = -174 + NF + 10·log₁₀(BW) + required SNR**
+
+For a typical GPS L1 C/A receiver:
+- NF = 2 dB
+- BW = 4 MHz → 10·log₁₀(4×10⁶) = 66 dB
+- Required SNR for tracking ≈ -20 to -25 dB (thanks to correlation gain)
+
+Sensitivity ≈ -174 + 2 + 66 + (-22) = **-128 dBm**
+
+High-sensitivity receivers push tracking sensitivity to **-165 dBm** or better using longer integration times, but this comes at the cost of power and acquisition time.
+
+---
+
+## Part 2: Antenna Parameters
+
+![GNSS antenna parameters overview — gain, axial ratio, VSWR, phase center, bandwidth, and group delay](/images/gnss-rf-params/antenna-parameters.svg "The six key antenna parameters and their impact on GNSS positioning")
+
+The antenna is often the most underappreciated component in a GNSS system. A great front-end IC behind a poor antenna still produces poor positions. Let's walk through each parameter using the **Quectel YEGR001W8AH** multi-band active GNSS antenna as a real-world reference.
+
+### Quectel YEGR001W8AH — At a Glance
+
+| Parameter | Specification |
+|:----------|:-------------|
+| Frequency Bands | 1164–1300 MHz (L2/L5), 1525–1606 MHz (L1) |
+| Constellations | GPS, GLONASS, Galileo, BDS, QZSS, IRNSS |
+| Peak Gain | 5.5 dBi |
+| LNA Gain | 40 ± 4 dB |
+| Noise Figure | ≤ 2.5 dB |
+| Out-of-Band Rejection | ≥ 60 dB |
+| Axial Ratio | Low (RHCP) |
+| Current Consumption | 19.6 ± 4 mA |
+| Supply Voltage | 3 – 12 V |
+| IP Rating | IP67 |
+| Connector | TNC female |
+| Operating Temp | -40°C to +85°C |
+
+Now let's unpack what each of these means.
+
+### Antenna Element Gain (dBi)
+
+**What it is:** The ratio of power radiated (or received) in a particular direction to that of an isotropic antenna. Expressed in **dBi** (decibels relative to isotropic).
+
+**Why 5.5 dBi matters:** GNSS signals arrive from satellites spread across the sky, from zenith (directly overhead, ~90° elevation) to near the horizon (~5° elevation). An antenna with 5.5 dBi peak gain at zenith might drop to **-2 to 0 dBi near the horizon**—a 5-7 dB roll-off.
+
+**Gain roll-off** is actually desirable to some degree: signals near the horizon suffer from more multipath and atmospheric delay. An antenna with aggressive gain roll-off naturally de-emphasizes these noisy low-elevation signals. But too much roll-off means you lose satellites that could improve geometry (DOP).
+
+**Typical values:**
+- Patch antenna (embedded): 3 – 6 dBi
+- Helical antenna: 2 – 5 dBi
+- Choke-ring geodetic antenna: 5 – 9 dBi at zenith
+
+### Polarization and Axial Ratio
+
+**What it is:** GNSS satellites transmit **Right-Hand Circular Polarization (RHCP)**. When a signal reflects off a surface (multipath), it flips to **Left-Hand Circular Polarization (LHCP)**. A well-designed RHCP antenna rejects LHCP signals, providing built-in multipath mitigation.
+
+**Axial ratio** quantifies how "circular" the polarization actually is. Perfect circular polarization = **0 dB** (ratio of 1:1 between the major and minor axes of the polarization ellipse). Real antennas have:
+
+| Antenna Quality | Axial Ratio at Zenith | At 10° Elevation |
+|:----------------|:--------------------:|:----------------:|
+| Geodetic-grade | < 1 dB | < 3 dB |
+| Good commercial | < 2 dB | < 6 dB |
+| Budget patch | 2 – 4 dB | > 6 dB |
+
+**The YEGR001W8AH** specifies "low axial ratio" — for a multi-band antenna at this price point, expect **1-3 dB at zenith**.
+
+**Why this matters for positioning:** A 3 dB axial ratio means the antenna passes about half the power of a reflected (LHCP) signal, rather than rejecting it. In a multipath-rich environment (urban canyons, near buildings), poor axial ratio translates directly to **larger pseudorange errors** — potentially adding meters to your position error.
+
+**Note on linear polarization:** The passive Quectel YFGA003AA FPC antenna uses **linear polarization** instead of RHCP. This means it receives both RHCP and LHCP with equal sensitivity — you get a **3 dB penalty** on direct signals (since a linearly polarized antenna captures only half the power of a circularly polarized wave) and **zero multipath rejection** from polarization. It's fine for basic L1 tracking in open sky, but unsuitable for precision applications.
+
+### VSWR and Return Loss
+
+**What it is:** **Voltage Standing Wave Ratio (VSWR)** measures impedance matching between the antenna and the 50Ω transmission line. A perfect match = **1:1**. Any mismatch causes signal reflections, reducing the power delivered to the receiver.
+
+**Return Loss** is the same concept in dB: **RL = -20·log₁₀((VSWR-1)/(VSWR+1))**
+
+| VSWR | Return Loss | Power Reflected | Power Delivered |
+|:----:|:----------:|:---------------:|:---------------:|
+| 1.0:1 | ∞ dB | 0% | 100% |
+| 1.2:1 | -20.8 dB | 0.8% | 99.2% |
+| 1.5:1 | -14.0 dB | 4.0% | 96.0% |
+| 2.0:1 | -9.5 dB | 11.1% | 88.9% |
+| 3.0:1 | -6.0 dB | 25.0% | 75.0% |
+
+**For GNSS:** A VSWR of **1.5:1 or better** across the operating band is a good target. At 1.5:1, you lose only 0.18 dB — negligible. But a VSWR of 3:1 costs you 1.25 dB, which is significant when you're fighting for every fraction of a dB in noise figure.
+
+**The YEGR001W8AH** achieves VSWR ≤ 1.5:1 across both its frequency bands, which is solid for a multi-band design.
+
+### Bandwidth
+
+**What it is:** The frequency range over which the antenna maintains acceptable performance (gain, VSWR, axial ratio).
+
+**For multi-band GNSS**, the antenna must cover:
+- **L1 band:** 1559 – 1606 MHz (GPS L1, GLONASS G1, Galileo E1, BDS B1)
+- **L2 band:** 1215 – 1255 MHz (GPS L2, GLONASS G2, Galileo E5b, BDS B2)
+- **L5 band:** 1164 – 1189 MHz (GPS L5, Galileo E5a)
+
+The YEGR001W8AH covers **1164–1300 MHz** and **1525–1606 MHz**, spanning all major GNSS bands plus L-band corrections. Maintaining good axial ratio and gain across this entire range is one of the main engineering challenges in multi-band antenna design.
+
+### Phase Center Offset (PCO) and Phase Center Variation (PCV)
+
+**What it is:** The **phase center** is the virtual point in space where the antenna appears to receive signals. It's not a physical point — it can shift depending on frequency, elevation angle, and azimuth.
+
+- **PCO:** The static offset between the antenna's mechanical reference point (ARP) and the mean phase center. Usually a few mm.
+- **PCV:** The variation of the phase center as a function of signal direction. Can be several mm across elevation angles.
+
+**Why it matters:** For survey-grade and geodetic applications, uncorrected PCV introduces **millimeter-level systematic errors** that don't average out. This is why geodetic antennas come with calibration tables (ANTEX files) that receivers use to correct for PCV.
+
+**For most embedded/IoT applications** targeting meter-level accuracy, PCV is negligible. But if you're designing an RTK rover expecting **cm-level accuracy**, antenna phase center calibration becomes critical.
+
+### Group Delay Variation (GDV)
+
+**What it is:** The variation in signal propagation time through the antenna as a function of frequency and/or signal direction. Ideally, all frequencies within a band experience the same delay.
+
+**Target spec:** < **20 nanoseconds** variation per band for good positioning performance.
+
+**Why it matters:** GNSS code measurements rely on precise timing. If the antenna introduces different delays for signals arriving from different satellites (different elevation angles), it creates a direction-dependent pseudorange bias. For code-phase positioning, each nanosecond of group delay error corresponds to about **0.3 meters** of range error.
+
+### LNA Specifications (Active Antennas)
+
+The YEGR001W8AH integrates an LNA with **40 ± 4 dB gain** and **≤ 2.5 dB noise figure**. For an active antenna, these are the key LNA parameters:
+
+**LNA Gain (40 dB):** This amplifies the signal before it travels down the cable to the receiver. Cable losses at L-band can be significant — RG174 coax loses about **1 dB per meter** at 1.5 GHz. With a 3-meter cable (standard for the YEGR001W8AH), you'd lose ~3 dB. The 40 dB LNA gain ensures the signal arrives at the receiver well above the noise floor despite cable loss.
+
+**LNA Noise Figure (≤ 2.5 dB):** For an integrated active antenna, this is the system noise figure that matters — it includes the antenna element loss. A standalone external LNA with 0.8 dB NF would be better, but the convenience and size advantage of integration often wins.
+
+**Out-of-Band Rejection (≥ 60 dB):** A pre-LNA SAW filter attenuates out-of-band interferers by 60 dB before they reach the LNA. This is critical because the LNA's IIP3 is finite — without filtering, a strong cellular signal could generate in-band intermod products.
+
+**Current Draw (19.6 mA):** Active antennas need DC power, typically supplied via the coax cable (DC bias). The receiver must provide this current. For battery-powered applications, this is a meaningful portion of your power budget.
+
+---
+
+## Part 3: How RF Parameters Impact Positioning
+
+Here's where all these specs converge. Let's trace how each parameter ultimately affects your **horizontal position error**.
+
+![C/N0 impact on positioning performance — showing code noise and carrier phase noise across different C/N0 levels](/images/gnss-rf-params/cn0-impact.svg "The relationship between C/N0 and measurement quality: every dB counts")
+
+### The C/N0 Cascade
+
+Your receiver reports **C/N0** (carrier-to-noise density ratio) for each tracked satellite, typically in the range of 30–50 dB-Hz. This single number integrates the entire RF chain's performance:
+
+> **C/N0 = P_signal + G_ant - L_cable + G_LNA - NF_system - N₀**
+
+Where N₀ = **-174 dBm/Hz** (thermal noise floor at 290K).
+
+**Example calculation** with the YEGR001W8AH and MAX2769C:
+- P_signal at antenna: -130 dBm (typical open-sky GPS L1)
+- G_ant (element): +5.5 dBi → but average across hemisphere ≈ +3 dBi
+- L_cable: -3 dB (3m RG174)
+- G_LNA: +40 dB (integrated in antenna)
+- The receiver's LNA2 adds further gain with NF = 1.5 dB
+- System NF ≈ 2.5 dB (dominated by the active antenna's NF since it's first in chain)
+
+C/N0 ≈ -130 + 3 - (-174) - 2.5 = **44.5 dB-Hz**
+
+That's a healthy C/N0. Tracking loops operate comfortably above 35 dB-Hz, and acquisition works down to about 25-30 dB-Hz.
+
+### C/N0 → Measurement Quality → Position Accuracy
+
+| C/N0 (dB-Hz) | Code Noise (1σ) | Carrier Phase Noise | Positioning Impact |
+|:------------:|:---------------:|:-------------------:|:-------------------|
+| 45+ | 0.5 – 2 m | < 1 mm | Excellent — all solution types work well |
+| 35 – 45 | 2 – 5 m | 1 – 3 mm | Good — RTK/PPP still viable |
+| 25 – 35 | 5 – 15 m | 3 – 10 mm | Marginal — SPP degrades, RTK ambiguity resolution slows |
+| < 25 | > 15 m | > 10 mm | Poor — loss of lock, cycle slips, no fix |
+
+Studies show that **code noise can range from 2 to 15 meters** depending on C/N0, which directly bounds SPP accuracy. For RTK, lower C/N0 means longer time to fix integer ambiguities and higher risk of incorrect fixes.
+
+### When Linearity (IP3/P1dB) Saves Your Position
+
+In clean open-sky conditions, linearity barely matters. But in the real world:
+
+**Scenario 1: Urban driving near a cell tower.** An LTE downlink at -30 dBm leaks into your antenna. With IIP3 = -1 dBm, the IM3 products are at:
+> 3 × (-30) - 2 × (-1) = -88 dBm
+
+That's well below the noise floor (-174 + 2 + 66 = -106 dBm in 4 MHz BW). No problem.
+
+But drop IIP3 to -15 dBm (low-power mode): IM3 = 3 × (-30) - 2 × (-15) = -60 dBm. That's **46 dB above the noise floor** — your receiver is now jammed by its own intermod products.
+
+**Scenario 2: Intentional jamming.** A personal privacy device (illegal but common) outputs +10 dBm across the L1 band. Even with 60 dB out-of-band rejection from the antenna filter, you still see -50 dBm at the LNA input. Now P1dB matters a lot — if your LNA compresses, you lose everything.
+
+### The Multi-Band Advantage
+
+Using dual/multi-band (L1+L5 or L1+L2+L5) doesn't just help with ionospheric correction — it also improves RF robustness:
+
+- **Narrowband jammers** typically affect only one band
+- **Different front-end ICs** can be optimized per-band
+- **Frequency diversity** means if one band's C/N0 drops due to interference, the other may still be clean
+
+The YEGR001W8AH's coverage of L1, L2, L5, and L-band enables the receiver to exploit this diversity fully.
+
+### Putting It All Together: System-Level Design Checklist
+
+| Design Goal | Key RF Parameters | Target Spec |
+|:------------|:-----------------|:------------|
+| Maximum sensitivity | LNA NF, antenna gain | NF < 1.5 dB, gain > 3 dBi avg |
+| Urban robustness | IIP3, P1dB, OOB rejection | IIP3 > -5 dBm, OOB > 50 dB |
+| Multipath rejection | Axial ratio, polarization | AR < 3 dB, RHCP |
+| cm-level accuracy | PCV, GDV, phase stability | PCV calibrated, GDV < 20 ns |
+| Low power (IoT) | LNA current, ADC bits | < 20 mA total, 2-bit ADC |
+| Multi-band precision | Bandwidth, gain flatness | Cover L1+L2/L5, ±2 dB gain variation |
+
+---
+
+## Quick Reference: IC Comparison
+
+To ground these parameters in real products, here's a comparison of popular GNSS RF front-end ICs:
+
+| Parameter | MAX2769C | SY1007 (Saphyrion) | Bynav Ripley |
+|:----------|:--------:|:------------------:|:------------:|
+| Noise Figure | 1.4 dB (cascaded) | ~2.0 dB | ~2.3 dB |
+| LNA1 NF | 0.8 dB | — | — |
+| LNA1 Gain | 19 dB | — | — |
+| LNA1 IIP3 | -1.1 dBm | — | — |
+| Total Gain | 110 dB | — | 131 dB |
+| ADC | Multi-bit (1/2/3) | 3-bit I/Q | Up to 120 MHz |
+| Supply | 2.7 – 3.3 V | — | — |
+| Bands | L1/E1/B1/G1 | Multi-band | 3-channel wideband |
+| Filter BW | Programmable | Up to 24 MHz | 4 – 40 MHz |
+
+The MAX2769C remains a popular choice for single-band receivers due to its excellent NF and integration. For multi-band, multi-constellation high-precision receivers, purpose-built RFICs like the Bynav Ripley offer wider bandwidth and more channels.
+
+---
+
+## TL;DR
+
+- **Noise Figure** is king — it directly determines C/N0 and thus positioning quality. The first LNA's NF dominates thanks to the Friis equation. Target < 1.5 dB for the front-end IC.
+- **IIP3 and P1dB** define your interference tolerance. In clean environments, modest specs suffice. Near cell towers or in jamming scenarios, they become critical.
+- **Antenna gain** sets the baseline signal level. More important than peak gain is the **gain pattern** across elevation angles.
+- **Axial ratio** determines multipath rejection. RHCP with AR < 3 dB is essential for precision. Linear polarization costs you 3 dB and all polarization-based multipath rejection.
+- **VSWR** should be ≤ 1.5:1 — anything worse wastes precious signal power at the very first stage.
+- **ADC bits**: 2-3 bits is the sweet spot for GNSS. More bits help with anti-jamming, not with basic positioning.
+- **Phase center** (PCO/PCV) only matters for cm-level or better accuracy — ignore it for meter-level applications.
+- **Active antenna LNA gain** must exceed cable loss by a healthy margin (aim for 20+ dB net) to prevent cable loss from degrading system NF.
+- Everything connects through **C/N0** — if you can measure and maximize your C/N0, you've optimized the RF chain.
+
+## Sources
+
+- [Navipedia — RF Front End](https://gssc.esa.int/navipedia/index.php/Front_End)
+- [Calian — GNSS Antenna RF Characteristics](https://www.calian.com/advanced-technologies/gnss/information-support/gnss-antenna-radio-frequency-characteristics/)
+- [Taoglas — Six Key Parameters for GNSS Antennas](https://www.taoglas.com/blogs/six-key-parameters-to-consider-when-comparing-gnss-antennas/)
+- [Analog Devices — MAX2769C Datasheet](https://www.analog.com/en/products/max2769c.html)
+- [Mini-Circuits — IP3 and P1dB Explained](https://blog.minicircuits.com/rf-signal-quality-measurements-third-order-intercept-point-ip3-and-power-at-1-db-compression-p1db/)
+- [Quectel — YEGR001W8AH Active GNSS Antenna](https://www.quectel.com/product/yegr001w8ah-active-gnss-multiple-mount-antenna/)
+- [Embedded Computing Design — Simplify GNSS Receiver Design](https://embeddedcomputing.com/application/networking-5g/gateways-routers-switches-io-modules/simplify-gnss-receiver-design)
+- [u-blox — GNSS Antennas Application Note](https://content.u-blox.com/sites/default/files/products/documents/GNSS-Antennas_AppNote_(UBX-15030289).pdf)
+- [Inside GNSS — Measuring GNSS Signal Strength](https://insidegnss.com/measuring-gnss-signal-strength/)
+- [GPS World — Innovation: GNSS Antennas](https://www.gpsworld.com/innovation-gnss-antennas/)

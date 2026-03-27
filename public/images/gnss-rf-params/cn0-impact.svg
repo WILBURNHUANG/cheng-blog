@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <linearGradient id="greenZone" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ade80;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#4ade80;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="yellowZone" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="redZone" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.05"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="500" rx="12" fill="url(#bg2)"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="700">C/N0 Impact on Positioning Performance</text>
+  <text x="450" y="55" text-anchor="middle" fill="#94a3b8" font-size="12">How RF chain quality translates to real-world accuracy</text>
+
+  <!-- Chart area -->
+  <g transform="translate(80, 75)">
+    <!-- Zones -->
+    <rect x="0" y="0" width="540" height="90" fill="url(#greenZone)" rx="4"/>
+    <rect x="0" y="90" width="540" height="100" fill="url(#yellowZone)" rx="4"/>
+    <rect x="0" y="190" width="540" height="100" fill="url(#redZone)" rx="4"/>
+    <rect x="0" y="290" width="540" height="60" fill="#ef4444" opacity="0.08" rx="4"/>
+
+    <!-- Grid lines -->
+    <line x1="0" y1="0" x2="540" y2="0" stroke="#334155" stroke-width="0.5"/>
+    <line x1="0" y1="90" x2="540" y2="90" stroke="#334155" stroke-width="0.5" stroke-dasharray="4,4"/>
+    <line x1="0" y1="190" x2="540" y2="190" stroke="#334155" stroke-width="0.5" stroke-dasharray="4,4"/>
+    <line x1="0" y1="290" x2="540" y2="290" stroke="#334155" stroke-width="0.5" stroke-dasharray="4,4"/>
+    <line x1="0" y1="350" x2="540" y2="350" stroke="#334155" stroke-width="0.5"/>
+
+    <!-- Y-axis labels (C/N0) -->
+    <text x="-10" y="5" text-anchor="end" fill="#4ade80" font-size="11" font-weight="600">50</text>
+    <text x="-10" y="95" text-anchor="end" fill="#fbbf24" font-size="11" font-weight="600">40</text>
+    <text x="-10" y="195" text-anchor="end" fill="#ef4444" font-size="11" font-weight="600">30</text>
+    <text x="-10" y="295" text-anchor="end" fill="#ef4444" font-size="11" font-weight="600">20</text>
+    <text x="-10" y="355" text-anchor="end" fill="#64748b" font-size="11">10</text>
+
+    <!-- Y-axis title -->
+    <text x="-55" y="175" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600" transform="rotate(-90, -55, 175)">C/N0 (dB-Hz)</text>
+
+    <!-- Zone labels on right -->
+    <g transform="translate(555, 0)">
+      <!-- Excellent zone -->
+      <rect x="0" y="15" width="200" height="60" rx="6" fill="#1e293b" stroke="#4ade80" stroke-width="1"/>
+      <text x="15" y="33" fill="#4ade80" font-size="12" font-weight="700">45+ dB-Hz</text>
+      <text x="15" y="48" fill="#94a3b8" font-size="10">Code noise: 0.5–2 m</text>
+      <text x="15" y="62" fill="#94a3b8" font-size="10">All solutions work well</text>
+
+      <!-- Good zone -->
+      <rect x="0" y="105" width="200" height="72" rx="6" fill="#1e293b" stroke="#fbbf24" stroke-width="1"/>
+      <text x="15" y="123" fill="#fbbf24" font-size="12" font-weight="700">35–45 dB-Hz</text>
+      <text x="15" y="138" fill="#94a3b8" font-size="10">Code noise: 2–5 m</text>
+      <text x="15" y="152" fill="#94a3b8" font-size="10">RTK/PPP still viable</text>
+      <text x="15" y="166" fill="#94a3b8" font-size="10">SPP accuracy: 3–5 m</text>
+
+      <!-- Marginal zone -->
+      <rect x="0" y="200" width="200" height="72" rx="6" fill="#1e293b" stroke="#ef4444" stroke-width="1"/>
+      <text x="15" y="218" fill="#ef4444" font-size="12" font-weight="700">25–35 dB-Hz</text>
+      <text x="15" y="233" fill="#94a3b8" font-size="10">Code noise: 5–15 m</text>
+      <text x="15" y="247" fill="#94a3b8" font-size="10">RTK fix slows/fails</text>
+      <text x="15" y="261" fill="#94a3b8" font-size="10">Cycle slips increase</text>
+
+      <!-- Lost zone -->
+      <rect x="0" y="295" width="200" height="50" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+      <text x="15" y="313" fill="#94a3b8" font-size="12" font-weight="700">&lt; 25 dB-Hz</text>
+      <text x="15" y="328" fill="#64748b" font-size="10">Loss of lock / No fix</text>
+    </g>
+
+    <!-- Code noise curve (illustrative) -->
+    <polyline points="
+      10,30 50,35 90,42 130,52 170,68 210,90
+      250,120 290,155 330,195 370,240 410,280 450,310 490,335 530,348
+    " fill="none" stroke="#f472b6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="10" cy="30" r="3" fill="#f472b6"/>
+    <circle cx="530" cy="348" r="3" fill="#f472b6"/>
+
+    <!-- Carrier phase noise curve -->
+    <polyline points="
+      10,82 50,84 90,87 130,92 170,100 210,115
+      250,138 290,165 330,198 370,235 410,268 450,300 490,330 530,345
+    " fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6,3"/>
+    <circle cx="10" cy="82" r="3" fill="#38bdf8"/>
+
+    <!-- Legend -->
+    <g transform="translate(10, 360)">
+      <line x1="0" y1="8" x2="25" y2="8" stroke="#f472b6" stroke-width="2.5"/>
+      <text x="32" y="12" fill="#f472b6" font-size="11">Code phase noise</text>
+      <line x1="170" y1="8" x2="195" y2="8" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6,3"/>
+      <text x="202" y="12" fill="#38bdf8" font-size="11">Carrier phase noise</text>
+    </g>
+
+    <!-- Annotations -->
+    <!-- NF impact arrow -->
+    <g transform="translate(100, -10)">
+      <line x1="0" y1="50" x2="0" y2="100" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arrowYellow)"/>
+      <rect x="-55" y="28" width="110" height="20" rx="4" fill="#fbbf24" opacity="0.15"/>
+      <text x="0" y="42" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="600">+1 dB NF = -1 dB C/N0</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="450" y="488" text-anchor="middle" fill="#64748b" font-size="10">Higher C/N0 = better measurements = more accurate positions. Every dB of noise figure costs you 1 dB of C/N0.</text>
+</svg>
