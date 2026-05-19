@@ -91,19 +91,19 @@ The quality of your RAG output is entirely bounded by the quality of your knowle
 
 The agent draws from three distinct knowledge bases, each serving a different purpose:
 
-**1. Technical documentation** (~1,300 documents) — product specs, hardware design guides, reference designs, protocol documentation, certificates, application notes. This is the canonical source of truth for "what does the product do and how do you use it."
+**1. Product documentation** — the canonical source of truth for "what does the product do and how do you use it."
 
-**2. Support ticket history** (~28 monthly collections spanning 27 months) — past customer issues with root cause analysis and solutions extracted and summarized by AI. This is the institutional memory that prevents reinventing the wheel.
+**2. Support ticket history** — past customer issues with root cause analysis and solutions, extracted and summarized by AI. The institutional memory that prevents reinventing the wheel.
 
-**3. Schematic review cases** (~21 cases across 11 product lines) — past hardware design reviews with risk assessments and recommendations. This trains the AI to conduct new reviews following established patterns.
+**3. Design review cases** — past review reports with risk assessments and recommendations. This trains the AI to conduct new reviews following established patterns.
 
 Separating these into distinct knowledge bases wasn't arbitrary. Each serves a different retrieval pattern:
 
-- Technical docs answer "what is X?" questions
+- Product docs answer "what is X?" questions
 - Support tickets answer "we saw problem Y, what was the fix?" questions
-- Schematic cases answer "is this hardware design correct?" questions
+- Design cases answer "is this design correct?" questions
 
-**Mixing them into one giant knowledge base would have destroyed retrieval quality.** The vector similarity between "LC module power consumption" in a datasheet and "LC module power issue" in a support ticket is high, but the user intent behind those queries is completely different.
+**Mixing them into one giant knowledge base would have destroyed retrieval quality.** The vector similarity between a product spec mentioning "power consumption" and a support ticket about a "power issue" is high, but the user intent behind those queries is completely different.
 
 ### The Support Ticket Pipeline: Where MCP Earns Its Keep
 
