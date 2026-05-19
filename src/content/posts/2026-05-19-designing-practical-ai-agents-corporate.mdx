@@ -193,13 +193,11 @@ Switching from one LLM to another might improve answer quality by 10%. Restructu
 
 ## Looking Forward
 
-The agent is live and being used daily. But it's not done — it's never done.
+The agent is live and being used daily. But it's not done — it's never done. Two directions matter most from here.
 
-The immediate roadmap includes **group chat support** (right now it only works in 1:1 conversations), **query analytics** to understand what the team asks most and where the AI struggles, and **MCP standardization** to make the knowledge base accessible to any AI client, not just the current chat platform.
+**First: gather user feedback and refine relentlessly.** The initial version is a hypothesis about what's useful. Real usage data — which questions get asked most, which answers get thumbs-down, where users abandon the agent and go ask a human instead — tells you where the gaps are. The next phase is building feedback loops into the system: tracking query patterns, collecting satisfaction signals, and using that data to tune the system prompt, improve knowledge coverage, and adjust skill design. The details matter. A slightly better card layout, a more precise system prompt boundary, a knowledge base that covers one more edge case — these incremental improvements compound into the difference between a tool people tolerate and one they rely on.
 
-The bigger vision is that every team's institutional knowledge — the documentation, the past cases, the tribal wisdom — should be queryable by AI. Not through some futuristic system that replaces humans, but through practical tools that give engineers back the hours they currently spend searching, compiling, and repeating.
-
-The technology to do this exists today. The gap isn't AI capability. It's the willingness to do the unsexy engineering work that turns a capability into a product.
+**Second: package the entire domain knowledge space as an MCP server.** Right now, the knowledge bases are locked inside one chat platform's agent. That's a ceiling. The real unlock is wrapping the entire domain knowledge space — product docs, support history, design review cases — as a standardized MCP (Model Context Protocol) server. Once you do that, the knowledge becomes a **pluggable module** that any MCP-compatible AI client can consume. A different team builds their own agent on a different platform? They plug into the same MCP server and instantly get access to the full knowledge base. A developer uses Claude Code or Cursor for their workflow? Same knowledge, different interface. The domain expertise becomes infrastructure — decoupled from any single AI client, reusable across the entire organization. That's the end state worth building toward.
 
 ---
 
