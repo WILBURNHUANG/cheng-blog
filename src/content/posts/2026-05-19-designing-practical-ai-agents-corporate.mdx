@@ -1,0 +1,215 @@
+---
+title: "What I Learned Building an AI Agent My Team Actually Uses"
+description: "Design principles for practical AI agents in corporate settings — from context management to knowledge architecture."
+date: 2026-05-19
+category: "AI"
+tags: ["AI Agent", "RAG", "MCP", "enterprise AI", "knowledge management", "system design"]
+hero: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80"
+draft: false
+---
+
+Everyone is building AI agents right now. Most of them will never be used.
+
+I know this because I spent the past month building one that actually stuck — an AI-powered assistant for the general FAE workflow that utilizes domain knowledge. The team's daily work involves answering technical questions, reviewing designs, digging through support tickets, and generating weekly reports.
+
+The agent now handles all of these. But getting there taught me that the hard part was never the AI — it was everything around it.
+
+## The Gap Between Demo and Product
+
+There's a seductive pattern in the AI space: build a chatbot, connect it to some documents, demo it answering a question correctly, and declare victory. The demo always looks great. The CEO nods. The slides get approved.
+
+Then reality hits. Real users don't ask clean, well-formed questions. Documents are scattered across five platforms. The AI hallucinates a spec number that's close enough to sound right but wrong enough to cause a hardware defect. People try it once, get a mediocre answer, and go back to asking the senior engineer.
+
+**The gap between an AI demo and an AI product is entirely an engineering problem.** The AI model is the easy part. What's hard is the context management, the interaction design, the knowledge curation, and the reliability engineering that makes the whole thing trustworthy enough that someone stakes their work on it.
+
+## Start with the Workflow, Not the Technology
+
+Before writing a single line of code, I spent time watching how the team actually worked. Not what they said they did — what they *actually* did, day after day.
+
+Three patterns emerged:
+
+**The document hunt.** A customer asks about a module's power consumption. The engineer opens a shared drive, digs through folders organized by product line, opens a 200-page hardware design manual, and searches for the right table. Three minutes for a number that should take three seconds.
+
+**The tribal knowledge problem.** A new engineer encounters a customer issue. The solution exists — buried in a support ticket from 14 months ago, written by someone who's since moved to a different team. The new engineer spends hours reinventing the wheel, or worse, asks the same senior engineer who's already answered this question six times.
+
+**The report assembly tax.** Every Friday, each engineer spends 30 minutes manually compiling a weekly status report by cross-referencing tickets, spreadsheets, and email threads. It's pure busywork, but managers need it to track what's happening.
+
+These three patterns — **scattered documentation**, **buried institutional knowledge**, and **repetitive report generation** — became the foundation of the agent's design. Not "what can AI do?" but "what friction can we remove?"
+
+If I could give one piece of advice to anyone building a corporate AI agent, it's this: **interview your users, observe their workflows, and design for the five tasks they do most often.** Not the impressive edge cases. The boring, repetitive ones.
+
+## The Dual-Track Architecture: Don't Make Users Think
+
+Here's a design decision that made all the difference: the agent supports two completely different interaction modes, running in parallel.
+
+**Track 1: Structured queries.** Users click a menu, see a card with options and preset buttons, and get guided step-by-step to their answer. Click "Module Parameters" → see categories like precision, voltage, packaging → click a preset question → get an AI-generated answer grounded in documentation.
+
+**Track 2: Free-form questions.** Users just type whatever they want — "What's the positioning accuracy of [module X]?" — and the AI answers directly using RAG.
+
+Why both? Because different users have different comfort levels with AI.
+
+New team members and skeptics need **guardrails**. They don't know what questions the system can answer, and they don't trust it yet. The structured path — menu, card, preset buttons, progressive disclosure — teaches them the agent's capabilities without requiring any leap of faith.
+
+Power users and early adopters need **freedom**. They already know what they want. Forcing them through a menu flow is friction.
+
+The architecture mirrors this: structured queries are handled entirely by code (event routing, card building, database lookups), while free-form questions are forwarded to the AI with RAG retrieval. The user doesn't know or care about this distinction. They just get answers.
+
+**The lesson: design for both ends of the adoption curve.** Let the UI guide novices while not constraining experts. If you only build the chatbot, you lose the cautious majority. If you only build the menu, you lose the power users.
+
+## Context Management is Everything
+
+If there's one thing that separates a toy agent from a production agent, it's **context management** — specifically, how you control what the AI knows and doesn't know.
+
+### The System Prompt is the Soul
+
+The system prompt isn't a formality you copy from a template. It's the single most important design document of your agent. It defines:
+
+- **Identity**: What the agent is, who it serves, and what domain it operates in
+- **Boundaries**: What it should and shouldn't answer (a hardware documentation assistant has no business giving financial advice)
+- **Behavior**: How it responds — citation style, language, level of detail, when to admit uncertainty
+- **Guardrails**: When to escalate to a human, how to handle ambiguous queries, what to do when the knowledge base has no relevant match
+
+I rewrote the system prompt at least a dozen times. Each iteration was informed by real user queries that exposed gaps — cases where the agent was too verbose, too vague, hallucinated a parameter, or answered a question it shouldn't have.
+
+**The system prompt needs continuous tuning based on production usage.** Treat it like code: version it, review it, test it against regression cases.
+
+### RAG as a Constraint, Not Just a Feature
+
+Most people think of RAG (Retrieval-Augmented Generation) as a way to make the AI smarter. That's backwards. **RAG is primarily a way to make the AI more constrained.**
+
+Without RAG, the model draws on its training data — which may be outdated, wrong for your domain, or entirely fabricated. With RAG, you're telling the model: "Here are the facts. Answer based on these, and only these."
+
+This is especially critical in technical domains where a hallucinated number can cause real-world damage. If the AI says a module's input voltage range is 2.8-3.6V when it's actually 3.0-3.6V, someone might fry their hardware.
+
+The key design choice was using RAG knowledge bases to **bound** the agent's answers to verified documentation. The AI doesn't know everything — it only knows what's in the knowledge base. And that's a feature, not a bug.
+
+## Knowledge Space Architecture: The Unsexy Critical Part
+
+The quality of your RAG output is entirely bounded by the quality of your knowledge input. **Garbage in, garbage out** applies more to RAG than to almost any other system.
+
+### Three Separate Knowledge Bases
+
+The agent draws from three distinct knowledge bases, each serving a different purpose:
+
+**1. Technical documentation** (~1,300 documents) — product specs, hardware design guides, reference designs, protocol documentation, certificates, application notes. This is the canonical source of truth for "what does the product do and how do you use it."
+
+**2. Support ticket history** (~28 monthly collections spanning 27 months) — past customer issues with root cause analysis and solutions extracted and summarized by AI. This is the institutional memory that prevents reinventing the wheel.
+
+**3. Schematic review cases** (~21 cases across 11 product lines) — past hardware design reviews with risk assessments and recommendations. This trains the AI to conduct new reviews following established patterns.
+
+Separating these into distinct knowledge bases wasn't arbitrary. Each serves a different retrieval pattern:
+
+- Technical docs answer "what is X?" questions
+- Support tickets answer "we saw problem Y, what was the fix?" questions
+- Schematic cases answer "is this hardware design correct?" questions
+
+**Mixing them into one giant knowledge base would have destroyed retrieval quality.** The vector similarity between "LC module power consumption" in a datasheet and "LC module power issue" in a support ticket is high, but the user intent behind those queries is completely different.
+
+### The Support Ticket Pipeline: Where MCP Earns Its Keep
+
+The most interesting knowledge engineering challenge was turning 27 months of unstructured support tickets into a searchable, structured knowledge base. Here's how the pipeline works:
+
+**Step 1: Extract.** Pull tickets from the issue tracking system, filtered by month and product line. This uses an MCP (Model Context Protocol) tool that provides a standardized interface between the AI and the ticket system — query by date range, product, issue type.
+
+**Step 2: Summarize.** For each ticket, use AI to extract the structured core: problem description, root cause analysis, and resolution. A raw ticket might be 50 messages of back-and-forth between engineers; the summary is three paragraphs.
+
+**Step 3: Organize.** Sync the summaries into structured spreadsheets organized by month, then feed those into the knowledge base. Each month becomes its own collection.
+
+**Step 4: Retrieve.** When a user asks about a problem, the RAG system searches across all months and product lines to find similar cases, ranked by relevance.
+
+The monthly organization isn't just for tidiness — it dramatically improves retrieval quality. A user asking about "recent calibration failures" should prioritize last month's tickets over tickets from two years ago. Temporal structure gives the retrieval system a natural relevance signal.
+
+**MCP (Model Context Protocol) was the key enabler here.** Think of it as a USB interface for AI — a standardized way to connect any AI system to any data source. Instead of writing custom Jira API integration code that only works with one AI platform, the MCP tool provides a clean interface that any MCP-compatible client can use. One adapter, many consumers.
+
+## Designing Functions as Skills
+
+The agent has six distinct capabilities, but I didn't design them by asking "what can AI do?" I designed them by asking "what does each team member need to accomplish?"
+
+**Skill 1: Technical Q&A** — Free-form questions about product documentation. The bread and butter.
+
+**Skill 2: Document packaging** — "Give me all the hardware design documents for module X." Returns organized links to all relevant docs.
+
+**Skill 3: Ticket lookup** — Search 27 months of support history by ticket number, keyword, product line, or complex query.
+
+**Skill 4: Ticket summarization** — Extract root cause and resolution from raw ticket threads.
+
+**Skill 5: Schematic review** — Upload a hardware design PDF, get a structured review report with risk-graded findings.
+
+**Skill 6: Weekly report generation** — "Generate [person]'s weekly report." Pulls from live project tracking data, auto-highlights VIP customer issues, outputs a formatted document in 30 seconds.
+
+Each skill maps to **one user intent** backed by **one knowledge source**. This 1:1 mapping is deliberate. When the agent receives a query, the skill routing is straightforward: the agent perceives the user's intent, selects the appropriate skill, and that skill knows exactly which knowledge base to search.
+
+**The lesson: don't design skills around AI capabilities — design them around user tasks.** "Summarize text" is an AI capability. "Find me past cases similar to this customer's problem" is a user task. Build the latter.
+
+## Harness Engineering: The Iceberg Below the Surface
+
+Users see two things: "I click a button and get an answer" and "I type a question and get an answer." That's the tip of the iceberg.
+
+Below the surface:
+
+- **Event routing and dispatch** — The enterprise chat platform pushes different event types (menu clicks, button callbacks, message receipt, chat entry). Each needs to be routed to the correct handler.
+- **Interactive card construction** — Rich cards with headers, descriptions, action buttons, color coding by category. All built as structured JSON, returned as responses to events.
+- **Knowledge pipeline automation** — Excel files converted to JSON, fields standardized, classic cases algorithmically identified and prioritized.
+- **AI proxy forwarding** — When the user types free text, the system captures the message, logs it, and forwards it to the AI agent for RAG-based answering. This forwarding must be non-blocking so it doesn't slow down the event loop.
+- **Dual deployment modes** — WebSocket for local development (no public IP needed), Webhook for production (supports AI auto-reply). The same logic works with both.
+- **Reliability engineering** — Auto-reconnect, heartbeat mechanisms, background threads for long-running operations, graceful error handling.
+
+All of this was **about 1,100 lines of Python across 6 files.** Not because the architecture is simple, but because good design keeps complexity manageable. Single responsibility per file, clear module boundaries, separation of concerns.
+
+**The insight I keep coming back to: AI provides capability; engineering provides usability.** Capability without usability is a demo. Usability without capability is a toy. You need both to build something people actually rely on.
+
+## What I'd Do Differently
+
+No project survives contact with reality unchanged. Here's what I learned:
+
+**Ground every answer through RAG and system prompt — this is the design philosophy, not a feature.** The single most important lesson from this project is that RAG and the system prompt aren't just technical components — they're the core design philosophy. Every answer the agent gives must be grounded in verified documents, constrained by the system prompt's boundaries. Without this discipline, you have a chatbot that occasionally hallucinates dangerous misinformation. With it, you have a tool engineers trust enough to stake their work on. The system prompt defines *what* the agent is allowed to say; RAG ensures it can only say things backed by evidence. Together, they turn a probabilistic language model into a reliable knowledge interface.
+
+**Build structured knowledge with a designated methodology for regular updates.** I initially treated the knowledge base as a one-time upload: gather documents, upload them, done. That's a trap. Documents get revised, new products launch, support tickets keep flowing in, and yesterday's accurate answer becomes today's outdated one. What I learned is that you need a **repeatable, scheduled pipeline** for knowledge maintenance — not just the data, but the methodology. For support tickets, that meant monthly batch extraction, AI-powered summarization, sync to structured spreadsheets, and feeding into the knowledge base on a fixed cadence. For technical docs, it meant version tracking and re-ingestion when documents update. The knowledge base is a living system, not a static archive. Treat it like infrastructure that requires ongoing maintenance, not a project deliverable you check off.
+
+**Start with fewer skills.** I built six skills before shipping. In hindsight, I should have shipped with two (technical Q&A and ticket lookup), measured usage, and added the rest based on actual demand. Some skills were heavily used from day one; others took time to gain traction.
+
+**Invest in feedback loops earlier.** I didn't have query analytics at launch. I couldn't tell which questions the AI answered well and which it fumbled. Adding usage tracking, satisfaction ratings, and failed-query logging should be a day-one feature, not a "future enhancement."
+
+**System prompt tuning is the highest-leverage activity.** Every hour spent analyzing real user queries and refining the system prompt yielded more quality improvement than any architectural change. If I had one extra day, I'd spend it on the prompt, not the code.
+
+## The Five Principles
+
+After building this system end-to-end, I've distilled my experience into five principles:
+
+**1. Ground everything — RAG + system prompt is the design philosophy.**
+Don't treat RAG as a feature and the system prompt as boilerplate. They are the foundation. RAG constrains the AI to verified facts; the system prompt constrains it to appropriate behavior. Together, they are what make the difference between an unreliable chatbot and a trusted knowledge tool.
+
+**2. Structured knowledge requires structured maintenance.**
+A knowledge base without a maintenance methodology decays from day one. Build a repeatable pipeline — scheduled extraction, automated summarization, organized sync — and treat knowledge freshness as a first-class operational concern.
+
+**3. AI + Engineering Packaging = Usable Product.**
+The AI model provides raw intelligence. Engineering provides everything else — interaction design, reliability, data pipelines, error handling. Neither alone is sufficient. The packaging is at least half the work.
+
+**4. Dual-track architecture is the pragmatic default.**
+Structured queries for reliability and discoverability. Free-form AI for flexibility and power. Running both in parallel serves the full spectrum of users, from cautious newcomers to power users.
+
+**5. Knowledge curation beats model selection.**
+Switching from one LLM to another might improve answer quality by 10%. Restructuring your knowledge base, cleaning your documents, and organizing by retrieval pattern can improve it by 200%. Invest accordingly.
+
+## Looking Forward
+
+The agent is live and being used daily. But it's not done — it's never done.
+
+The immediate roadmap includes **group chat support** (right now it only works in 1:1 conversations), **query analytics** to understand what the team asks most and where the AI struggles, and **MCP standardization** to make the knowledge base accessible to any AI client, not just the current chat platform.
+
+The bigger vision is that every team's institutional knowledge — the documentation, the past cases, the tribal wisdom — should be queryable by AI. Not through some futuristic system that replaces humans, but through practical tools that give engineers back the hours they currently spend searching, compiling, and repeating.
+
+The technology to do this exists today. The gap isn't AI capability. It's the willingness to do the unsexy engineering work that turns a capability into a product.
+
+---
+
+## TL;DR
+
+- **RAG + system prompt is the design philosophy, not a feature.** Ground every answer in verified documents and constrain behavior through the system prompt. This is what turns a chatbot into a trusted tool.
+- **Build structured knowledge with a repeatable update methodology.** Monthly extraction, AI summarization, organized sync — treat the knowledge base as living infrastructure, not a one-time upload.
+- **Start with workflows, not technology.** Map the 5 most frequent tasks before writing any code.
+- **Design dual-track interaction** — structured queries for novices, free-form AI for power users, running in parallel.
+- **Organize knowledge bases by retrieval pattern**, not by source. Separate docs, support tickets, and review cases.
+- **Use MCP to bridge data silos** — build standardized interfaces between AI and your tools.
+- **Design skills around user tasks**, not AI capabilities.
+- **The engineering packaging (event routing, cards, pipelines, reliability) is at least half the work.**
