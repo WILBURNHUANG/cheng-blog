@@ -1,0 +1,69 @@
+---
+title: "Daily Tech & GNSS News Digest - May 22, 2026"
+description: "Nvidia posts $81.6B quarter as data center revenue doubles and Vera Rubin demand outruns supply, Google launches the always-on Gemini Spark agent at I/O, Anthropic eyes Microsoft's Maia chips, plus Starlink ends its 'pseudo-GPS' location service and Septentrio ships its ultra-resilient mosaic-G5 P8 module."
+date: 2026-05-22
+category: "News Digest"
+tags: ["Tech News", "GNSS", "Daily Digest", "AI", "Semiconductors", "Autonomous Vehicles"]
+hero: "/images/daily-digest.svg"
+draft: false
+---
+
+AI infrastructure spending showed no sign of cooling this week as Nvidia nearly doubled its data center business, Google moved the assistant wars into always-on agent territory with Gemini Spark, and Anthropic explored renting Microsoft's homegrown silicon — while in the positioning world, Starlink quietly shut down a location feature many had come to rely on as a GPS backup.
+
+## Tech News
+
+### Nvidia's Data Center Revenue Doubles as Vera Rubin Demand Outruns Supply
+
+Nvidia reported fiscal first-quarter revenue of **$81.62 billion**, up **85%** from **$44.06 billion** a year earlier, with its data center unit doubling to **$75.2 billion** — a stunning **92%** of total sales. The results, posted May 20, confirmed that AI infrastructure spending has not just held up but accelerated through the transition from the Blackwell generation to Nvidia's next rack-scale system, Vera Rubin.
+
+CEO Jensen Huang told analysts he expects Nvidia "will be constrained throughout the entire life of Vera Rubin," signaling that demand is running ahead of what the company can manufacture. Huang also highlighted the new Vera central processing unit as opening "a brand new **$200 billion** tab" for Nvidia, with the CFO guiding toward roughly **$20 billion** in total CPU revenue this year as the company pushes deeper into general-purpose data-center workloads.
+
+Despite the blowout report, Nvidia shares slipped after hours — a now-familiar pattern in which expectations have climbed so high that even a near-doubling of the data center business fails to clear the bar. The reaction underscores how much of the AI trade is already priced in, and how closely the market is watching for any sign that the buildout is peaking.
+
+### Google Launches Always-On Gemini Spark Agent at I/O 2026
+
+At Google I/O 2026 on May 19, Google introduced **Gemini Spark**, a personal AI agent that keeps running on Google's cloud infrastructure even after a user closes their laptop or locks their phone. Powered by Gemini 3.5, Spark can monitor a Gmail inbox, run scheduled workflows, and take actions across Workspace apps including Docs and Slides without the user being actively present.
+
+Spark runs on Google's Antigravity harness, which can spin up multiple sub-agents in parallel and handle long-running tasks. Rather than screen-reading pixel by pixel, it connects to Gmail, Docs, and Slides through structured API integrations — an approach Google argues makes the agent more predictable than rivals that navigate a desktop visually. Early integrations extend to Canva, OpenTable, and Instacart, with more partners promised in the coming weeks.
+
+For now, Spark is a US-only beta limited to Google AI Ultra subscribers at **$100 a month**. The launch is Google's clearest answer yet to the agent boom, moving the assistant beyond conversational responses toward genuinely autonomous, background task execution.
+
+### Anthropic in Early Talks to Rent Microsoft's AI Chips
+
+Anthropic is in early discussions to rent Microsoft's homegrown **Maia** AI server chips as the Claude maker scrambles to secure more computing power, The Information reported May 21. A deal would give Anthropic another way to run its Claude models beyond its existing reliance on Amazon's Trainium silicon and Google's TPUs.
+
+The talks remain preliminary and may not result in an agreement, but the discussions illustrate how aggressively leading AI labs are diversifying their compute supply. With Nvidia warning of constrained GPU availability through the entire Vera Rubin cycle, custom data-center silicon from cloud providers has become a strategic hedge — and a way for Microsoft to monetize chip programs that have so far trailed Amazon's and Google's.
+
+### Additional Headlines
+
+- **Samsung averts memory-chip strike**: Samsung reached a last-minute deal with its union — including profit-sharing and wage increases — heading off a walkout that could have disrupted memory production at a delicate moment for the AI supply chain.
+- **Randstad CEO downplays AI job apocalypse**: The staffing giant's chief executive told Bloomberg his base case is that AI will replace **7–8%** of jobs over the next five to ten years, adding he does not see the "doomsday scenario" some predict.
+- **NASA tests AI space chip**: NASA detailed a new radiation-tolerant AI processor designed to let spacecraft make navigation and science decisions onboard rather than waiting on round-trip communication with Earth.
+
+---
+
+## GNSS News
+
+### Starlink Ends Its "Pseudo-GPS" Location Service, Removing a Popular GNSS Backup
+
+Effective May 20, Starlink disabled the local gRPC location service that had let users query their dishes directly for highly accurate position data derived from the satellite constellation's orbital geometry. The feature, accessed through a local API on the terminal, had quietly become a favored fallback in regions where GNSS is unusable — one operator reported using it to navigate the Red Sea despite widespread interference, since the service was inherently resilient to the jamming and spoofing that plague GPS in the Black Sea and Middle East.
+
+SpaceX is shifting location data to an enterprise-facing Telemetry API that will likely require higher-tier subscriptions and proper authentication tokens. Inside GNSS reports the change has frustrated maritime, survey, and field users who had treated Starlink's "pseudo-GPS" as a free, jam-resistant complement to traditional receivers. Possible motivations range from liability concerns over variable accuracy to preventing misuse by bad actors — or laying groundwork for a paid positioning product.
+
+The episode is a reminder that GNSS resilience increasingly depends on diverse, independent signal sources, and that consumer-grade backups can disappear without notice. It lands amid a broader surge in interference: the Secure World Foundation's 2026 Global Counterspace Capabilities report found GNSS jamming has become "a constant of modern conflict," documenting Starlink terminals themselves being GPS-spoofed during unrest in Iran with packet losses of **30–80%**.
+
+### Septentrio Ships Ultra-Resilient mosaic-G5 P8 for Contested Environments
+
+Septentrio, part of Hexagon, announced the mosaic-G5 P8, a multi-frequency GNSS module built specifically for operation in contested environments. Measuring just **23 mm by 16 mm** and weighing **2.2 grams**, the receiver targets mission-critical devices, UAVs, marine vessels, and rail applications where positioning integrity cannot be compromised.
+
+The module's AIM+ Ultimate technology is designed to protect the receiver from powerful and sophisticated jamming and spoofing attacks — directly addressing the threat environment highlighted by the Starlink shutdown and the SWF interference report. The P8 joins the recently launched mosaic-G5 P6, a same-size module aimed at high-precision UAS and robotics, giving Septentrio a tiered family of compact receivers for size- and power-constrained autonomous platforms.
+
+The launches reflect a wider industry pivot toward anti-jam, anti-spoof hardware. u-blox this month also unveiled the ZED-X20P-01B, which adds global Precise Point Positioning and native support for the Galileo High Accuracy Service, enabling decimeter-level accuracy without dependence on local RTK infrastructure — another route to resilient positioning as correction networks and signal availability come under strain.
+
+---
+
+## Key Takeaways
+
+- **The AI buildout is still accelerating, not peaking**: Nvidia doubling data center revenue and warning of supply constraints through the entire Vera Rubin cycle — paired with Anthropic shopping for Microsoft's Maia chips — shows demand for AI compute remains the dominant force in tech, even as investors grow harder to impress.
+- **Agents are moving from chat to autonomy**: Google's always-on Gemini Spark, running tasks in the cloud while devices are off, marks a shift from assistants that respond to ones that act independently in the background across a user's apps.
+- **GNSS resilience can't rely on convenient backups**: Starlink's abrupt removal of its jam-resistant location service — just as anti-spoofing modules like Septentrio's mosaic-G5 P8 reach market — underscores that durable positioning depends on diverse, purpose-built signal sources rather than informal stopgaps.
