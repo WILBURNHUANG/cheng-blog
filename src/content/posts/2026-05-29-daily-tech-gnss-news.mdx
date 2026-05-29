@@ -1,0 +1,66 @@
+---
+title: "Daily Tech & GNSS News Digest - May 29, 2026"
+description: "Anthropic raises $65 billion at a $965 billion valuation and eclipses OpenAI while Apollo and Blackstone line up a separate $36 billion debt deal to buy Google TPUs, Marvell prints record AI silicon revenue, and FocalPoint's Precise+ delivers sub-meter GNSS accuracy under canopy without sensor fusion."
+date: 2026-05-29
+category: "News Digest"
+tags: ["Tech News", "GNSS", "Daily Digest", "AI", "Semiconductors", "PNT", "RTK", "PPP"]
+hero: "/images/daily-digest.svg"
+draft: false
+---
+
+The AI capital stack widened on every dimension this week — Anthropic became the most valuable private AI company on the planet, Apollo and Blackstone shopped a record chip-financing debt deal to bankroll its Google TPU buildout, and Marvell turned its custom silicon book into a fresh quarter of record revenue. On the positioning side, FocalPoint pushed Supercorrelation into the carrier-phase domain and the House Armed Services Committee moved to install a dedicated Pentagon official over the entire PNT enterprise.
+
+## Tech News
+
+### Anthropic Closes $65 Billion at $965 Billion, Tops OpenAI as Apollo and Blackstone Shop $36 Billion TPU Debt Deal
+
+Anthropic announced on May 28 that it had closed a **$65 billion** Series H at a **$965 billion** post-money valuation — eclipsing OpenAI's **$852 billion** March mark and making Anthropic, for the first time, the most valuable AI company in the world. The round was co-led by Altimeter, Dragoneer, Greenoaks, Sequoia, Capital Group, Coatue, and D1, with Baillie Gifford, Blackstone, Brookfield, D.E. Shaw Ventures, DST Global, and Fidelity joining alongside strategic infrastructure partners Samsung, SK Hynix, and Micron. Anthropic said run-rate revenue crossed **$47 billion** earlier this month and signaled that this is likely its last private round before an IPO.
+
+Running in parallel, Bloomberg reported the same day that Apollo Global Management and Blackstone are syndicating a **$36 billion** debt financing earmarked specifically to buy Google's custom TPUs, which Anthropic will then lease — the largest chip-financing transaction ever attempted and one of the biggest private credit deals on record. Broadcom, which co-designs the TPUs with Google, is backstopping payments on the senior portions of the structure. The financing operationalizes the **3.5-gigawatt** TPU compute pact Anthropic struck with Google and Broadcom in April, with deployments slated to scale from **2027**.
+
+Stacked together, the two transactions reveal how the AI infrastructure trade is being financed: equity capital sets the valuation ceiling, but the actual silicon — increasingly custom rather than merchant — is being funded through private credit collateralized by the chips themselves. That model has now spread from data-center real estate and GPU leasing into accelerator silicon, with Broadcom-backed TPUs as the first major test case.
+
+### AMD Pours $10 Billion Into Taiwan, Ramps EPYC Venice on TSMC 2nm
+
+AMD continued to push deeper into Taiwan, confirming earlier this month that it is investing more than **$10 billion** across the island's chip ecosystem and partnering with ASE, SPIL, PTI, Sanmina, Wiwynn, Wistron, and Inventec to expand advanced packaging capacity for next-generation AI infrastructure. The headline product: AMD has begun production ramp of its sixth-generation EPYC "Venice" CPU on **TSMC's 2-nanometer** node — the first high-performance computing product to enter production on that node — with a follow-on "Verano" design integrating **LPDDR** memory aimed squarely at memory-hungry AI workloads.
+
+The move tightens AMD's grip on the leading-edge process queue that Apple, Nvidia, and the hyperscalers are all racing toward, and it lands as Computex 2026 opens in Taipei on June 2. Nvidia CEO Jensen Huang will deliver the GTC Taipei keynote at 11 a.m. local time on June 1 — Sunday evening Pacific — where Nvidia is expected to detail its **Vera Rubin** architecture, **DLSS 5** neural rendering, and custom MediaTek-built Arm AI chips alongside its broader "five-layer cake" stack from energy through applications.
+
+### Marvell Posts Record $2.42 Billion Quarter on Custom AI Silicon
+
+Marvell Technology reported Q1 FY27 net revenue of **$2.418 billion** on May 28 — a record, up **28%** year over year — with non-GAAP diluted EPS of **$0.80** and Q2 guidance of **$2.7 billion** at the midpoint, implying **35%** year-over-year growth. Custom silicon revenue, which crossed **$1.5 billion** in fiscal 2026, is now guided to grow **20%+** in FY27 as XPU programs for large U.S. hyperscalers ramp and the company locks in **3nm** wafer and packaging capacity for a next-generation program targeted to enter production this year.
+
+Marvell's print rounds out a remarkably uniform earnings season for AI silicon: Nvidia at the merchant accelerator layer, Dell and Super Micro at the system layer, and now Marvell and Broadcom at the custom-XPU and networking layer all delivered records in the same week. Together with the Anthropic-TPU debt deal and AMD's Venice ramp, the read-through is unambiguous — the AI infrastructure cycle has decisively broadened from a single-vendor merchant-GPU story into a multi-vendor, multi-architecture buildout where custom silicon is the marginal capacity.
+
+### Additional Headlines
+
+- **Qualcomm deepens Stellantis tie-up**: Qualcomm announced an expansion of its Stellantis relationship to deploy Snapdragon Digital Chassis across automated-driving and infotainment stacks, helping push Qualcomm's automotive revenue to **$1.33 billion** in fiscal Q2 — up **38%** year over year.
+- **Mistral plans €4 billion European AI buildout**: France's Mistral disclosed a new **10-megawatt** data center in Les Ulis opening in the second half of 2026 as part of a broader **€4 billion** investment plan, positioning Mistral as the anchor of Europe's push to reduce dependence on U.S. AI infrastructure.
+- **ByteDance pushes custom CPUs**: TikTok parent ByteDance is developing its own server CPUs to cut reliance on foreign suppliers, the latest Chinese hyperscaler to follow Alibaba and Baidu into in-house silicon as U.S. export controls continue to bite.
+- **SiPearl–Semidynamics build sovereign EU rack**: France's SiPearl and Spain's Semidynamics announced a partnership to build one of the first European sovereign rack-scale AI platforms, bolting Semidynamics' RISC-V cores onto SiPearl's HPC fabric for EuroHPC-aligned deployments.
+
+---
+
+## GNSS News
+
+### FocalPoint's Precise+ Hits 80 cm at Thetford Forest Without Sensor Fusion
+
+UK-based FocalPoint Positioning unveiled **Precise+** at the European Navigation Conference in Vienna, extending its patented Supercorrelation platform from code-phase into the **carrier-phase** domain — the layer where RTK and PPP receivers normally lose lock. The headline result: in standardized testing at **Thetford Forest**, a reference dense-foliage environment for GNSS receivers, Precise+ achieved **80 cm** accuracy at the **99th percentile**, against errors of **more than 3 meters** for state-of-the-art receivers in the same conditions.
+
+What makes the number interesting is what is *not* in the stack. The result was generated using receiver-level processing only — no inertial measurement unit, no dead reckoning, no sensor fusion, and no external RTK or PPP correction stream. By suppressing the cycle slips that normally collapse carrier-phase tracking under canopy, in urban canyons, and in multipath, Precise+ effectively buys back a class of environments that previously demanded a full INS-aided receiver. FocalPoint emphasized that the technique stacks on top of conventional aiding — fusing Precise+ with an IMU and PPP corrections should compound rather than substitute.
+
+The launch fits a broader pattern this month at ENC and at XPONENTIAL 2026 in Detroit, where assured PNT has become the recurring through-line: rather than betting on any single replacement for vulnerable GNSS, the market is converging on layered stacks — software-defined GNSS, hardened correlators, jam-aware receivers, low-SWaP inertial, and emerging LEO-PNT — coupled tightly enough that a failure in any one layer degrades gracefully instead of dropping the platform.
+
+### NDAA 2027 Mark Would Install a Pentagon PNT Czar
+
+The House Armed Services Committee's chairman's mark of the FY27 National Defense Authorization Act, released on May 26, includes language directing the Defense Department to designate a single senior official with cross-service responsibility for the entire PNT enterprise — covering GPS, alternative-PNT programs, and the integration of commercial and allied capabilities. The provision is a direct response to the structural fragmentation that has dogged DoD's PNT modernization push for years, with M-code, Resilient GPS, Loran-class terrestrial backups, and various alt-PNT pilots spread across the Space Force, Army, Navy, and OSD.
+
+The proposed designation matches the direction allied partners have already taken — the UK's eLoran award to Team Elaris and France's similar terrestrial-PNT trials have all rolled up to single-point ownership inside their respective defense ministries. If the language survives conference, it would mark the first time the Pentagon's full PNT stack — satellite, terrestrial, inertial, and commercial — sits under one accountable office.
+
+---
+
+## Key Takeaways
+
+- **AI capital is now financed in two layers, and both are scaling at once**: Anthropic's $65 billion equity round at a $965 billion valuation and Apollo–Blackstone's parallel $36 billion TPU-collateralized debt deal show how AI compute is increasingly funded by stacking equity for option value with private credit for actual silicon — a financing pattern that is unlikely to reverse while accelerator demand outpaces supply.
+- **Custom silicon has become the marginal AI capacity**: AMD's Venice ramp on TSMC 2nm, Marvell's record custom-XPU quarter, and Broadcom's TPU backstop for Anthropic all point the same direction — merchant GPUs no longer set the ceiling on AI buildout; custom accelerators are now the limiting and lucrative middle layer of the stack.
+- **Resilient PNT is becoming a layered architecture, not a single fix**: FocalPoint's carrier-phase Supercorrelation result and the NDAA's move to consolidate PNT ownership both reinforce that the future of assured navigation is a tightly coupled stack of software-defined GNSS, terrestrial signals, inertial sensors, and LEO-PNT under unified governance — not a single replacement for GPS.
