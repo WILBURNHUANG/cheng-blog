@@ -1,0 +1,66 @@
+---
+title: "Daily Tech & GNSS News Digest - June 1, 2026"
+description: "Nvidia ships Vera Rubin into full production and unveils the RTX Spark AI PC chip at GTC Taipei, US data center construction tops $50 billion for the first time, and u-blox's new ZED-X20P-01B brings global PPP and Galileo HAS to a single all-band module."
+date: 2026-06-01
+category: "News Digest"
+tags: ["Tech News", "GNSS", "Daily Digest", "AI", "Semiconductors", "PPP", "Galileo HAS"]
+hero: "/images/daily-digest.svg"
+draft: false
+---
+
+Computex Monday in Taipei doubled as the official opening of the Agentic AI era — Nvidia put Vera Rubin into full production, introduced its first standalone data-center CPU, and pushed Blackwell down into the AI PC. Behind the keynote, US data-center construction spending blew past **$50 billion** in a single month for the first time. On the positioning side, u-blox dropped a single-chip combination that until recently required a full receiver stack: global PPP plus native Galileo HAS in one module.
+
+## Tech News
+
+### Nvidia Ramps Vera Rubin Into Production, Unveils Vera CPU and RTX Spark at GTC Taipei
+
+Jensen Huang opened GTC Taipei at Computex 2026 on the morning of June 1 by confirming that the **Vera Rubin** platform — what Nvidia calls "the most ambitious endeavor in the history of the company" — is now in full production and ramping to power agentic AI factories worldwide. The headline reference system, the **Vera Rubin NVL72**, is a five-rack AI factory combining Vera CPUs, Rubin GPUs, NVLink switches, and Spectrum-X Ethernet Photonics that Nvidia rates at **10× higher inference performance per watt** and **10× lower cost per token** than the prior generation. Named customers for the Vera CPU include Anthropic, OpenAI, Oracle, CoreWeave, and Nebius, with CoreWeave, Lambda, and Oracle Cloud Infrastructure adopting Nvidia's new co-packaged optics networking.
+
+Two other launches expanded the stack at both ends. **Vera** itself is Nvidia's first standalone data-center CPU — an **88-core** processor with **1.2 TB/s** of LPDDR5X bandwidth, **10 instructions per clock**, and what Nvidia claims is "world-class single-thread performance" — pitched as up to **1.8×** faster than legacy x86 in agentic workloads. At the opposite end of the spectrum, the new **RTX Spark** brings a **1 petaflop** AI personal chip to Windows laptops and desktops, pairing a Blackwell RTX GPU with **6,144 CUDA cores** and a custom **20-core** Grace CPU — Nvidia's most direct shot yet at the AI PC market staked out by Apple Silicon, Intel Lunar Lake, and Qualcomm's Snapdragon X.
+
+Beyond silicon, Huang used the keynote to formalize Nvidia's physical-AI push. Cosmos 3, a new world foundation model for physical-AI understanding and simulation, anchors the platform, while **Alpamayo 2 Super** ships as an open end-to-end autonomous-vehicle reasoning model and **Jetson Thor** delivers **7.5×** the edge compute of its predecessor. Nvidia also announced collaborations with humanoid-robot makers in the US, Europe, and South Korea, with an initial reference platform that bolts Unitree's H2 body and hands from Singapore's Sharpa onto Blackwell-class compute.
+
+### Washington Tightens the Rubin-Blackwell Export Net
+
+The US Department of Commerce moved on June 1 to close a year-old loophole that had let Chinese-affiliated entities source Nvidia's most advanced **Rubin** and **Blackwell** silicon through subsidiaries and procurement vehicles registered outside mainland China. The Bureau of Industry and Security said the update would require licensing review for the most advanced AI chip categories regardless of whether the recipient is incorporated inside China — a structural fix aimed at the shell-company workaround that has dominated enforcement complaints since the original October 2023 controls.
+
+The timing — the same morning as Nvidia's GTC Taipei keynote — is unlikely to be coincidental: Nvidia spent much of the past 18 months arguing that bright-line export rules were preferable to the case-by-case licensing chill that has affected H20 and H200 shipments. Whether the new rules trigger another round of Chinese hyperscaler workarounds will likely depend on enforcement against intermediaries in Singapore, Malaysia, and the UAE, where most of the diversion is alleged to occur.
+
+### US Data Center Construction Spending Eclipses $50 Billion in a Month
+
+Spending on US data-center construction crossed **$50 billion** in April for the first time, according to Census Bureau figures released June 1 — a record that also marked the first month in which private data-center outlays exceeded public spending on transportation infrastructure, the category covering airports, marine terminals, and mass transit. The print confirms what hyperscaler capex guidance and Anthropic's $36 billion Apollo–Blackstone TPU debt deal already signaled: the AI buildout has become a meaningful share of overall US fixed investment.
+
+The Bloomberg report frames the milestone as a turning point in the composition of US industrial spending, with data centers now structurally competing with transportation, manufacturing, and power generation for skilled labor, switchgear, and grid interconnect queues. Power remains the binding constraint — multiple analysts cited in the piece flagged that nameplate construction starts are running well ahead of confirmed substation availability, an imbalance that is showing up in record gas-turbine backlogs and lengthening interconnect wait times across PJM and ERCOT.
+
+### Additional Headlines
+
+- **Vast joins China's AI unicorn list**: Beijing-based 3D-model startup Vast — founded by a 29-year-old gamer — raised nearly **$200 million** at a **$1 billion** valuation, led by Ince Capital and a China Life Insurance-backed venture fund, the latest Chinese generative-AI company to cross the unicorn line.
+- **Goldman's profitless-tech basket up 57% YTD**: A Goldman Sachs basket of unprofitable technology stocks climbed **27%** in May alone — beating the Nasdaq 100 by **17 percentage points** for its strongest outperformance since November 2020 — putting the cohort up **57%** year to date and prompting Wall Street warnings about late-cycle risk.
+- **Nvidia courts Korea Inc. in Taipei**: Nvidia hosted Samsung, SK Hynix, and Hyundai executives at a Taipei dinner on the eve of the keynote, deepening the Korean memory and automotive supply alignment that already underpins HBM4 capacity for Rubin.
+- **Bloomberg-tracked AI-driven home computing push**: Semafor reports Nvidia positioned RTX Spark explicitly as the substrate for "AI supercomputers in your house, running agents and assistants" — the strongest signal yet that Nvidia views the agent-PC transition, not GPU upgrades, as the next consumer growth vector.
+
+---
+
+## GNSS News
+
+### u-blox ZED-X20P-01B Combines Global PPP and Galileo HAS in a Single Module
+
+u-blox unveiled the **ZED-X20P-01B**, a new variant of its ZED-X20P all-band GNSS module that adds two correction services in one package: u-blox's own **global PPP** (delivered through PointPerfect) and native support for **Galileo HAS**, the European Commission's free, satellite-broadcast high-accuracy service. The combination is what makes the launch notable — until recently, getting decimeter-level absolute positioning without local RTK infrastructure meant either subscribing to a commercial PPP service or relying on Galileo HAS as a standalone source, but rarely both inside the same module form factor.
+
+The target applications cluster around environments where RTK is impractical: UAV mapping, dredging and seabed survey, precision agriculture in remote fields, and autonomous platforms operating beyond the reach of cellular NTRIP. The module retains the established ZED footprint so existing integrators can drop it into current designs as a hardware upgrade, and u-blox flagged that the part was independently validated for jamming and spoofing detection at **Jammertest 2025**. Samples and evaluation kits are shipping in June, with a public demonstration on the floor at **XPONENTIAL 2026** in Detroit.
+
+The ZED-X20P-01B sits at a useful inflection point for the industry. Galileo HAS reached full operational capability earlier this year and is now broadcasting **20 cm** horizontal corrections globally at no cost, while commercial PPP services have steadily improved convergence times. Combining both inside a single receiver lets integrators arbitrate between them — Galileo HAS as the always-available, free baseline, and commercial PPP for tighter convergence or higher integrity — without redesigning around a second module or correction interface.
+
+### TRX Systems Brings DAPS GEN II to JNC 2026 With Multi-Layer Assured PNT
+
+TRX Systems is showcasing a mounted variant of its **Dismounted Assured PNT System (DAPS) GEN II** at the **Joint Navigation Conference** in Northern Kentucky from June 1 to 4, expanding the platform from soldier-worn use into vehicles and uncrewed ground systems. DAPS GEN II uses multi-layer sensor fusion across diverse positioning and timing sources — M-code GPS, inertial, vision, and alternative RF — to maintain navigation continuity in **GPS-degraded, jammed, or denied** environments.
+
+The release frames the design philosophy explicitly: electronic warfare has converted jamming, spoofing, meaconing, and sustained RF pressure into the baseline operating condition, not an edge case. That mirrors the architecture direction reflected in last week's NDAA mark calling for a single Pentagon PNT overseer — assured navigation is moving away from any single "GPS replacement" and toward tightly coupled stacks where every layer is assumed compromised some of the time and the system has to degrade gracefully through the others.
+
+---
+
+## Key Takeaways
+
+- **Agentic AI is being shipped, not promised**: Nvidia's Vera Rubin moving to full production, the launch of a standalone Vera CPU optimized for agent workloads, and the petaflop-class RTX Spark for AI PCs together mark the transition from the GPU-accelerated training era to a multi-tier compute stack purpose-built for long-horizon agent inference.
+- **AI capex is now a structural share of US fixed investment**: April's record **$50 billion+** in data-center construction — the first month it outranked transportation infrastructure — pairs with parallel debt and equity raises to show that AI-driven build is shifting the composition of US industrial spending, with power interconnect now the binding constraint rather than capital.
+- **Sub-meter positioning is collapsing into a single chip**: u-blox combining global PPP and Galileo HAS in one module — alongside DAPS GEN II's layered assured-PNT approach — is the receiver-side counterpart to last week's FocalPoint and NDAA stories: precise, resilient positioning is becoming the default capability of mainstream GNSS silicon rather than a premium add-on.
