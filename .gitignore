@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 .vercel
 firebase-debug.log
+
+# Claude Code temporary worktrees
+.claude/worktrees/
