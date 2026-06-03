@@ -1,0 +1,65 @@
+---
+title: "Daily Tech & GNSS News Digest - June 3, 2026"
+description: "Chipmakers and software stocks post their widest divergence on record as Broadcom heads into earnings, Qualcomm lands ByteDance for millions of custom AI chips, and Nvidia pushes into the PC. On the positioning side, VectorNav taps Low Earth Orbit signals to harden inertial navigation against GPS jamming."
+date: 2026-06-03
+category: "News Digest"
+tags: ["Tech News", "GNSS", "Daily Digest", "AI", "Semiconductors", "Autonomous Vehicles", "INS", "LEO"]
+hero: "/images/daily-digest.svg"
+draft: false
+---
+
+The market is drawing a sharp line through the AI trade: silicon is winning and software is paying for it. Chipmakers and software shares posted their largest one-day divergence on record Tuesday, and the catalysts keep coming — Broadcom reports earnings after the bell today with AI revenue guided to **$10.7 billion**, Qualcomm has reportedly landed ByteDance for millions of custom accelerators, and STMicroelectronics just doubled its data-center revenue forecast. On the positioning side, VectorNav is now using Low Earth Orbit satellite signals to aid its inertial systems — a hedge against the GPS jamming that increasingly defines real-world navigation.
+
+## Tech News
+
+### Chip Stocks Rip, Software Sinks — and Broadcom Heads Into Earnings as the Tell
+
+The AI rally is bifurcating. On Tuesday the Philadelphia Stock Exchange Semiconductor Index jumped **4.5%** while the iShares Expanded Tech-Software Sector ETF fell **4%** — an **8.4 percentage-point** gap that is the widest single-day divergence between chipmakers and software shares on record, according to Bloomberg data going back more than four years. The message from investors is blunt: in the current phase of the buildout, the value is accruing to whoever sells the compute, not whoever rents it.
+
+Broadcom steps into that narrative after the close today with its fiscal Q2 report, and it has become arguably the most important AI print of the quarter outside of Nvidia. Management guided to **$10.7 billion** in AI semiconductor revenue, which would mark roughly **140%** year-over-year growth, after AI revenue hit **$8.4 billion** (up 106%) in the prior quarter. Custom accelerators — the ASICs Broadcom co-designs with hyperscalers — are the single biggest line item investors will scrutinize, though the company has flagged that about **40%** of AI revenue this quarter will come from networking silicon rather than the chips themselves.
+
+That networking-versus-compute split is the subtext of the whole tape. As clusters scale into the hundreds of thousands of accelerators, the bottleneck migrates from the processor to the fabric connecting them — which is precisely why Broadcom's results will be read as a verdict on the durability of the entire data-center spend cycle.
+
+### Qualcomm Lands ByteDance for Millions of Custom AI Chips
+
+Qualcomm has reached a deal to supply TikTok owner ByteDance with millions of custom AI accelerators for its data centers, Bloomberg reports — sending Qualcomm shares up roughly **8%** and marking one of the company's first major wins outside its smartphone stronghold. The agreement covers ASICs purpose-built to run ByteDance's AI agent software, and notably has Qualcomm helping take a chip design ByteDance had already completed in-house all the way into full production.
+
+The economics behind the deal are striking: ByteDance lifted its 2026 AI infrastructure budget by **25%** to **200 billion yuan** (about **$29.4 billion**), and is increasingly steering that spend toward custom silicon as U.S. export controls limit access to advanced Nvidia GPUs. The reported transaction appears to stay within current export thresholds, giving Qualcomm a foothold in Chinese data-center demand without tripping Washington's performance caps. CEO Cristiano Amon is expected to lay out a full data-center roadmap at Qualcomm's June 24 Investor Day in New York.
+
+### Nvidia Pushes Down the Stack Into the PC
+
+Nvidia used Computex to extend its reach beyond the data center, introducing a new "superchip" aimed at AI-agent workloads running locally on laptops and desktops, with launch partners including Dell, HP, and Microsoft. The move is a direct bid to own every layer of the AI stack — from hyperscale training clusters down to the device on your desk — and challenges Intel and AMD on their home turf in client computing.
+
+The push lands alongside a broader signal that the supply story is real, not speculative: STMicroelectronics nearly **doubled** its forecast for data-center revenue to **$1 billion** this year, up from a prior target above $500 million, citing booming demand for AI infrastructure components.
+
+### Additional Headlines
+
+- **Alphabet upsizes its raise to $84.75B**: A day after announcing an $80 billion equity offering, Alphabet confirmed it lifted the total to **$84.75 billion** — partly to absorb demand that might otherwise flow to the pending OpenAI and Anthropic IPOs.
+- **Anthropic's S-1 hits the SEC**: Anthropic confidentially filed its IPO prospectus on June 1, with a reported **$47 billion** revenue run-rate and a fresh **$965 billion** private valuation, getting ahead of rival OpenAI's own filing.
+- **Marvell extends its run**: Marvell shares continued a sharp climb after Nvidia's CEO publicly endorsed the company's custom-silicon roadmap, deepening the market's rotation into AI infrastructure names.
+- **Intel up ~250% in 2026**: Intel traded near **$130**, a roughly 250% gain over five months, buoyed by a mid-May foundry agreement with Apple.
+- **C3.ai reports Q4**: Enterprise AI vendor C3.ai posts fiscal Q4 results today, a smaller but watched read on whether application-layer AI demand can keep pace with infrastructure spend.
+
+---
+
+## GNSS News
+
+### VectorNav Taps LEO Signals to Harden Inertial Navigation Against Jamming
+
+VectorNav Technologies announced June 2 that it has added Low Earth Orbit satellite signals as an aiding source for its inertial navigation systems — a meaningful step toward resilient positioning in the GPS-degraded environments that now define everything from contested airspace to dense urban canyons. LEO constellations transmit at far higher power than traditional medium-Earth-orbit GNSS satellites and change geometry quickly, making their signals both harder to jam and useful for rapidly bounding the drift that accumulates in an unaided inertial measurement unit.
+
+The capability is shipping first as a development kit built around the **VN-210E** GNSS-aided INS, with broader support across VectorNav's Tactical Series available on request. The architecture matters: rather than treating LEO as a standalone fix, VectorNav fuses it as one more constraint inside the navigation filter alongside GNSS and the IMU — so when the primary GPS signal is spoofed or denied, the system degrades gracefully instead of going blind. That fusion-first approach is becoming the default design pattern for autonomous platforms, defense payloads, and any application where a clean sky view cannot be assumed.
+
+### Septentrio and Trimble Extend High-Precision Lines for Robotics and Drones
+
+Two of the industry's heavyweights pushed new positioning hardware into the autonomy market. Septentrio launched the **mosaic-G5 P6**, a multi-frequency precise-positioning module extending its compact mosaic receiver family and aimed squarely at commercial UAV, robotics, and industrial-automation integrators. The company also continues to promote its **AsteRx EB** board, which in a dual-antenna configuration delivers sub-degree GNSS heading on top of RTK positioning — orientation being a hard requirement for port logistics, marine, and mobile-robot platforms that need to know which way they are pointing, not just where they are.
+
+Trimble, meanwhile, introduced a smart-antenna enclosure option for its **PX-1 RTX** positioning solution, targeting commercial drone-delivery integrators looking to compress development timelines. Bundling the antenna, receiver, and Trimble's RTX correction service into a ready-to-mount package reflects a broader market shift: integrators increasingly want positioning delivered as a turnkey module so they can focus engineering effort on autonomy and payload rather than RF design. Underscoring the strategic stakes, the FY2027 defense authorization markup released in late May would create a dedicated Pentagon official to oversee positioning, navigation, and timing — including alternative-PNT programs beyond GPS itself.
+
+---
+
+## Key Takeaways
+
+- **Compute is eating the AI trade**: A record divergence between chip and software stocks, Broadcom's earnings, and the Qualcomm-ByteDance deal all point to value concentrating in silicon and networking over the application layer.
+- **Custom silicon is the new battleground**: From ByteDance's in-house ASICs to Broadcom's hyperscaler accelerators, the most consequential AI chips are now co-designed by buyers, not bought off the shelf.
+- **Resilient PNT goes mainstream**: VectorNav's LEO-aided inertial navigation and a proposed Pentagon PNT czar both signal that assured positioning — not just precise positioning — is now the organizing problem for the GNSS industry.
