@@ -112,11 +112,19 @@ def send_email(
     msg.attach(text_part)
 
     # HTML version (basic formatting)
-    html_body = body.replace('\n', '<br>\n')
+    html_body = body
+    # Bold
     html_body = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', html_body)
-    html_body = re.sub(r'# (.+?)<br>', r'<h1>\1</h1>', html_body)
-    html_body = re.sub(r'## (.+?)<br>', r'<h2>\1</h2>', html_body)
-    html_body = f"<html><body style='font-family: sans-serif;'>{html_body}</body></html>"
+    # Headings — handle '##' before '#', anchored to the start of a line.
+    # (The previous version's '# ...' rule matched the second '#' of a '## '
+    # heading, leaving a stray '#' like "#<h1>Key Takeaways</h1>".)
+    html_body = re.sub(r'(?m)^## (.+)$', r'<h2>\1</h2>', html_body)
+    html_body = re.sub(r'(?m)^# (.+)$', r'<h1>\1</h1>', html_body)
+    # Horizontal rules
+    html_body = re.sub(r'(?m)^---$', r'<hr>', html_body)
+    # Remaining newlines -> line breaks
+    html_body = html_body.replace('\n', '<br>\n')
+    html_body = f"<html><body style='font-family: sans-serif; line-height: 1.5;'>{html_body}</body></html>"
     html_part = MIMEText(html_body, 'html')
     msg.attach(html_part)
 
