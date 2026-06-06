@@ -8,25 +8,25 @@ hero: "/images/pnt-pulse/hero.svg"
 draft: false
 ---
 
-Welcome to the May issue of **PNT Pulse** — my monthly read on where positioning, navigation & timing is actually heading, tying the month's GNSS / PNT and Earth-observation news back to the EUSPA market framework and telling you the "so what." Three standing sections: automotive & AI navigation, space & defense PNT, and a rotating roundup of everything else.
+**PNT Pulse** is my monthly read on where positioning, navigation & timing is actually heading — the signal beneath the press releases. Each issue gathers the month's most consequential GNSS, PNT and Earth-observation news, places each story against the wider market and its value chain, and draws out the "so what" you can actually use. Same running order every time so you can skim: automotive & AI navigation first, then space (LEO-PNT) & defense PNT, then a rotating roundup of every other sector.
 
 **The 60-second version:** May's headline is a paradox. The U.S. finished building the most capable GPS constellation ever — the last **GPS III** satellite is on orbit, with M-code that's **8× harder to jam** — and in the same breath Congress is fighting to bring back **Resilient GPS**, the cheaper-satellite backup plan the Space Force tried to kill. On the commercial side, Mobileye lined up robotaxis in six cities, u-blox shipped automotive GNSS brains built for safety-critical autonomy, and ICEYE turned a radar constellation into a sovereign-intelligence business. One number to sit with: **8×**. We made the signal far tougher this month — and still spent the month arguing about whether "tougher" is enough.
 
 ## 🚗 Automotive, AI & End-to-End Navigation
 
-**Mobileye stopped talking robotaxis and started staging them.** Its eye-off, driverless platform (Mobileye Drive) now has **100+ VW ID.Buzz** vehicles validating on public roads across **six cities** — LA, Austin, Orlando, Munich, Berlin, Hamburg — with VW/MOIA picking Orlando as the first commercial driverless launch and pre-series production kicked off in Hanover ([Mobileye 8-K](https://www.sec.gov/Archives/edgar/data/0001910139/000110465926047231/tm2612233d1_ex99-1.htm)). It also landed a third Surround-ADAS customer (Mahindra) and agreed to buy **Mentee Robotics** to push into "Physical AI" — humanoids and AVs sharing one perception brain.
+**Mobileye stopped talking robotaxis and started staging them.** Its eye-off, driverless platform (Mobileye Drive) now has **100+ VW ID.Buzz** vehicles validating on public roads across **six cities** — LA, Austin, Orlando, Munich, Berlin, Hamburg — with VW/MOIA picking Orlando as the first commercial driverless launch and pre-series production kicked off in Hanover.<sup>1</sup> It also landed a third Surround-ADAS customer (Mahindra) and agreed to buy **Mentee Robotics** to push into "Physical AI" — humanoids and AVs sharing one perception brain.
 
 The "so what" for PNT: a robotaxi running an eye-off stack treats GNSS as a *coarse prior and a geofence anchor*, not the steering signal. The fix has to be trustworthy enough to bound the problem, but the heavy lifting is perception. Absolute positioning's job is shifting from "where exactly am I" to "am I allowed to operate here, and can I trust this fix."
 
-**u-blox shipped the brains for that world.** It expanded its automotive line with the **ZED-X20K** and **ZED-A20K** — one tuned for mass-market ADAS, one for safety-critical autonomous architectures ([GPS World](https://www.gpsworld.com/u-blox-expands-auto-gnss-portfolio-enabling-adas-increasing-safety/)). This is the component stage quietly productizing "functional-safety GNSS": modules designed to fail loudly and predictably, which is exactly what an autonomy stack needs from its position prior.
+**u-blox shipped the brains for that world.** It expanded its automotive line with the **ZED-X20K** and **ZED-A20K** — one tuned for mass-market ADAS, one for safety-critical autonomous architectures.<sup>2</sup> This is the component stage quietly productizing "functional-safety GNSS": modules designed to fail loudly and predictably, which is exactly what an autonomy stack needs from its position prior.
 
 > **Anchor:** Road & Automotive + Consumer Solutions = **>90%** of cumulative 2023–2033 GNSS revenue (EUSPA EO and GNSS Market Report, Issue 2, © EUSPA 2024). When the chip vendors add safety-grade parts here, they're aiming at the fattest part of the market.
 
 ## 🛰️ Space (LEO-PNT) & Defense PNT
 
-**GPS III is finished — and that's exactly why the fight started.** A Falcon 9 carried the tenth and final GPS III satellite (SV-10) to orbit on April 19, and the Space Force declared the constellation complete; every GPS III carries M-code, advertised as **3× more accurate and 8× more jam-resistant** than the legacy fleet ([Space Systems Command](https://www.ssc.spaceforce.mil/Newsroom/Article-Display/Article/4465444/us-space-force-delivers-final-gps-iii-to-orbit-advancing-its-most-resilient-con)). Lockheed Martin also took a contract worth up to **$105M** to keep modernizing the GPS ground control network toward the M-code-heavy GPS IIIF birds ([GPS World](https://www.gpsworld.com/lockheed-martin-secures-105m-contract-for-gps-iiif-operations/)).
+**GPS III is finished — and that's exactly why the fight started.** A Falcon 9 carried the tenth and final GPS III satellite (SV-10) to orbit on April 19, and the Space Force declared the constellation complete; every GPS III carries M-code, advertised as **3× more accurate and 8× more jam-resistant** than the legacy fleet.<sup>3</sup> Lockheed Martin also took a contract worth up to **$105M** to keep modernizing the GPS ground control network toward the M-code-heavy GPS IIIF birds.<sup>4</sup>
 
-Here's the tension. The Space Force's FY2026 budget **defunded Resilient GPS (R-GPS)** — the program to add a layer of small, cheap satellites to harden PNT — cancelling it at the end of its design phase, and lawmakers spent May pushing to revive it ([SpaceNews](https://spacenews.com/space-force-may-be-done-with-r-gps-but-congress-isnt/), [Breaking Defense](https://breakingdefense.com/2026/01/as-space-force-wraps-up-gps-iii-launches-worried-lawmakers-push-for-more-anti-jam-capability/)). The strategic read: a perfect 31-satellite MEO constellation is still 31 faint signals from 20,000 km up. Making each signal 8× tougher is real, but it doesn't change the *architecture* — and that's the gap commercial LEO-PNT (last month's Celeste and Xona news) is racing to fill.
+Here's the tension. The Space Force's FY2026 budget **defunded Resilient GPS (R-GPS)** — the program to add a layer of small, cheap satellites to harden PNT — cancelling it at the end of its design phase, and lawmakers spent May pushing to revive it.<sup>5,6</sup> The strategic read: a perfect 31-satellite MEO constellation is still 31 faint signals from 20,000 km up. Making each signal 8× tougher is real, but it doesn't change the *architecture* — and that's the gap commercial LEO-PNT (last month's Celeste and Xona news) is racing to fill.
 
 <img src="/images/pnt-pulse/gps3-resilience-gap.svg" alt="Diagram: the GPS III constellation is complete with M-code, but the Resilient GPS augmentation layer was defunded, leaving ground users exposed to jamming" style="width:100%;border-radius:12px;margin:1.5rem 0;" />
 
@@ -38,14 +38,14 @@ The same week underlined why anyone cares: jamming and spoofing keep climbing, a
 
 A tour of the sectors that moved in May.
 
-**Agriculture went driverless at scale.** U.S. Sugar rolled out what's billed as the **largest autonomous-tractor deployment** in the sugar industry, and FarmX put its electric **Amos** autonomous tractor to work — against a backdrop where precision-guided tractors are projected to hit **~40% of farm-tractor sales** in 2026 ([Precision Farming Dealer](https://www.precisionfarmingdealer.com/articles/7147-top-10-precision-farming-stories-in-may-2026)). Every one of those machines is an RTK/PPP corrections subscriber — and agriculture is ~46% of the GNSS revenue outside consumer and automotive.
+**Agriculture went driverless at scale.** U.S. Sugar rolled out what's billed as the **largest autonomous-tractor deployment** in the sugar industry, and FarmX put its electric **Amos** autonomous tractor to work — against a backdrop where precision-guided tractors are projected to hit **~40% of farm-tractor sales** in 2026.<sup>7</sup> Every one of those machines is an RTK/PPP corrections subscriber — and agriculture is ~46% of the GNSS revenue outside consumer and automotive.
 
 <img src="/images/GNSS_Segment.png" alt="GNSS revenue and installed base by market segment" style="width:100%;border-radius:12px;margin:1.5rem 0;" />
 <p style="text-align:center;color:#9DB4D8;font-size:0.85rem;margin-top:-0.75rem;">Agriculture leads the "everything else" slice of GNSS revenue — which is why autonomous-tractor deployments matter to the corrections business. <em>Source: EUSPA, 2024.</em></p>
 
-**Earth observation turned radar into sovereignty.** ICEYE launched **six** more SAR satellites, signed a constellation-build deal with Japan's IHI (4 satellites firm, option for 20 more), and delivered a SAR capability to the Polish Armed Forces — the **~€200M** POLSARIS system ([Military Aerospace](https://www.militaryaerospace.com/rf-analog/news/55379141/iceye-launches-six-sar-satellites-for-sovereign-intelligence-and-earth-observation-missions), [Via Satellite](https://www.satellitetoday.com/government-military/2026/05/15/iceye-delivers-sar-capability-to-polish-armed-forces/)). EO is a much smaller market than GNSS (~€3.4bn → ~€6bn by 2033, EUSPA), but "sovereign eyes" is clearly where the defense money is flowing.
+**Earth observation turned radar into sovereignty.** ICEYE launched **six** more SAR satellites, signed a constellation-build deal with Japan's IHI (4 satellites firm, option for 20 more), and delivered a SAR capability to the Polish Armed Forces — the **~€200M** POLSARIS system.<sup>8,9</sup> EO is a much smaller market than GNSS (~€3.4bn → ~€6bn by 2033, EUSPA), but "sovereign eyes" is clearly where the defense money is flowing.
 
-**Robotics & industrial positioning.** Septentrio extended its mosaic line with the **mosaic-G5 P6** and launched the **AsteRx EB** for industrial robots, port logistics and marine automation ([GPS World](https://www.gpsworld.com/)). Boring on the surface, but it's the receiver stage equipping the automation wave EUSPA keeps flagging as the top cross-segment driver.
+**Robotics & industrial positioning.** Septentrio extended its mosaic line with the **mosaic-G5 P6** and launched the **AsteRx EB** for industrial robots, port logistics and marine automation.<sup>10</sup> Boring on the surface, but it's the receiver stage equipping the automation wave EUSPA keeps flagging as the top cross-segment driver.
 
 ## 📈 Number of the month
 
@@ -57,6 +57,19 @@ A tour of the sectors that moved in May.
 - **Mobileye's Orlando launch.** When VW/MOIA actually flips on paid driverless rides, and how the stack leans on (or ignores) GNSS.
 - **ICEYE's build-out.** Whether the IHI deal exercises its 20-satellite option — a tell for how fast sovereign SAR demand is compounding.
 
+## References
+
+1. [Mobileye — Q1 FY2026 8-K (robotaxi & ADAS update)](https://www.sec.gov/Archives/edgar/data/0001910139/000110465926047231/tm2612233d1_ex99-1.htm)
+2. [GPS World — u-blox expands automotive GNSS portfolio](https://www.gpsworld.com/u-blox-expands-auto-gnss-portfolio-enabling-adas-increasing-safety/)
+3. [Space Systems Command — final GPS III delivered to orbit](https://www.ssc.spaceforce.mil/Newsroom/Article-Display/Article/4465444/us-space-force-delivers-final-gps-iii-to-orbit-advancing-its-most-resilient-con)
+4. [GPS World — Lockheed Martin $105M GPS IIIF ground-control contract](https://www.gpsworld.com/lockheed-martin-secures-105m-contract-for-gps-iiif-operations/)
+5. [SpaceNews — Space Force may be done with R-GPS, but Congress isn't](https://spacenews.com/space-force-may-be-done-with-r-gps-but-congress-isnt/)
+6. [Breaking Defense — lawmakers push for more anti-jam capability](https://breakingdefense.com/2026/01/as-space-force-wraps-up-gps-iii-launches-worried-lawmakers-push-for-more-anti-jam-capability/)
+7. [Precision Farming Dealer — top precision-farming stories, May 2026](https://www.precisionfarmingdealer.com/articles/7147-top-10-precision-farming-stories-in-may-2026)
+8. [Military Aerospace — ICEYE launches six SAR satellites](https://www.militaryaerospace.com/rf-analog/news/55379141/iceye-launches-six-sar-satellites-for-sovereign-intelligence-and-earth-observation-missions)
+9. [Via Satellite — ICEYE delivers SAR capability to Polish Armed Forces](https://www.satellitetoday.com/government-military/2026/05/15/iceye-delivers-sar-capability-to-polish-armed-forces/)
+10. [GPS World — Septentrio mosaic-G5 P6 / AsteRx EB](https://www.gpsworld.com/)
+
 ---
 
-*Market fundamentals anchored to the EUSPA EO and GNSS Market Report, Issue 2, © EUSPA 2024. Third-party analyst forecasts are labelled as estimates and vary widely — read them as direction, not destiny. Sources linked inline.*
+*Market fundamentals anchored to the EUSPA EO and GNSS Market Report, Issue 2, © EUSPA 2024. Third-party analyst forecasts are labelled as estimates and vary widely — read them as direction, not destiny. Sources are numbered in the References above.*

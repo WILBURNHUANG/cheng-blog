@@ -30,6 +30,15 @@ detail, minimal fluff — explaining the month to a sharp friend over coffee. Ev
 "so what," not just "X announced Y." Match the existing first issue,
 `src/content/posts/2026-06-06-pnt-pulse-june-2026.mdx`, as the reference for tone and structure.
 
+## Hard rules (always apply)
+- **Never mention "Tesla"** anywhere in the newsletter — not in the body, the title, or the frontmatter `description`. Cover robotaxi / autonomy trends through the general end-to-end "large driving models" shift and other operators instead. (A source URL that happens to contain the word in its slug is fine; just no visible mention.)
+- **The intro paragraph must not name EUSPA** or any specific report. Keep the opening framing general and reader-focused (what PNT Pulse is, the method, the running order). EUSPA remains the factual backbone — still cite it in the body `> **Anchor:**` blockquotes and the closing note, just not in the intro.
+- **Don't call any issue "the first issue"** or number the issues; refer to them by month.
+- **Citations go at the end, not inline.** In the body, mark each source with a superscript number (`<sup>1</sup>`, or `<sup>1,2</sup>` for multiple) right after the sentence punctuation — never an inline `[label](url)` link. Collect all sources in a numbered `## References` section just before the closing italic footer, each as `1. [Publisher — short title](url)`. The footer should say sources are numbered in the References above.
+
+## Standard intro (reuse, lightly varied each month)
+Open with a short paragraph that says what PNT Pulse is (a monthly read on where PNT is actually heading), the three-step method (gather the month's most consequential GNSS/PNT/EO news → place each story against the wider market and value chain → draw out the "so what"), and the fixed running order (automotive & AI navigation → space LEO-PNT & defense PNT → rotating roundup of every other sector). Do not mention EUSPA here.
+
 ## Workflow
 
 ### 1. Set the window
