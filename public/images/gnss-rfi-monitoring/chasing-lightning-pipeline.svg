@@ -1,0 +1,59 @@
+<svg viewBox="0 0 860 440" xmlns="http://www.w3.org/2000/svg" font-family="'Inter','Space Grotesk',sans-serif">
+  <defs>
+    <linearGradient id="clbg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0A1530"/><stop offset="100%" stop-color="#0F1D3D"/></linearGradient>
+    <marker id="clA" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><polygon points="0 0,10 4,0 8" fill="#5CE1FF"/></marker>
+  </defs>
+  <rect width="860" height="440" rx="14" fill="url(#clbg)"/>
+  <text x="34" y="42" fill="#F1F5FF" font-family="'Space Grotesk',sans-serif" font-size="22" font-weight="700">Chasing Lightning: detection → attribution</text>
+  <text x="34" y="66" fill="#9DB4D8" font-size="13">UT Austin used a public reference-station network to do what anti-jam can't — name the source</text>
+
+  <!-- stage 1 -->
+  <g transform="translate(34,100)">
+    <rect width="184" height="118" rx="10" fill="#13234a" stroke="#1F3563" stroke-width="1.5"/>
+    <text x="14" y="28" fill="#5CE1FF" font-size="13" font-weight="700">1 · DETECT</text>
+    <text x="14" y="52" fill="#F1F5FF" font-size="12">Synchronous CNR drop</text>
+    <text x="14" y="70" fill="#F1F5FF" font-size="12">(up to <tspan fill="#ff8a8a">10 dB</tspan>) across</text>
+    <text x="14" y="88" fill="#F1F5FF" font-size="12">IGS L1 stations, &lt;10 s,</text>
+    <text x="14" y="106" fill="#9DB4D8" font-size="12">Europe·Greenland·Canada</text>
+  </g>
+  <!-- stage 2 -->
+  <g transform="translate(252,100)">
+    <rect width="184" height="118" rx="10" fill="#13234a" stroke="#1F3563" stroke-width="1.5"/>
+    <text x="14" y="28" fill="#5CE1FF" font-size="13" font-weight="700">2 · CHARACTERIZE</text>
+    <text x="14" y="52" fill="#F1F5FF" font-size="12">Spatial / temporal /</text>
+    <text x="14" y="70" fill="#F1F5FF" font-size="12">spectral pattern; rule</text>
+    <text x="14" y="88" fill="#F1F5FF" font-size="12">out solar radio burst &amp;</text>
+    <text x="14" y="106" fill="#9DB4D8" font-size="12">ground/air sources</text>
+  </g>
+  <!-- stage 3 -->
+  <g transform="translate(470,100)">
+    <rect width="184" height="118" rx="10" fill="#13234a" stroke="#1F3563" stroke-width="1.5"/>
+    <text x="14" y="28" fill="#5CE1FF" font-size="13" font-weight="700">3 · GEOLOCATE</text>
+    <text x="14" y="52" fill="#F1F5FF" font-size="12">Fuse <tspan fill="#6ee7b7">T/FDOA</tspan> from raw</text>
+    <text x="14" y="70" fill="#F1F5FF" font-size="12">wideband samples:</text>
+    <text x="14" y="88" fill="#F1F5FF" font-size="12">4+ stations instant, or</text>
+    <text x="14" y="106" fill="#9DB4D8" font-size="12">2 + ephemeris catalog</text>
+  </g>
+  <!-- stage 4 -->
+  <g transform="translate(688,100)">
+    <rect width="138" height="118" rx="10" fill="#0c2e26" stroke="#0e7490" stroke-width="1.6"/>
+    <text x="14" y="28" fill="#6ee7b7" font-size="13" font-weight="700">4 · IDENTIFY</text>
+    <text x="14" y="52" fill="#F1F5FF" font-size="12">GLRT association</text>
+    <text x="14" y="70" fill="#F1F5FF" font-size="12">(CNR + TDOA)</text>
+    <text x="14" y="92" fill="#F1F5FF" font-size="12">→ <tspan fill="#6ee7b7" font-weight="700">named</tspan></text>
+    <text x="14" y="110" fill="#9DB4D8" font-size="12">satellite</text>
+  </g>
+
+  <g stroke="#5CE1FF" stroke-width="2" marker-end="url(#clA)">
+    <line x1="218" y1="159" x2="250" y2="159"/><line x1="436" y1="159" x2="468" y2="159"/><line x1="654" y1="159" x2="686" y2="159"/>
+  </g>
+
+  <!-- result banner -->
+  <g transform="translate(34,256)">
+    <rect width="792" height="150" rx="12" fill="#0a1f1c" stroke="#0e7490" stroke-width="1.5"/>
+    <text x="24" y="40" fill="#6ee7b7" font-size="16" font-weight="700">The verdict</text>
+    <text x="24" y="74" fill="#F1F5FF" font-size="15">A small constellation of <tspan fill="#5CE1FF" font-weight="700">Russian early-warning satellites in Molniya ("lightning") orbits</tspan></text>
+    <text x="24" y="100" fill="#F1F5FF" font-size="15">— scores of powerful transient L1 events since <tspan fill="#5CE1FF" font-weight="700">2019</tspan>, all from public IGS + 2 European receivers.</text>
+    <text x="24" y="130" fill="#9DB4D8" font-size="12.5" font-style="italic">Clements, Kriezis &amp; Humphreys, arXiv:2606.03673 (submitted to NAVIGATION, 2026)</text>
+  </g>
+</svg>

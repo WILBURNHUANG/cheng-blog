@@ -1,0 +1,44 @@
+<svg viewBox="0 0 820 460" xmlns="http://www.w3.org/2000/svg" font-family="'Inter','Space Grotesk',sans-serif">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0A1530"/><stop offset="100%" stop-color="#0F1D3D"/></linearGradient>
+    <radialGradient id="lobe" cx="50%" cy="100%" r="80%"><stop offset="0%" stop-color="#5CE1FF" stop-opacity="0.55"/><stop offset="100%" stop-color="#5CE1FF" stop-opacity="0.05"/></radialGradient>
+  </defs>
+  <rect width="820" height="460" rx="14" fill="url(#bg3)"/>
+  <text x="34" y="44" fill="#F1F5FF" font-family="'Space Grotesk',sans-serif" font-size="22" font-weight="700">How a CRPA fights back — and where it caps out</text>
+
+  <!-- antenna array -->
+  <g transform="translate(220,360)">
+    <ellipse cx="0" cy="0" rx="150" ry="26" fill="#13234a" stroke="#1F3563" stroke-width="2"/>
+    <g fill="#5CE1FF">
+      <circle cx="-90" cy="-4" r="7"/><circle cx="-45" cy="-4" r="7"/><circle cx="0" cy="-4" r="7"/><circle cx="45" cy="-4" r="7"/><circle cx="90" cy="-4" r="7"/>
+    </g>
+    <text x="0" y="34" text-anchor="middle" fill="#9DB4D8" font-size="13">N-element controlled-reception-pattern antenna</text>
+
+    <!-- gain pattern: beam up, nulls toward jammers -->
+    <path d="M0 -8 C-70 -150 70 -150 0 -8 Z" fill="url(#lobe)"/>
+    <!-- satellite signal kept -->
+    <line x1="0" y1="-8" x2="-30" y2="-150" stroke="#34d399" stroke-width="2.5"/>
+    <text x="-44" y="-158" fill="#6ee7b7" font-size="12">satellite ✓</text>
+    <line x1="0" y1="-8" x2="40" y2="-150" stroke="#34d399" stroke-width="2.5"/>
+    <text x="36" y="-158" fill="#6ee7b7" font-size="12">satellite ✓</text>
+    <!-- nulls toward jammers (notched) -->
+    <line x1="0" y1="-8" x2="-175" y2="-70" stroke="#ff5a5a" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="-175" cy="-70" r="5" fill="#ff5a5a"/><text x="-198" y="-78" fill="#ff8a8a" font-size="12" text-anchor="end">jammer → null</text>
+    <line x1="0" y1="-8" x2="180" y2="-70" stroke="#ff5a5a" stroke-width="2" stroke-dasharray="5 4"/>
+    <circle cx="180" cy="-70" r="5" fill="#ff5a5a"/><text x="196" y="-78" fill="#ff8a8a" font-size="12">jammer → null</text>
+  </g>
+
+  <!-- the ceiling box -->
+  <g transform="translate(560,90)">
+    <rect x="0" y="0" width="232" height="300" rx="10" fill="#0A1530" stroke="#1F3563" stroke-width="1.5"/>
+    <text x="16" y="32" fill="#5CE1FF" font-size="14" font-weight="700">The physics ceiling</text>
+    <text x="16" y="64" fill="#F1F5FF" font-size="13">N elements null only</text>
+    <text x="16" y="86" fill="#ff8a8a" font-size="20" font-weight="700">~N − 1 jammers</text>
+    <text x="16" y="120" fill="#9DB4D8" font-size="12.5"><tspan x="16" dy="0">• add jammers &gt; N−1 → lose lock</tspan></text>
+    <text x="16" y="150" fill="#9DB4D8" font-size="12.5"><tspan x="16" dy="0">• bulky, costly, export-</tspan><tspan x="16" dy="17">  controlled SWaP</tspan></text>
+    <text x="16" y="196" fill="#9DB4D8" font-size="12.5"><tspan x="16" dy="0">• blind to spoofing that</tspan><tspan x="16" dy="17">  arrives from the sky</tspan></text>
+    <text x="16" y="244" fill="#9DB4D8" font-size="12.5"><tspan x="16" dy="0">• protects one platform —</tspan><tspan x="16" dy="17">  cost scales per platform</tspan></text>
+    <line x1="16" y1="272" x2="216" y2="272" stroke="#1F3563"/>
+    <text x="16" y="290" fill="#9DB4D8" font-size="11.5" font-style="italic">Gold standard ≠ unlimited</text>
+  </g>
+</svg>

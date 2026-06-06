@@ -1,0 +1,98 @@
+---
+title: "Stop Out-Shouting the Jammer: GNSS Defense Pivots to Monitoring"
+description: "Anti-jam antennas are hitting a physics ceiling just as the jamming epidemic explodes. Why HawkEye 360 and UT Austin are betting on interference monitoring — and how it named a source anti-jam never could."
+date: 2026-06-05
+category: "Space Tech"
+tags: ["GNSS", "PNT", "RF interference", "jamming", "spoofing", "HawkEye 360"]
+hero: "/images/gnss-rfi-monitoring/hero.svg"
+draft: true
+---
+
+In the first four months of 2025, roughly **123,000 flights** over the Baltic had their navigation degraded by jamming — a figure the region's governments handed to ICAO themselves. In Estonia, **85%** of flights were affected. Sweden logged **733** disruptions in 2025, up from **55** in 2023. Lithuania counted more than **1,000** interference cases in a single month, about **22×** the year before. ([TRT](https://www.trtworld.com/article/f587da45f7ba), [Travel And Tour World](https://www.travelandtourworld.com/news/article/aviation-safety-at-risk-surge-in-gps-jamming-and-spoofing-over-baltic-sea-northern-europe-and-germany-in-2025/))
+
+Here's the asymmetry that should bother every PNT engineer: a GPS signal reaches the ground at around **−127 dBm** — *below the thermal noise floor*. A jammer costing less than a tank of gas can bury it across tens of kilometers. We have spent a decade engineering the receiver to survive that attack. The question worth asking is whether we're winning: **are we losing the jamming fight at the receiver, and is the field's center of gravity quietly moving somewhere else?**
+
+The short answer: anti-jam isn't dead, but its best tool has hit a wall built out of physics — and both industry and academia have pivoted the field's center of gravity from *out-shouting* interference to *mapping* it.
+
+## The anti-jam wall: the CRPA and the N−1 ceiling
+
+If you protect a high-value GNSS platform today, you almost certainly reach for a **Controlled Reception Pattern Antenna (CRPA)** — widely and fairly called the gold standard. A CRPA is a multi-element array that does adaptive spatial filtering: it senses the direction a jammer is arriving from and steers an antenna-pattern **null** at it, cancelling the interference while keeping the satellites in view. The marketing numbers are real — Thales claims its TopShield delivers over **10,000×** the jamming immunity of a conventional antenna, and four-element units like the HEDGE-4008 advertise up to **3 independent jammer suppressions per band**. ([infiniDome](https://infinidome.com/crpa-anti-jamming-antenna/), [Thales](https://www.thalesgroup.com/en/solutions-catalogue/defence/topshield-antijamming-and-spoofing-solution))
+
+![A CRPA steers nulls at jammers but an N-element array can only cancel about N−1 of them, is bulky and export-controlled, and is blind to spoofing from the satellites' direction](/images/gnss-rfi-monitoring/crpa-null.svg "A CRPA buys real protection — within a hard ceiling set by element count.")
+
+Notice the load-bearing word in that spec sheet: *per band*, and the implicit **N**. Adaptive nulling has a hard degrees-of-freedom limit — an array of **N** elements can place roughly **N − 1** independent spatial nulls. Point more coherent jammers at it than it has elements, or surround it with a distributed swarm, and the array runs out of nulls and the receiver loses lock. You can buy more elements, but every one adds size, weight, power, cost, and (for the good ones) export control. That's a poor scaling law against an adversary whose marginal jammer costs almost nothing.
+
+And nulling solves the wrong half of the problem anyway. Spoofing — counterfeit signals that walk a receiver onto a false position or time — typically arrives from *above*, in roughly the same direction as the real satellites. You can't null the spoofer without nulling the constellation. CRPAs are extraordinary engineering, but they are **local, reactive, capped by element count, priced per platform, and silent about who is attacking you.** That last property is the one that turns out to matter most.
+
+## The pivot: from mitigation to monitoring
+
+There's a second discipline that has quietly been compounding while anti-jam fought its losing arms race: **interference monitoring**. Instead of asking *how do I keep this one receiver alive*, it asks *where is the interference, what does it look like, how strong is it, and who is emitting it* — and answers from a network of sensors that may be nowhere near the victim.
+
+![Mitigation protects one platform locally and reactively; monitoring uses sensor networks to detect, characterize, geolocate and attribute interference globally](/images/gnss-rfi-monitoring/antijam-vs-monitoring.svg "Different questions, different scaling laws. Monitoring scales with data, not hardware.")
+
+The academic literature backs this. Dedicated GNSS interference monitors have been shown to provide valuable spectrum situational awareness for years — anomalous-event monitors, long-running systems like ARFIDAAS, and national CORS networks (Sweden's SWEPOS among them) — with some demonstrating outright **geolocation** of the source via time-difference-of-arrival. The newest layer is orbital: GNSS receivers in **low Earth orbit** can detect, characterize and geolocate terrestrial jammers with worldwide coverage (Murrian *et al.* reported three years of LEO interference monitoring in 2021; Clements *et al.* demonstrated dual-satellite geolocation of terrestrial jammers in 2023). Ground, reference-network, and space sensors now triangulate the same problem from three directions. (All cited within [arXiv:2606.03673](https://arxiv.org/abs/2606.03673).)
+
+The crucial property is the scaling law. Anti-jam costs you per protected platform and caps out at your antenna's element count. Monitoring **scales with data and sensor diversity**, and its output isn't a momentarily-surviving receiver — it's *intelligence*: a time, a place, a waveform, a power level, and increasingly an attribution.
+
+## Industry's bet: HawkEye 360 productizes it
+
+First, it helps to be clear about *what HawkEye 360 actually sells*, because it's the opposite of a CRPA. There is no box you bolt onto your receiver. HawkEye operates a constellation of **formation-flying smallsat clusters** — groups of three satellites flying in tight, precisely-known formation — each carrying a software-defined radio that sweeps a broad slice of spectrum from **VHF up through the Ku band**. Because the three satellites observe the same emission from slightly different positions and velocities, the system can apply **time- and frequency-difference-of-arrival (TDOA/FDOA)** across the cluster to fix *where on Earth* a transmitter is, without any cooperation from the emitter. That's the whole company: commercial, space-based **RF geolocation** delivered as a data-and-analytics subscription, originally for maritime domain awareness, spectrum monitoring, and national-security customers. ([GPS World](https://www.gpsworld.com/trio-of-hawkeye-360-formation-flying-microsatellites-launched-for-rf-geolocation/), [eoPortal](https://www.eoportal.org/satellite-missions/hawkeye-360))
+
+So when you "buy" HawkEye's GNSS product, you aren't hardening a platform — you're subscribing to an intelligence feed that tells you where interference is coming from across whole theaters. In **July 2025** the company launched an upgraded **GNSS-Interference (GNSS-I) Detection** suite layered on that constellation, and it reads as a checklist of everything a CRPA can't do. A wider-frequency algorithm separates *individual* emitters out of a crowded, noisy band. A new **spoofing-detection** capability flags transmitters imitating legitimate GPS codes — the threat anti-jam nulling is structurally blind to. Terrain-adjusted processing pulls geolocation accuracy down to roughly **kilometer** level. And during the **Talisman Sabre 2025** exercise, HawkEye's RF data flowed directly into military platforms for the first time, putting real-time interference awareness in operators' hands rather than in a post-hoc report. ([Inside GNSS](https://insidegnss.com/hawkeye-360-launches-advanced-gnss-interference-detection-capabilities-to-enhance-defense-and-intelligence-operations/), [GPS World](https://www.gpsworld.com/hawkeye-360-launches-advanced-gnss-interference-detection-capabilities/), [SatNews](https://news.satnews.com/2025/07/31/hawkeye-360-launches-advanced-gnss-interference-detection-capabilities/))
+
+That's the category worth naming for the audience: this is **commercial RF intelligence as a service**, not a navigation component. The same TDOA/FDOA machinery that locates a ship's radar or a stray VHF beacon is now pointed at GPS jammers and spoofers, and sold as situational awareness. When a company whose entire business is RF geolocation decides GNSS interference deserves its own productized, spoofing-aware, operationally-integrated line, that's the market voting that *awareness* — not just receiver-side defense — is where the value is moving.
+
+## Academia's proof: Chasing Lightning
+
+If HawkEye is the commercial vote, the academic exclamation point arrived this month. In **"Chasing Lightning"** (arXiv:2606.03673, June 2026, submitted to *NAVIGATION*), Zachary Clements, Argyris Kriezis and Todd Humphreys of UT Austin's Radionavigation Lab did something anti-jam can never do, using nothing but a monitoring network and public data: they **named a source**.
+
+![The Chasing Lightning pipeline: detect synchronous CNR drops, characterize the event, geolocate with T/FDOA, then identify via a GLRT association test — concluding the source is a constellation of Russian early-warning satellites in Molniya orbits](/images/gnss-rfi-monitoring/chasing-lightning-pipeline.svg "Detection alone wasn't enough. Fusing CNR with TDOA was what produced a name.")
+
+The phenomenon is genuinely new. On **scores of occasions since 2019**, every tracked signal on the **GPS L1** band at International GNSS Service (IGS) reference stations across **Europe, Greenland and Canada** dropped in carrier-to-noise ratio *simultaneously* — synchronous to within the 1-Hz sampling resolution, lasting **less than 10 seconds**, with CNR hits of up to **10 dB**. The affected stations span an area no ground- or aircraft-based emitter could reach at once. That alone forces a space-based origin. It's also distinct from earlier space anomalies (a BeiDou satellite leaking a tone in the B3I band; GPS L5 leakage on SVN65/66) — those were continuous and traced to faulty hardware. These are transient, powerful, and on the band that runs global aviation.
+
+The method is the part practitioners should steal. A synchronized CNR drop across many stations is enough to **detect**, but — and the authors are explicit about this — it is *not* enough to **identify**. CNR is a scalar; it doesn't pin a position and velocity. For that you need geometry: capture raw broadband samples at a spatially diverse network and exploit **time- and frequency-difference-of-arrival (T/FDOA)**. With four or more stations you can estimate the source's position and velocity instantaneously; with a catalog of satellite ephemerides in hand, even **two** stations narrow the field to a manageable few. They then fuse CNR and TDOA in a **generalized likelihood ratio test (GLRT)** association framework to collapse the candidates to one. Pulling it together from public IGS observables (NASA's CDDIS archive of 1-Hz data) plus two extra European receivers, the verdict: a small constellation of **Russian early-warning satellites in Molniya ("lightning") orbits.**
+
+That is the qualitative leap. Anti-jam asks *can I keep working through this?* Monitoring, done well, answers *who did this and from where* — and that answer lives in a different world. It feeds ICAO condemnations, diplomatic pressure, and deterrence; in 2025 the interference problem went from an engineering nuisance to an item on foreign-ministry desks precisely because monitoring made attribution possible. ([Euronews](https://www.euronews.com/my-europe/2025/09/02/what-can-europe-do-to-better-defend-against-gps-interference-from-russia))
+
+## Why monitoring scales where anti-jam plateaus
+
+Step back and the two disciplines have opposite cost curves. Anti-jam is **subtractive and local**: each platform pays its own bill, and the protection is capped by the antenna's degrees of freedom regardless of how much you spend. Monitoring is **additive and global**: every new sensor — ground station, CORS node, LEO payload — sharpens the picture for *everyone*, and the marginal cost of an answer falls as the network grows. One produces a receiver that survives the next ten seconds; the other produces a standing intelligence layer that gets better the longer it runs.
+
+That's why the field's energy is visibly moving. It's not that the jammer got un-beatable; it's that *out-shouting* it was always going to lose to cheap power, while *mapping* it gets stronger with scale and turns an engineering loss into geopolitical leverage.
+
+## The honest synthesis: a layered stack, not a winner
+
+So is anti-jam at a dead end? Not quite — and the strong version of that claim is where careful readers should push back. **Monitoring does not keep an aircraft, ship, or drone navigating through an attack.** It tells you that you're being jammed, where from, and by whom; it does not, by itself, get the platform home. The truthful framing is **division of labor**:
+
+- **Mitigation** (CRPA, filtering, sensor fusion) keeps the platform alive *in the moment*. Still necessary. Still worth the SWaP on high-value assets.
+- **Monitoring** (ground + CORS + LEO networks) supplies awareness, characterization, and — the new superpower — **attribution**.
+- **Resilient PNT** is the third leg: multi-constellation/multi-frequency receivers, signal authentication like Galileo **OSNMA**, inertial and vision and signals-of-opportunity, and complementary timing such as eLoran. The real lesson of the last three years isn't "build a better antenna," it's **stop depending on one −127 dBm signal**, with monitoring as the early-warning layer over all of it.
+
+Monitoring has its own limits worth naming: it needs spatially diverse sensors and cooperative data-sharing, ephemeris catalogs only help for catalogued objects, low-power local spoofers are hard to see from far away, and attribution can be politically radioactive even when the math is clean.
+
+Your instinct was right about the direction of travel — the excitement, the funding, and the genuinely new results are on the monitoring side. It's just that the win isn't anti-jam's funeral. It's the field finally admitting that you can't out-shout physics, so you might as well point a network at the noise and figure out exactly who's making it.
+
+---
+
+## TL;DR
+
+- **The jamming epidemic is real and growing:** ~123,000 Baltic flights degraded in four months of 2025; Estonia 85% of flights; Sweden 733 events vs 55 in 2023.
+- **Anti-jam's gold standard has a physics ceiling:** a CRPA's N-element array nulls only ~N−1 jammers, costs SWaP and export controls per platform, and is structurally blind to spoofing from the satellites' direction.
+- **The field is pivoting to monitoring** — detect, characterize, geolocate, and *attribute* interference from sensor networks (ground, CORS, and LEO), which scales with data instead of hardware.
+- **Industry vote:** HawkEye 360's July 2025 GNSS-I suite adds spoofer detection and ~km geolocation, and fed live into platforms at Talisman Sabre 2025.
+- **Academic proof:** UT Austin's *Chasing Lightning* used public IGS data + CNR/T-FDOA fusion (GLRT) to name a source — Russian early-warning satellites in Molniya orbits behind scores of transient L1 events since 2019.
+- **The honest take:** monitoring doesn't replace anti-jam; it's a layer. Mitigation keeps you alive, monitoring tells you who/where, resilient PNT (OSNMA, multi-band, inertial, eLoran) keeps you from depending on one fragile signal.
+
+## Sources
+
+- Z. Clements, A. Kriezis, T. E. Humphreys, ["Chasing Lightning: Detecting, Characterizing, and Identifying a Powerful Space-Based GNSS Interference Source," arXiv:2606.03673 (2026)](https://arxiv.org/abs/2606.03673)
+- [HawkEye 360 launches advanced GNSS interference detection capabilities — Inside GNSS](https://insidegnss.com/hawkeye-360-launches-advanced-gnss-interference-detection-capabilities-to-enhance-defense-and-intelligence-operations/)
+- [HawkEye 360 GNSS-I detection — GPS World](https://www.gpsworld.com/hawkeye-360-launches-advanced-gnss-interference-detection-capabilities/)
+- [HawkEye 360 GNSS-I detection — SatNews](https://news.satnews.com/2025/07/31/hawkeye-360-launches-advanced-gnss-interference-detection-capabilities/)
+- [Formation-flying microsatellites for RF geolocation — GPS World](https://www.gpsworld.com/trio-of-hawkeye-360-formation-flying-microsatellites-launched-for-rf-geolocation/)
+- [HawkEye 360 mission overview — eoPortal](https://www.eoportal.org/satellite-missions/hawkeye-360)
+- [What is a CRPA Anti-Jamming Antenna? — infiniDome](https://infinidome.com/crpa-anti-jamming-antenna/)
+- [TopShield anti-jamming and spoofing solution — Thales Group](https://www.thalesgroup.com/en/solutions-catalogue/defence/topshield-antijamming-and-spoofing-solution)
+- [Russian GPS jamming disrupted 123,000 flights over Baltic airspace — TRT World](https://www.trtworld.com/article/f587da45f7ba)
+- [Surge in GPS jamming and spoofing over the Baltic, 2025 — Travel And Tour World](https://www.travelandtourworld.com/news/article/aviation-safety-at-risk-surge-in-gps-jamming-and-spoofing-over-baltic-sea-northern-europe-and-germany-in-2025/)
+- [What can Europe do to defend against GPS interference from Russia? — Euronews](https://www.euronews.com/my-europe/2025/09/02/what-can-europe-do-to-better-defend-against-gps-interference-from-russia)
