@@ -1,0 +1,93 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" font-family="'Space Grotesk','Inter',sans-serif">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#050A19"/>
+      <stop offset="55%" stop-color="#0A1530"/>
+      <stop offset="100%" stop-color="#0F1D3D"/>
+    </linearGradient>
+    <radialGradient id="glowC" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5CE1FF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#5CE1FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowI" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#818CF8" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="earth" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#1e3a5f"/>
+      <stop offset="100%" stop-color="#0A1530"/>
+    </radialGradient>
+    <linearGradient id="beam" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5CE1FF" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#5CE1FF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#sky)"/>
+  <circle cx="300" cy="200" r="260" fill="url(#glowC)"/>
+  <circle cx="930" cy="150" r="220" fill="url(#glowI)"/>
+
+  <!-- stars -->
+  <g fill="#F1F5FF" opacity="0.55">
+    <circle cx="120" cy="70" r="1.5"/><circle cx="320" cy="44" r="1"/><circle cx="540" cy="96" r="1.4"/>
+    <circle cx="780" cy="52" r="1"/><circle cx="1000" cy="84" r="1.6"/><circle cx="1100" cy="44" r="1"/>
+    <circle cx="680" cy="30" r="1.2"/><circle cx="210" cy="130" r="1"/><circle cx="1150" cy="150" r="1.2"/>
+    <circle cx="60" cy="210" r="1"/><circle cx="860" cy="100" r="1"/>
+  </g>
+
+  <!-- orbit rings around Earth -->
+  <g fill="none" stroke="#5CE1FF" stroke-opacity="0.18">
+    <ellipse cx="600" cy="720" rx="540" ry="250"/>
+    <ellipse cx="600" cy="720" rx="430" ry="190"/>
+    <ellipse cx="600" cy="720" rx="320" ry="135"/>
+  </g>
+
+  <!-- Earth arc -->
+  <circle cx="600" cy="900" r="400" fill="url(#earth)" stroke="#5CE1FF" stroke-opacity="0.35" stroke-width="2"/>
+  <g stroke="#5CE1FF" stroke-opacity="0.12" fill="none">
+    <path d="M250 560 Q600 600 950 560"/>
+    <path d="M210 620 Q600 670 990 620"/>
+  </g>
+
+  <!-- LEO PNT satellites broadcasting down (the "PNT source") -->
+  <g>
+    <g transform="translate(360,470)">
+      <rect x="-26" y="-3" width="14" height="34" rx="2" fill="#2563eb" opacity="0.65"/>
+      <rect x="12" y="-3" width="14" height="34" rx="2" fill="#2563eb" opacity="0.65"/>
+      <rect x="-13" y="-11" width="26" height="22" rx="3" fill="#13243f" stroke="#5CE1FF" stroke-width="1.6"/>
+      <polygon points="0,11 -22,80 22,80" fill="url(#beam)"/>
+    </g>
+    <g transform="translate(840,440)">
+      <rect x="-26" y="-3" width="14" height="34" rx="2" fill="#2563eb" opacity="0.65"/>
+      <rect x="12" y="-3" width="14" height="34" rx="2" fill="#2563eb" opacity="0.65"/>
+      <rect x="-13" y="-11" width="26" height="22" rx="3" fill="#13243f" stroke="#5CE1FF" stroke-width="1.6"/>
+      <polygon points="0,11 -22,90 22,90" fill="url(#beam)"/>
+    </g>
+  </g>
+
+  <!-- PULSE waveform crossing the title (the "Pulse") -->
+  <polyline points="120,300 300,300 340,300 370,238 410,372 448,262 480,300 560,300 600,300 640,256 680,344 720,300 1080,300"
+    fill="none" stroke="#5CE1FF" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" opacity="0.9"/>
+  <circle cx="448" cy="262" r="4" fill="#5CE1FF"/>
+  <circle cx="640" cy="256" r="4" fill="#5CE1FF"/>
+
+  <!-- Wordmark -->
+  <text x="600" y="150" text-anchor="middle" font-size="96" font-weight="700" fill="#F1F5FF" letter-spacing="2">PNT PULSE</text>
+  <text x="600" y="205" text-anchor="middle" font-size="27" font-weight="500" fill="#5CE1FF" letter-spacing="7">MONTHLY PNT INDUSTRY OBSERVATION</text>
+
+  <!-- three-highlight chips -->
+  <g font-size="20" font-weight="600" fill="#9DB4D8" text-anchor="middle">
+    <g>
+      <rect x="150" y="372" width="270" height="44" rx="22" fill="#0A1530" stroke="#5CE1FF" stroke-opacity="0.4"/>
+      <text x="285" y="400">Automotive &amp; AI Nav</text>
+    </g>
+    <g>
+      <rect x="465" y="372" width="270" height="44" rx="22" fill="#0A1530" stroke="#5CE1FF" stroke-opacity="0.4"/>
+      <text x="600" y="400">LEO-PNT &amp; Defense</text>
+    </g>
+    <g>
+      <rect x="780" y="372" width="270" height="44" rx="22" fill="#0A1530" stroke="#5CE1FF" stroke-opacity="0.4"/>
+      <text x="915" y="400">Rest of the Map</text>
+    </g>
+  </g>
+</svg>
