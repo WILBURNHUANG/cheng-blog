@@ -42,6 +42,12 @@ So when you "buy" HawkEye's GNSS product, you aren't hardening a platform — yo
 
 That's the category worth naming for the audience: this is **commercial RF intelligence as a service**, not a navigation component. The same TDOA/FDOA machinery that locates a ship's radar or a stray VHF beacon is now pointed at GPS jammers and spoofers, and sold as situational awareness. When a company whose entire business is RF geolocation decides GNSS interference deserves its own productized, spoofing-aware, operationally-integrated line, that's the market voting that *awareness* — not just receiver-side defense — is where the value is moving.
 
+## A different sensor: watching the victims (Iridium + Aireon)
+
+HawkEye and Spire detect the *jammer's own RF*. There's a second way to monitor interference that's arguably even more telling: watch the **victims**. Aircraft compute their own position from GNSS and broadcast it once a second over **ADS-B**. When GPS is jammed or spoofed, those broadcasts go visibly wrong — positions jump, velocities turn impossible, whole flights "teleport" or pile onto a single spoofed point. A global ADS-B receiver mesh therefore doubles as a real-time map of *where GNSS is being denied*, inferred from the aircraft themselves rather than from the emitter.
+
+That mesh exists: **Aireon**, the space-based ADS-B network hosted on the Iridium constellation since 2019, which tracks roughly **190,000 flights a day** with 100% global coverage. In May 2026 **Iridium agreed to buy the remaining 61% of Aireon for about $366.7M** (plus ~$155M of assumed debt), and the deal language is explicit that the business now "includes **GPS jamming and spoofing detection**, alongside real-time and historical flight data." ([Inside GNSS](https://insidegnss.com/iridium-to-acquire-full-control-of-aireon-in-367-million-deal/)) I dug into the strategic logic of that acquisition separately ([here](/posts/2026-05-26-iridium-aireon-acquisition)), but the interference angle is the interesting one for this post: it lands Iridium in *both* lanes at once. Its **PNT/STL** signal is mitigation — a tougher fallback when GPS is denied — while **Aireon's ADS-B feed is monitoring** — a victim-side global view of *where and when* it's happening. Protect and detect, consolidated onto one constellation. When the same operator is buying its way into both halves of the problem, that's another data point that monitoring has become a business, not just a research topic.
+
 ## Academia's proof: Chasing Lightning
 
 If HawkEye is the commercial vote, the academic exclamation point arrived this month. In **"Chasing Lightning"** (arXiv:2606.03673, June 2026, submitted to *NAVIGATION*), Zachary Clements, Argyris Kriezis and Todd Humphreys of UT Austin's Radionavigation Lab did something anti-jam can never do, using nothing but a monitoring network and public data: they **named a source**.
@@ -79,7 +85,7 @@ Your instinct was right about the direction of travel — the excitement, the fu
 - **The jamming epidemic is real and growing:** ~123,000 Baltic flights degraded in four months of 2025; Estonia 85% of flights; Sweden 733 events vs 55 in 2023.
 - **Anti-jam's gold standard has a physics ceiling:** a CRPA's N-element array nulls only ~N−1 jammers, costs SWaP and export controls per platform, and is structurally blind to spoofing from the satellites' direction.
 - **The field is pivoting to monitoring** — detect, characterize, geolocate, and *attribute* interference from sensor networks (ground, CORS, and LEO), which scales with data instead of hardware.
-- **Industry vote:** HawkEye 360's July 2025 GNSS-I suite adds spoofer detection and ~km geolocation, and fed live into platforms at Talisman Sabre 2025.
+- **Industry vote:** HawkEye 360's July 2025 GNSS-I suite adds spoofer detection and ~km geolocation, and fed live into platforms at Talisman Sabre 2025. Iridium's ~$367M move to take full control of Aireon adds a victim-side ADS-B view, putting it in both the mitigation (PNT/STL) and monitoring lanes.
 - **Academic proof:** UT Austin's *Chasing Lightning* used public IGS data + CNR/T-FDOA fusion (GLRT) to name a source — Russian early-warning satellites in Molniya orbits behind scores of transient L1 events since 2019.
 - **The honest take:** monitoring doesn't replace anti-jam; it's a layer. Mitigation keeps you alive, monitoring tells you who/where, resilient PNT (OSNMA, multi-band, inertial, eLoran) keeps you from depending on one fragile signal.
 
@@ -91,6 +97,8 @@ Your instinct was right about the direction of travel — the excitement, the fu
 - [HawkEye 360 GNSS-I detection — SatNews](https://news.satnews.com/2025/07/31/hawkeye-360-launches-advanced-gnss-interference-detection-capabilities/)
 - [Formation-flying microsatellites for RF geolocation — GPS World](https://www.gpsworld.com/trio-of-hawkeye-360-formation-flying-microsatellites-launched-for-rf-geolocation/)
 - [HawkEye 360 mission overview — eoPortal](https://www.eoportal.org/satellite-missions/hawkeye-360)
+- [Iridium to Acquire Full Control of Aireon in $367 Million Deal — Inside GNSS](https://insidegnss.com/iridium-to-acquire-full-control-of-aireon-in-367-million-deal/)
+- [Geolocating GNSS jammers from LEO — Spire Global](https://spire.com/blog/space-reconnaissance/geolocating-gnss-jammers-from-leo/)
 - [What is a CRPA Anti-Jamming Antenna? — infiniDome](https://infinidome.com/crpa-anti-jamming-antenna/)
 - [TopShield anti-jamming and spoofing solution — Thales Group](https://www.thalesgroup.com/en/solutions-catalogue/defence/topshield-antijamming-and-spoofing-solution)
 - [Russian GPS jamming disrupted 123,000 flights over Baltic airspace — TRT World](https://www.trtworld.com/article/f587da45f7ba)
