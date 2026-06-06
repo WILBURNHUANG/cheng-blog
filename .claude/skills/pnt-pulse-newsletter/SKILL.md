@@ -90,7 +90,7 @@ draft: false
 
 Body structure (from the template, in Cheng's voice):
 - One-paragraph intro + a **60-second version** bold lead with one memorable number.
-- `## 🚗 Automotive, AI & End-to-End Navigation` — 2–4 items; weave autonomy-stack framing.
+- `## 🚗 Automotive, AI & End-to-End Navigation` — 2–4 items; weave autonomy-stack framing. Include a short "Who else is moving" roundup (2-4 sentences) covering the past month's developments from the major AV / robotaxi players beyond any single brand — e.g. Waymo, Zoox, Waabi, Pony.ai, WeRide, Baidu Apollo Go, and relevant OEMs — kept brief, ending on the PNT "so what" (multi-constellation reach + integrity as fleets expand geographically). Never name Tesla.
 - `## 🛰️ Space (LEO-PNT) & Defense PNT` — 2–4 items; flag the "LEO flipped to PNT source" narrative; label third-party market sizes.
 - `## 🌍 Across the Rest of the Map` — rotating roundup, one tight paragraph per sector that had news.
 - `## 📈 Number of the month` and `## 🔭 What I'm watching next month`.
