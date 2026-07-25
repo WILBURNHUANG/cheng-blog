@@ -1,0 +1,60 @@
+---
+title: "Daily Tech & GNSS News Digest - July 25, 2026"
+description: "The Magnificent Seven shed roughly $797 billion in a single session—their worst day since April 2025—as an earnings season strong enough to beat almost every estimate keeps getting punished for one thing: AI spending. IBM adds a concrete data point, cutting its 2026 outlook after mainframe revenue plunged 42%, while investors brace for Meta, Microsoft, and Amazon to defend their own capex next week. On the positioning side, Xona Space Systems opens its Pulsar Verified program with Trimble, Septentrio, STMicroelectronics, and Safran signed on to make receivers speak LEO-PNT, and Jericho Receivers ships a software-defined atomic clock that keeps time when GNSS goes dark."
+date: 2026-07-25
+category: "News Digest"
+tags: ["Tech News", "GNSS", "Daily Digest", "AI", "IBM", "Semiconductors", "LEO-PNT", "Timing"]
+hero: "/images/daily-digest.svg"
+draft: false
+---
+
+By the end of the week the pattern was impossible to miss: companies are clearing the bar, and the market is unimpressed. About 85% of the S&P 500 firms that have reported beat profit estimates—the highest share in five years—yet the Magnificent Seven just had their worst session in over a year, because the one line investors care about right now is capex, not earnings. IBM handed the skeptics a tidy example of budgets shifting under the industry's feet. And in positioning, two stories pointed the same direction everyone in the field is heading: away from a single vulnerable signal, toward layered, jam-resistant PNT.
+
+## Tech News
+
+### The Magnificent Seven Lose $797 Billion in a Single Session
+
+The market delivered its verdict on AI-spending season Thursday, wiping roughly **$797 billion** off the **Magnificent Seven** in one session—their steepest drop since April 2025—and leaving the group down about **11%**, having erased close to **$2 trillion** from a late-May peak, per Bloomberg and NBC News. The selloff came even though profits have been strong: Bloomberg notes about **85%** of S&P 500 reporters have beaten estimates, the best showing in five years.
+
+The disconnect is the story. Investors have stopped rewarding the beats and started interrogating the bills, and the trigger was capex guidance climbing faster than anyone wants to underwrite. Chipmakers took the worst of it—the MSCI World Semiconductor index is down about **6%** in July—as traders rotated out of the names that led the melt-up. The spending is still real and still rising; what changed is the market's willingness to pay for it before the returns show up.
+
+### IBM Cuts Its 2026 Outlook as Mainframe Sales Plunge 42%
+
+**IBM** trimmed its full-year revenue forecast after a soft second quarter, with **IBM Z** mainframe revenue plunging **42%** as the z17 product cycle wound down—a drop CFO James Kavanaugh said shaved more than five percentage points off overall growth, per Bloomberg and CNBC. Adjusted EPS of **$2.93** missed the **$2.97** consensus, and revenue of **$17.16 billion** came in under the **$17.58 billion** Wall Street expected. The company lowered its constant-currency growth target to **4–5%** from "more than 5%," and cut its software growth outlook too.
+
+CEO Arvind Krishna's explanation is the interesting part: customers pulled mainframe purchases forward ahead of price increases, and enterprise budgets are increasingly steering large capital projects toward AI servers, GPUs, networking, and storage. In other words, the same AI buildout inflating hyperscaler capex is quietly cannibalizing demand for the previous generation of enterprise iron. IBM stock slid on the news.
+
+### The AI-Infrastructure Checks Keep Clearing Anyway
+
+For all the market's unease, private capital is still pouring into the physical layer of AI. A **BlackRock**- and **MGX**-backed consortium committed another **$5 billion** to **Aligned Data Centers**, fresh off closing a **$40 billion** acquisition, per Bloomberg and startup-funding trackers. AI-3D startup **Meshy** raised roughly **$400 million** at a **$1.5 billion** valuation, and battery-materials maker **Sila** pulled in **$300 million**—a reminder that the buildout runs on power and materials as much as silicon.
+
+The split screen is the whole month in miniature. Public-market investors are docking Big Tech for spending too much, while the private market races to own the data centers, power, and supply chain that spending depends on. Both can be rational at once: the assets are scarce and long-lived, but the near-term return math is exactly what this week's selloff was questioning.
+
+**Additional Headlines:**
+
+- **Meta, Microsoft, and Amazon report next week under a capex microscope**: After Alphabet lifted its spending guidance, the three face renewed investor pressure to prove their debt-funded AI outlays will pay off, per Bloomberg, with combined 2026 AI-infrastructure spending projected to top **$700 billion**.
+- **Memory giants face a pivotal earnings test**: **SK Hynix**, **Samsung**, and **Kioxia** are set to report into volatile AI-memory demand, a read on whether the high-bandwidth memory boom still has legs, per Bloomberg.
+- **ServiceNow's strength, IBM's weakness**: The same week showed enterprise software splitting—ServiceNow topped sales and bookings on AI adoption while IBM guided lower, per Bloomberg.
+- **AI-hardware startups dominate the funding tape**: Of the ten largest disclosed rounds globally, more than 80% landed in AI hardware, sensing, robotics, or physical-AI infrastructure, per startup-funding trackers.
+
+## GNSS News
+
+### Xona Opens Pulsar Verified, and the Big Names Line Up for LEO-PNT
+
+**Xona Space Systems** launched **Pulsar Verified**, a certification program that validates receivers, chipsets, and test equipment for interoperability with its **Pulsar** low-Earth-orbit PNT signal—and the inaugural cohort reads like a who's-who of the industry: **Trimble**, **Septentrio** (part of Hexagon), **STMicroelectronics**, **Safran**, **StarNav**, and **Keysight**, per Inside GNSS, GPS World, and SpaceNews. Trimble is bringing devices launched as far back as 2018 into Pulsar compatibility, and many receivers can ingest the signal via firmware updates—no new hardware required.
+
+That firmware angle is what makes this more than a press release. Xona's pitch is a LEO signal it says is up to **100x stronger** than GPS, with authentication baked in, deployed from a planned constellation of **258** satellites beginning in the second half of 2026. A certification program with STMicroelectronics and Trimble on day one signals that LEO-PNT is moving from demo passes to a supply chain—the boring, essential step where a new signal becomes something you can actually buy in a chip. Xona's demonstrator, Pulsar-0, logged over **350** transmission passes and **22 TB** of data in its first year, tracked by more than a dozen receiver makers.
+
+### Jericho Ships a Software-Defined Atomic Clock That Survives GNSS Outages
+
+**Jericho Receivers**, a subsidiary of **All 6G**, announced commercial availability of its **Software-Defined Atomic Clock (SDAC)**, a timing device that fuses multiple independent references—GNSS, terrestrial **ATSC 3.0** broadcast signals, and network-based precision time protocols—to hold atomic-grade accuracy even when satellite signals are jammed, spoofed, or gone, per Inside GNSS and Business Wire. Unlike conventional systems that fall back to "holdover" and slowly drift during an outage, the SDAC continuously cross-references live sources, so there's no single point of failure to knock out.
+
+The target market is everything that quietly depends on precise time: 5G and 6G networks, data centers, power grids, and financial systems. It's the same resilience thesis driving the whole PNT sector right now—assume the GPS signal will be denied at some point, and build timing that degrades gracefully instead of failing. Jericho adds a supply-chain wrinkle, saying the SDAC is U.S.-designed and built under a "no-Chinese-chip" policy, pitching assurance in the hardware as well as the signal.
+
+---
+
+## Key Takeaways
+
+- **Earnings are beating and the market doesn't care**: The Magnificent Seven lost about $797 billion in a single session—their worst since April 2025—despite 85% of S&P 500 reporters topping estimates, because investors have shifted from grading growth to interrogating AI capex.
+- **The AI buildout is reshaping demand it didn't intend to**: IBM cut its 2026 outlook as mainframe revenue fell 42%, with budgets flowing to GPUs and AI servers—even as BlackRock/MGX, Meshy, and Sila poured fresh billions into data centers and the physical layer of AI.
+- **PNT is going layered and jam-proof**: Xona's Pulsar Verified put Trimble, Septentrio, and STMicroelectronics behind a firmware-upgradable LEO-PNT signal, while Jericho's software-defined atomic clock fuses GNSS, broadcast, and network time to keep critical infrastructure ticking through outages.
