@@ -1,0 +1,53 @@
+---
+title: "Daily Tech & GNSS News Digest - August 4, 2026"
+description: "Earnings season hands the microphone to two very different debutants: SpaceX posts its first-ever quarterly report as a public company—Q2 revenue of $7.8 billion beating estimates even as an $18.4 billion capex bill and a fresh AI-compute buildout keep it in the red—while AMD delivers a double beat with data-center revenue more than doubling to $6.7 billion and Lisa Su promising the segment doubles again in 2027. Underneath, China's model factory keeps shipping: after Alibaba's Qwen, Moonshot's 2.8-trillion-parameter Kimi K3 and Zhipu's GLM-5.2 have Western analysts admitting the six-month lead they assumed is gone. On the positioning side, assured PNT goes modular—Pacific Defense wins an Army contract for a GPS-denied navigation card, and Tersus brings satellite-correction fallback to the farm."
+date: 2026-08-04
+category: "News Digest"
+tags: ["Tech News", "GNSS", "Daily Digest", "AI", "SpaceX", "AMD", "China AI", "Assured PNT"]
+hero: "/images/daily-digest.svg"
+draft: false
+---
+
+Tuesday belonged to first impressions and second acts. The market got its first-ever look inside SpaceX's books, and the numbers told the story of a company growing fast and spending faster—a familiar shape, now with a ticker attached. Hours earlier, AMD reminded everyone that the AI buildout still mints winners on the supply side, with a data-center business that has doubled in a year. And the week's quieter through-line kept humming: China's labs keep shipping frontier-class models, and the gap the West kept insisting on is getting harder to find. In positioning, the theme was resilience made practical—assured navigation shrinking down to a plug-in card, and precision farming that keeps steering when the correction signal drops.
+
+## Tech News
+
+### SpaceX Opens the Books: A $7.8 Billion Quarter, and a Bill to Match
+
+**SpaceX** reported its first quarterly results as a public company on Tuesday, and the debut cleared the bar Wall Street set. Second-quarter revenue came in at **$7.8 billion**, ahead of the roughly **$6.81 billion** consensus and up sharply from **$4.7 billion** in the first quarter, per CBS News and Yahoo Finance. Adjusted EBITDA of **$3.5 billion** blew past the **$2.0 billion** analysts expected, and the net loss narrowed to **$541 million** from about **$1 billion** a year earlier—progress, if not yet profit.
+
+The catch is the same one haunting every name in this cycle: the buildout costs money. Capital expenditures landed at **$18.37 billion** for the quarter, just under estimates, as the company pours cash into Starship, Starlink, and what its CFO described as "new AI compute agreements" driving "significant margin expansion." Investors have been ambivalent about the whole package. The stock closed Monday at **$114**—down almost **50%** from its **$211** closing record on June 16 and **15%** below the **$135** IPO price from what was, two months ago, the biggest public offering in history. A beat this clean should help; the tension between blistering top-line growth and an eye-watering spending line is now SpaceX's problem to manage in public, quarter after quarter.
+
+### AMD Doubles Its Data-Center Business and Guides for More
+
+**AMD** delivered a double beat after Monday's close carried into Tuesday's session, reporting second-quarter revenue of **$11.5 billion**, up **50%** year over year and ahead of the **$11.28 billion** consensus, with adjusted earnings of **$1.66** a share topping the **$1.61** estimate, per Benzinga and StockTitan. The engine was, unsurprisingly, the data center: segment revenue climbed **107%** to a record **$6.72 billion** and now makes up **58%** of the company, powered by EPYC server chips and Instinct GPUs feeding AI and cloud workloads.
+
+Management's guidance was the louder signal. On the call, CEO **Lisa Su** said AMD expects data-center sales to **double again in 2027** and server revenue to grow more than **80%** in the back half of fiscal 2026—an aggressive framing for a company that has spent the year trying to convince investors it can be more than the second act to Nvidia's headliner. Coming off a recent supply agreement with **Anthropic**, the print lands as fresh evidence that the AI hardware pie is big enough to feed a credible number two. The stock had run up roughly **8%** heading into the report, which set a high bar; delivering against it is the harder trick.
+
+### China's Model Factory Keeps Shipping, and the "Six-Month Gap" Fades
+
+The steady cadence of Chinese frontier releases turned into a cascade. Beyond Alibaba's latest, **Moonshot AI's Kimi K3**—unveiled in late July with **2.8 trillion** parameters—now stands as the largest open-source model yet, while **Zhipu's GLM-5.2** scored near top U.S. closed-source systems on benchmark tests, per Fortune, SCMP, and Bloomberg. The common thread is cost: these labs keep matching Western capability while undercutting Western pricing, a combination that has spread their models quickly through the developer world.
+
+The competitive read is what's changed. Z.ai's showing "undermined a consensus among Western analysts that Chinese AI models were at least six months behind," as Bloomberg put it, and **Meituan's LongCat-2.0** raised the stakes further by claiming performance on par with early-2026 OpenAI and Anthropic releases while training *entirely on Chinese-made processors* rather than U.S. chips. That last detail is the one to watch: if frontier training can be done without American silicon, the export-control lever the U.S. has leaned on loses some of its grip. Not every Western buyer is convinced—**NAB's** technology chief told Bloomberg the Australian lender still prefers U.S.-built models to Chinese ones—but preference is a weaker moat than a two-quarter head start.
+
+## GNSS News
+
+### Assured PNT Goes Modular: Pacific Defense Wins Army Contract for a GPS-Denied Navigation Card
+
+**Pacific Defense** won a contract from the U.S. Army's **Program Manager Positioning, Navigation and Timing (PM PNT)** to develop a **Block 2 Assured PNT (APNT) plug-in card** under the CMOSS Mounted Form Factor (**CMFF**) program, per Inside GNSS and GPS World. The card is a rugged, SOSA- and CMOSS-aligned **3U VPX** module built to deliver resilient navigation and precise timing in exactly the contested, GPS-degraded conditions that dominate this column's coverage—fusing GPS with alternative navigation signals, inertial sensors, and vehicle data so a platform keeps knowing where and when it is even when the satellite signal is jammed or spoofed.
+
+The significance is in the form factor as much as the function. Rather than a bespoke box bolted onto each vehicle, an open-standards plug-in card slots into common infrastructure the Army is standardizing across its fleet, letting assured-PNT capability be upgraded like any other module. Pacific Defense will enhance its fielded Block 1 design to CMFF requirements and deliver prototype quantities for Army integration and test. It's the unglamorous industrialization of resilience: after two years of navigation-warfare headlines about jamming signals and killing drones, this is the part where hardened positioning becomes a standard-issue component you can requisition.
+
+### Tersus Brings Satellite-Correction Fallback to the Farm
+
+On the commercial side, **Tersus GNSS** launched the **AG993**, a modular autosteer retrofit kit for agricultural vehicles that pairs high-precision GNSS with the company's proprietary **TAP** (Tersus Advanced Positioning) correction service alongside conventional RTK, per Inside GNSS and GPS World. The clever bit is **TAPFill**: when RTK connectivity drops—a cellular dead zone, a lost base-station link—the system automatically falls back to L-band satellite corrections and keeps steering, so a pass through the field doesn't stall the moment the network hiccups.
+
+The specs aim squarely at the mass-market retrofit tier: better than **2.5 cm** accuracy from 0.1 up to 30 km/h, standard automatic headland U-turns, and compatibility with more than **90%** of agricultural vehicles across GPS, Galileo, GLONASS, BeiDou, QZSS, and SBAS. At an expected **$4,000–$8,000**, it undercuts the factory-integrated guidance systems on new equipment and targets the enormous installed base of older tractors whose owners want centimeter steering without buying a new machine. It fits the year's recurring GNSS theme from the civilian angle—precision positioning shedding its premium-only reputation and becoming a bolt-on upgrade, resilience feature included.
+
+---
+
+## Key Takeaways
+
+- **Two earnings debutants, one shared tension**: SpaceX's first public quarter beat with $7.8 billion in revenue and $3.5 billion adjusted EBITDA but carried an $18.4 billion capex bill and a $541 million loss, while AMD posted a double beat as data-center revenue doubled to $6.7 billion and Lisa Su guided the segment to double again in 2027—growth and spending scaling in lockstep across the AI trade.
+- **China's frontier gap keeps closing**: A cascade of releases—Moonshot's 2.8-trillion-parameter Kimi K3, Zhipu's GLM-5.2 scoring near top U.S. models, and Meituan's LongCat-2.0 trained entirely on Chinese chips—has Western analysts abandoning the assumption that Chinese labs trail by six months, with cost the recurring edge.
+- **Assured PNT gets practical, military and civil**: Pacific Defense won an Army contract for a modular, open-standards CMFF plug-in card that keeps navigation and timing alive in GPS-denied conditions, while Tersus's AG993 brought automatic satellite-correction fallback to farm autosteer for $4,000–$8,000—resilient positioning turning into a standard-issue component on both the battlefield and the back forty.
