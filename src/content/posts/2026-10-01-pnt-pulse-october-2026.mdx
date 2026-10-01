@@ -1,0 +1,84 @@
+---
+title: "PNT Pulse — October 2026: Trust Gets Its Own Signal"
+description: "Galileo produced the first civil position fix authenticated down to the ranging signal — while a spoofer was actively lying to the receivers next to it. Plus Waymo's push into snow country, a robotruck built on robotaxi brains, and jamming over Los Angeles. A monthly read on where positioning, navigation & timing is actually heading."
+date: 2026-10-01
+category: "Newsletter"
+tags: ["PNT Pulse", "Newsletter", "GNSS", "PNT", "Galileo", "Authentication", "Robotaxi", "LEO-PNT", "Agriculture", "Drones", "Maritime"]
+hero: "/images/pnt-pulse/hero.svg"
+draft: false
+---
+
+**PNT Pulse** is my monthly read on where positioning, navigation & timing is actually heading — the signal under the press releases. Every issue does the same three things: gather the month's most consequential GNSS, PNT and Earth-observation news, place each story against the wider market and its value chain, and pull out the "so what" you can actually use. The running order never changes, so you can skim: automotive & AI navigation first, then space (LEO-PNT) & defense PNT, then a rotating roundup of everything else.
+
+**The 60-second version:** For years the answer to "how do you know your GPS position is real?" was, more or less, "you hope." In September that changed a little. For **two hours on 16 September, five Galileo satellites** broadcast an encrypted ranging signal, and a receiver in northern Norway held its true position while a spoofer convinced the ordinary receiver beside it that it was somewhere else. Same month: airliners lost GPS over Sweden *and* over Los Angeles, Waymo took driverless cars into snow country, and a commercial LEO-PNT operator lined up its first production launch. Trust stopped being a feature request and started being a signal you can tune into.
+
+## 🚗 Automotive, AI & End-to-End Navigation
+
+**Waymo went to snow country.** On 1 September Waymo opened public service in Denver, San Diego and Tampa, taking it to **14 U.S. cities** and a fleet of more than **4,000** vehicles.<sup>1</sup> The detail I'd circle: in Denver and San Diego, the only car on offer is the Ojai — the cheaper Zeekr-built minivan running Waymo's sixth-generation driver — with roughly 300 of them in the fleet so far.<sup>1</sup> Denver is the interesting one for PNT people. Sunbelt cities are a localization dream; a Colorado winter, where snow hides the lane paint, is where the "where exactly am I on the map?" problem gets real. Lidar map-matching does the heavy lifting, but that's precisely where a trustworthy GNSS prior earns its keep: it narrows the search when the visual landmarks are under a foot of powder.
+
+**Pony.ai put its robotaxi brain in an 18-wheeler.** At IAA Transportation in Hannover, Pony.ai and GAC showed a Gen-4 Level 4 electric robotruck that uses *the same domain controller* as Pony's Gen-7 robotaxi, with nine lidars, three radars and 13 cameras — and an autonomy kit whose bill of materials is **70% cheaper** than the last generation.<sup>2</sup> That's the large-driving-model shift in one product decision: train one stack, then pour it into whatever chassis pays. Trucks also drag positioning into tougher places — ports, where steel cranes and stacked containers turn GNSS multipath into a daily nuisance, and long highway stretches where the system has to hold lane-level confidence for hours. Shared brains, very different PNT environments.
+
+**Who else is moving.** The Gulf has become the overseas proving ground: Baidu's Apollo Go has run commercial service in Dubai since March, WeRide says its 200-plus robotaxis across the Middle East are already profitable, and Pony.ai plans its own Dubai launch later this year.<sup>3</sup> Waymo, meanwhile, keeps London and Munich on its to-do list.<sup>1</sup> The PNT thread: every new city is a new sky, a new set of urban canyons and a new interference picture. As fleets spread from Phoenix to Dubai to Munich, multi-constellation reach and *integrity* — knowing when to distrust your own position — matter far more than another centimetre of accuracy.
+
+> **Anchor:** Road & Automotive is the second pillar of the GNSS downstream market — together with Consumer Solutions it makes up **more than 90%** of cumulative 2023–2033 GNSS revenue (EUSPA EO and GNSS Market Report, Issue 2, © EUSPA 2024). Robotaxis are a tiny share of those units today, but they're the use case that defines what "good enough" positioning has to mean for everyone else.
+
+<img src="/images/GNSS_Segment.png" alt="GNSS revenue by market segment" style="width:100%;border-radius:12px;margin:1.5rem 0;" />
+<p style="text-align:center;color:#9DB4D8;font-size:0.85rem;margin-top:-0.75rem;">Consumer and automotive dominate GNSS revenue — which is why autonomy's integrity requirements tend to trickle down to everyone. <em>Source: EUSPA, 2024.</em></p>
+
+## 🛰️ Space (LEO-PNT) & Defense PNT
+
+**Galileo authenticated the ranging signal itself — under live spoofing.** On 16 September five Galileo satellites (E06, E21, E23, E34, E36) encrypted their E6-C signal for two hours, and receivers at Andøya, Norway, and at ESA's ESTEC lab got position fixes from it — the first real-world positioning with Galileo's upcoming Signal Authentication Service (SAS).<sup>4</sup> The Andøya part was timed to Jammertest, Norway's annual open-air jamming-and-spoofing week: while the spoofer fooled a commercial receiver into reporting false positions, the SAS receiver flagged the attack and held its true position.<sup>4</sup>
+
+Why that's a bigger deal than it sounds: Galileo's OSNMA, live since 2025, already signs the *navigation message* — so you know the data came from Galileo. But a clever spoofer can replay authentic data with fake timing. SAS closes that gap by authenticating the *ranging*. The ground segment publishes the spreading codes in encrypted form ahead of time; the receiver records the raw signal, then uses a key released *afterwards* to recover the codes and check them against what it heard.<sup>5</sup> A spoofer can't fake a code it doesn't know yet. Service validation and accreditation are planned for next year before SAS is declared operational, and both SAS and OSNMA will be free and worldwide.<sup>4</sup>
+
+<img src="/images/pnt-pulse/pnt-trust-stack.svg" alt="Diagram of the four-layer PNT trust stack: message authentication, signal authentication, LEO-PNT second opinion, and non-GNSS cross-checks" style="width:100%;border-radius:12px;margin:1.5rem 0;" />
+<p style="text-align:center;color:#9DB4D8;font-size:0.85rem;margin-top:-0.75rem;">The trust stack is filling in from the bottom up. September's news landed on layer 2, with layer 3 queued for an October launch.</p>
+
+**The LEO second opinion got its paperwork.** Xona Space Systems received full FCC authorization in early August to broadcast its Pulsar signal across a planned constellation of more than 250 LEO satellites — the first private operator cleared to broadcast navigation signals next to GPS frequencies — and says its first block of **six production spacecraft** is set to launch this month.<sup>6</sup> Pulsar promises signals up to 100× stronger than GPS from MEO, plus a cryptographic watermark. Put that next to SAS and you see the pattern: the industry isn't hunting for one magic fix, it's stacking independent ways to say "no, that position is wrong."
+
+**And the U.S. resilience plan crept back to life.** The Space Force says it will soon award follow-on Resilient-GPS contracts to Astranis, L3Harris and Sierra Space, funded by a congressional add-on — the small-satellite program meant to start delivering PNT from medium Earth orbit around 2028.<sup>7</sup> Small dollars, but it means the R-GPS idea survived its near-death experience.
+
+The reason all three matter showed up on flight decks. On 25 September, United crews reported GPS jamming climbing out of LAX and cruising near Los Angeles at 35,000 feet, with an offshore sector also affected; a week earlier, flights crossing Sweden lost satellite navigation too.<sup>8</sup> The aircraft fell back on inertial references and ground beacons, as designed. But "GPS jamming over a major U.S. hub" is no longer something you only read about in Baltic and Middle East reports.
+
+> **Anchor:** EUSPA lists *robustness* — to jamming and, separately, to spoofing — as a core GNSS performance parameter, with **authentication** as the tool that strengthens spoofing resistance, and singles out OSNMA and the free High Accuracy Service as Galileo's two differentiators (EUSPA EO and GNSS Market Report, Issue 2, © EUSPA 2024). SAS adds a third, and HAS users get the authentication too. Third-party sizing for assured/resilient PNT still runs from hundreds of millions today to ~$10bn by the mid-2030s; estimates vary widely, so treat them as direction, not gospel.
+
+## 🌍 Across the Rest of the Map
+
+**Agriculture: autonomy became something you bolt on.** At the Farm Progress Show in Iowa, Carbon Robotics — better known for laser weeding — showed its Carbon Autonomy kit on a John Deere tractor and launched an "Autonomy Ready" program for implement makers, with Great Plains as the first partner; the kit fits 2019-or-newer Deere 6 and 8 Series tractors and is up for pre-order in the U.S.<sup>9</sup> AgZen's AI precision sprayer, meanwhile, picked up more than 260 dealers this year.<sup>9</sup> The so-what: retrofit autonomy turns the existing fleet into the addressable market, and every autonomous pass leans on RTK-grade positioning plus the correction subscriptions behind it — exactly the services revenue that ag GNSS is built on.
+
+**Aviation & drones: the BVLOS rule is one desk away.** The FAA's Part 108 rule for beyond-visual-line-of-sight drone operations has cleared internal review and now sits with the White House regulatory office (OIRA); the FAA told Commercial UAV Expo it hopes to publish by the end of 2026, after roughly 4,000 public comments.<sup>10</sup> When it lands, routine BVLOS switches from bespoke waivers to published rules — and continuous, trustworthy position reporting stops being a nice-to-have. Given this month's jamming headlines, I'd expect resilience to show up in the operational fine print.
+
+**Maritime: navigate by the seabed.** UK firm Flare Bright is taking its GPS-free navigation software to sea: BathyNav matches sensor readings against bathymetric maps of the seabed, GhostNav runs a model of the vessel to sanity-check inertial data, and MeshNav links a swarm of vessels together.<sup>11</sup> It's layer 4 of the trust stack in practice — when you can't trust the sky, ask the terrain — and an obvious fit for chokepoints and subsea cable routes where spoofing has become routine.
+
+<img src="/images/GNSS_Revenue.png" alt="GNSS downstream revenue forecast, devices and services, 2023 to 2033" style="width:100%;border-radius:12px;margin:1.5rem 0;" />
+<p style="text-align:center;color:#9DB4D8;font-size:0.85rem;margin-top:-0.75rem;">Services — corrections, autonomy, assurance — are where GNSS revenue growth comes from. <em>Source: EUSPA, 2024.</em></p>
+
+> **Anchor:** Outside Consumer and Road & Automotive, Agriculture is the biggest GNSS revenue segment, at **~46%** of the remainder, and EUSPA expects services to make up roughly 80% of GNSS downstream revenue by 2033 (EUSPA EO and GNSS Market Report, Issue 2, © EUSPA 2024). Retrofit autonomy kits are services revenue wearing a hardware costume.
+
+## 📈 Number of the month
+
+**5 satellites, 2 hours.** That's all it took to show a civil receiver keeping a true position while a spoofer was actively lying to the receiver next to it. A small test with a big implication: a free, global, *open* service can now authenticate ranging and not just data. Once it's operational, "I trust my position" becomes something a mass-market chip can check, not merely hope for.
+
+## 🔭 What I'm watching next month
+
+- **Xona's first production launch.** Six Pulsar spacecraft are slated for October. Whether they fly on time — and how quickly early receivers get firmware support — tells us how real the LEO "second opinion" is for 2027.
+- **Part 108's OIRA clock.** If the BVLOS rule publishes before year-end, read the position-reporting and detect-and-avoid sections closely for any resilience requirements.
+- **Denver's first real snow.** Waymo's Ojai fleet meets winter for the first time. Any service pauses, or any lack of them, will be a quiet data point on how robust map-relative localization really is.
+
+## References
+
+1. [TechCrunch — Waymo accelerates robotaxi expansion with launches in Denver, San Diego, and Tampa](https://techcrunch.com/2026/09/01/waymo-accelerates-robotaxi-expansion-with-launches-in-denver-san-diego-and-tampa/)
+2. [PR Newswire — Pony.ai unveils new Gen-4 Robotruck in collaboration with GAC Commercial Vehicle](https://www.prnewswire.com/news-releases/ponyai-unveils-new-gen-4-robotruck-in-collaboration-with-gac-commercial-vehicle-302877624.html)
+3. [Xinhua — Chinese robotaxis help drive Dubai's smart mobility future](https://english.news.cn/20260929/515ddcae7bc14c4cae72abf8b844cebf/c.html)
+4. [GPS World — Galileo achieves first civil authenticated position fix under spoofing conditions](https://www.gpsworld.com/galileo-achieves-first-civil-authenticated-position-fix-under-spoofing-conditions/)
+5. [Hackaday — Defeating satellite spoofing with Galileo's encryption](https://hackaday.com/2026/09/27/defeating-satellite-spoofing-with-galileos-encryption/)
+6. [SatNews — FCC authorizes Xona Space Systems for full commercial Pulsar LEO constellation deployment](https://satnews.com/2026/08/03/fcc-authorizes-xona-space-systems-for-full-commercial-pulsar-leo-constellation-deployment/)
+7. [Aviation Week — Space Force to award new Resilient-GPS contracts](https://aviationweek.com/space/satellites/space-force-award-new-resilient-gps-contracts)
+8. [AirLive — Several United flights affected by GPS jamming over Los Angeles](https://airlive.net/location/north-america/usa/2026/09/25/several-united-flights-are-reporting-being-affected-by-gps-jamming-over-los-angeles/)
+9. [Farm Equipment — 5 big precision technology takeaways from the 2026 Farm Progress Show](https://www.farm-equipment.com/blogs/6-opinions-columns/post/25660-5-big-precision-technology-takeaways-from-2026-farm-progress-show)
+10. [The Flight Brief — Part 108 nears publication, FAA says](https://www.theflightbrief.com/articles/faa-part-108-bvlos-update-september-2026)
+11. [Armada International — GPS-free autonomous navigation takes to water](https://www.armadainternational.com/2026/10/gps-free-autonomous-navigation-takes-to-water-foc/)
+
+---
+
+*Market fundamentals anchored to the EUSPA EO and GNSS Market Report, Issue 2, © EUSPA 2024. Third-party analyst forecasts are labelled as estimates and vary widely — read them as direction, not destiny. Sources are numbered in the References above.*

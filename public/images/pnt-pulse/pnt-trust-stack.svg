@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1200" height="630" fill="#050A19"/>
+  <text x="60" y="70" fill="#F1F5FF" font-size="32" font-weight="700">The PNT trust stack, October 2026</text>
+  <text x="60" y="104" fill="#9DB4D8" font-size="18">Each layer answers a different question. Spoofing only works if every one of them stays silent.</text>
+
+  <!-- Layer 4 -->
+  <rect x="60" y="140" width="760" height="92" rx="14" fill="#0A1530" stroke="#818CF8" stroke-width="2"/>
+  <text x="88" y="178" fill="#F1F5FF" font-size="22" font-weight="700">4 · Non-GNSS cross-check</text>
+  <text x="88" y="210" fill="#9DB4D8" font-size="17">Inertial, terrain / seabed matching, lidar maps — "does physics agree?"</text>
+
+  <!-- Layer 3 -->
+  <rect x="60" y="246" width="760" height="92" rx="14" fill="#0A1530" stroke="#5CE1FF" stroke-width="2" stroke-opacity="0.55"/>
+  <text x="88" y="284" fill="#F1F5FF" font-size="22" font-weight="700">3 · LEO-PNT second opinion</text>
+  <text x="88" y="316" fill="#9DB4D8" font-size="17">Stronger, watermarked signals from low orbit — "does another sky agree?"</text>
+
+  <!-- Layer 2 -->
+  <rect x="60" y="352" width="760" height="92" rx="14" fill="#0A1530" stroke="#5CE1FF" stroke-width="3"/>
+  <text x="88" y="390" fill="#5CE1FF" font-size="22" font-weight="700">2 · Signal authentication (Galileo SAS)</text>
+  <text x="88" y="422" fill="#9DB4D8" font-size="17">Encrypted E6-C ranging codes, key released after — "is the ranging real?"</text>
+
+  <!-- Layer 1 -->
+  <rect x="60" y="458" width="760" height="92" rx="14" fill="#0A1530" stroke="#5CE1FF" stroke-width="2" stroke-opacity="0.55"/>
+  <text x="88" y="496" fill="#F1F5FF" font-size="22" font-weight="700">1 · Message authentication (Galileo OSNMA)</text>
+  <text x="88" y="528" fill="#9DB4D8" font-size="17">Signed navigation data, live since 2025 — "is the data from the system?"</text>
+
+  <!-- Right column: status -->
+  <text x="860" y="170" fill="#9DB4D8" font-size="15" font-weight="700" letter-spacing="1">STATUS</text>
+  <circle cx="872" cy="190" r="7" fill="#818CF8"/>
+  <text x="890" y="196" fill="#F1F5FF" font-size="16">Shipping in niches</text>
+  <circle cx="872" cy="296" r="7" fill="#5CE1FF" fill-opacity="0.55"/>
+  <text x="890" y="290" fill="#F1F5FF" font-size="16">Licensed; first production</text>
+  <text x="890" y="312" fill="#F1F5FF" font-size="16">batch due to launch</text>
+  <circle cx="872" cy="398" r="7" fill="#5CE1FF"/>
+  <text x="890" y="392" fill="#5CE1FF" font-size="16" font-weight="700">First live fix under</text>
+  <text x="890" y="414" fill="#5CE1FF" font-size="16" font-weight="700">spoofing, 16 Sept</text>
+  <circle cx="872" cy="504" r="7" fill="#5CE1FF" fill-opacity="0.55"/>
+  <text x="890" y="510" fill="#F1F5FF" font-size="16">Operational</text>
+
+  <line x1="840" y1="140" x2="840" y2="550" stroke="#9DB4D8" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="60" y="596" fill="#9DB4D8" font-size="15">Diagram: Cheng Huang, PNT Pulse. Layer status as reported in September 2026.</text>
+</svg>
