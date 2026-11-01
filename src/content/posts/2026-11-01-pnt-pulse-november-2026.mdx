@@ -1,0 +1,86 @@
+---
+title: "PNT Pulse — November 2026: The Sky Gets Crowded"
+description: "Xona put six Pulsar satellites in orbit, ESA ordered four more Galileo G2s, and a GAO audit showed how long America's GPS fix will take. Plus Waymo's 250-square-mile expansion, Dubai's 248-scenario robotaxi test lab, and a Starlink signal used for positioning. A monthly read on where PNT is actually heading."
+date: 2026-11-01
+category: "Newsletter"
+tags: ["PNT Pulse", "Newsletter", "GNSS", "PNT", "LEO-PNT", "Galileo", "Robotaxi", "GPS Modernization", "Maritime", "Timing"]
+hero: "/images/pnt-pulse/hero.svg"
+draft: false
+---
+
+**PNT Pulse** is my monthly read on where positioning, navigation & timing is actually heading — the signal under the press releases. Every issue does the same three things: gather the month's most consequential GNSS, PNT and Earth-observation news, place each story against the wider market and its value chain, and pull out the "so what" you can actually use. The running order never changes, so you can skim: automotive & AI navigation first, then space (LEO-PNT) & defense PNT, then a rotating roundup of everything else.
+
+**The 60-second version:** Last month I wrote that trust was becoming a signal. This month the *sky* got busier. On 26 October **six Pulsar satellites** went up on a Falcon 9, ESA ordered **four more Galileo G2 satellites** (a fleet of 16), and a researcher showed a Starlink phone-link signal can be turned into a position fix. Meanwhile an audit reminded everyone that the ground system behind GPS's own upgrades won't deliver most capabilities until 2028-2029. The pattern: nobody is waiting for one fix. Everyone is adding layers.
+
+## 🚗 Automotive, AI & End-to-End Navigation
+
+**Waymo added about 250 square miles in one go.** On 27 October it announced bigger service areas across Los Angeles, Nashville, Orlando, San Diego and the Bay Area, rolling out over the following week.<sup>1</sup> It now runs in 15 U.S. metros with more than **500,000 paid rides a week**.<sup>1</sup> Nothing glamorous, and that's the point: scaling a robotaxi is mostly *stretching the map*, and every new square mile brings fresh urban canyons, new tunnels and garages, and new places where GNSS lies a little. The map-matching stack handles it, but a trustworthy satellite prior is what keeps the "where am I?" search cheap while it does.
+
+**Dubai is turning robotaxi readiness into a test plan.** The city's transport authority runs a Mobility Labs facility that checks vehicles against **248 test scenarios** covering traffic and weather, and closed lanes of Emirates Road (26-31 October) for driverless-taxi trials.<sup>2</sup> It wants **25% of all journeys autonomous by 2030**, and Uber began running Baidu's driverless Apollo Go there in August.<sup>2</sup> I'd love to see how many of those 248 scenarios are positioning scenarios: tunnel exits, interference, multipath off glass towers. Regulators writing scenario lists is how "integrity" becomes a requirement instead of a slide.
+
+**Who else is moving.** In London, Wayve's learning-based driver went live on Uber in September in Ford Mach-Es, still with a licensed safety driver aboard, with more than **140,000** riders activating the option in the app.<sup>3</sup> Pony.ai ended June with **1,975** robotaxis and is targeting more than 3,500 by year-end, with Luxembourg and Singapore already on its list.<sup>4</sup> The PNT thread: a learned driver that generalises from city to city still needs a position it can believe in every time the fleet lands in a new sky. Multi-constellation reach and integrity matter more as fleets go international than another centimetre of accuracy.
+
+> **Anchor:** Road & Automotive sits beside Consumer Solutions in making up **more than 90%** of cumulative 2023–2033 GNSS revenue (EUSPA EO and GNSS Market Report, Issue 2, © EUSPA 2024). Robotaxis are a sliver of today's units, but they set the bar for what "good enough" means for everyone else.
+
+<img src="/images/GNSS_Segment.png" alt="GNSS revenue by market segment" style="width:100%;border-radius:12px;margin:1.5rem 0;" />
+<p style="text-align:center;color:#9DB4D8;font-size:0.85rem;margin-top:-0.75rem;">Consumer and automotive dominate GNSS revenue, so autonomy's integrity needs tend to trickle down. <em>Source: EUSPA, 2024.</em></p>
+
+## 🛰️ Space (LEO-PNT) & Defense PNT
+
+**Xona's production constellation has started.** Six Pulsar satellites launched on a Falcon 9 rideshare from Cape Canaveral: four service satellites on the Pulsar-0 bus, plus two test satellites.<sup>5</sup> The company says service starts in **2027**, with early users from mid-2027. With four satellites, early customers in the U.S., Canada and most of Europe get about eight passes a day of roughly 25 minutes each, so this is a proving phase, not continuous coverage.<sup>5</sup> Xona claims signal accuracy under 2 cm and better behaviour in jammed and indoor conditions; those are company claims until independent receivers confirm them. The more telling line: the next four spacecraft are already in production, with a goal of several satellites a week by end-2027.<sup>5</sup> Last month this was a promise with a licence; now it's hardware.
+
+**Europe's LEO answer showed its first full-chain results.** ESA's Celeste IOD1, launched in March, transmitted E5 and S-band navigation signals that ground receivers tracked and decoded, including a Septentrio unit with an omnidirectional antenna.<sup>6</sup> No positioning-accuracy numbers yet; those assessments are still to come, with four more demo satellites planned.<sup>6</sup> Meanwhile ESA ordered **four additional Galileo G2 satellites** on behalf of EUSPA, taking the G2 fleet from 12 to 16, with delivery scheduled for 2031.<sup>7</sup> Same week, ESA funded three Norwegian projects on interference: a library of jamming recordings, maritime sensors with OSNMA and attack detection, and drone navigation that targets 10 minutes of operation without GNSS.<sup>7</sup> Europe is running both tracks at once: renew the MEO backbone, prototype the LEO layer, fund the resilience gear.
+
+**Even a phone-link signal can navigate, kind of.** An Ohio State team used Starlink direct-to-cell LTE signals for a Doppler positioning solution with no GNSS: **2.7 m horizontal** error using 12 satellites and a nearby base receiver.<sup>8</sup> The caveats are big: one 10-minute static test, specialised radios, and Starlink publishes no navigation data or precise orbits for this use.<sup>8</sup> Treat it as a proof of physics, not a product. But it sits alongside Iridium's tiny PNT chip, which was reported in commercial production at ION GNSS+.<sup>9</sup> Signals of opportunity are becoming a real fallback class.
+
+<img src="/images/pnt-pulse/crowded-sky.svg" alt="Diagram of four PNT layers: GNSS in MEO, dedicated LEO-PNT, communications constellations repurposed for PNT, and non-satellite cross-checks" style="width:100%;border-radius:12px;margin:1.5rem 0;" />
+<p style="text-align:center;color:#9DB4D8;font-size:0.85rem;margin-top:-0.75rem;">Four layers, four different questions. This month had news on every one of them.</p>
+
+**The U.S. side: slow, funded, and under audit.** A GAO report on 7 October says the Pentagon decided to end the OCX ground-system program and modernise the existing system instead, with most PNT capabilities expected in 2028-2029.<sup>10</sup> GPS IIIF deliveries have slipped by an average of **nine months** since December 2024, and GAO flags that the schedule may not meet the requirement of 24 operational M-code satellites.<sup>10</sup> It also cites a report that jamming cut one precision munition's effectiveness by up to **80%**, and recommends the services assess consolidating their scattered PNT efforts.<sup>10</sup> Separately, the Pentagon's new FORTRESS America resilience initiative names PNT resilience in its first guidance, though scope and funding are still undefined.<sup>11</sup> The so-what: the complementary-PNT layer isn't optional insurance anymore; it's the bridge while the main system catches up.
+
+> **Anchor:** EUSPA lists *robustness* to jamming and spoofing as a core GNSS performance parameter, and positions Galileo's OSNMA and free High Accuracy Service as differentiators (EUSPA EO and GNSS Market Report, Issue 2, © EUSPA 2024). EUSPA's scope excludes defence, so the defence picture here is current reporting. Third-party sizing for assured PNT varies widely; read it as direction, not gospel.
+
+## 🌍 Across the Rest of the Map
+
+**Regional systems: India is patching NavIC.** ISRO plans to launch NVS-03 on a GSLV Mk-2 around 30 October (an official called the date "most probably", so not confirmed), one of five planned second-generation satellites meant to restore NavIC capability after earlier setbacks.<sup>12</sup> The lesson: sovereign navigation is a maintenance business, not a one-time launch.
+
+**Timing & telecom: resilience is moving into the chip.** Beyond the Iridium ASIC, Oscilloquartz extended Iridium PNT across its timing portfolio, and the ION GNSS+ takeaway was that experts see trust as a system-level problem, not a receiver problem.<sup>9</sup> For network and grid operators, a second timing source is turning from a project into a part number.
+
+**Earth observation: more radio-occultation data.** PlanetiQ launched GNOMES-10, adding to its GNSS radio-occultation constellation, which uses GNSS signals bent by the atmosphere for weather data.<sup>13</sup> It's the quiet reminder that GNSS is also a sensor for the planet, not just a positioning service.
+
+**Drones: detect the lie in under a second.** A new drone positioning board reportedly detects GNSS spoofing in less than one second.<sup>14</sup> Fast on-board detection is exactly what unmanned aircraft need while regulations loosen; I'll be curious how it behaves outside the demo.
+
+> **Anchor:** EUSPA expects services to make up roughly 80% of GNSS downstream revenue by 2033 (EUSPA EO and GNSS Market Report, Issue 2, © EUSPA 2024). Authentication, assurance and corrections are all services wearing different hats.
+
+## 📈 Number of the month
+
+**392.** That's how many vessels reported GNSS interference to Finnish authorities between January and August 2026, and researchers say the real number is likely higher.<sup>15</sup> A simulation study found that fusing AIS dead-reckoning with receiver checks lifted jamming detection from roughly 75% to about 93%, with spoofing detection near 99.5%, though it's simulation only and AIS is not fully independent of GNSS.<sup>15</sup> The number says the problem is not hypothetical, and the fix is more independent evidence, not a better single receiver.
+
+## 🔭 What I'm watching next month
+
+- **First Pulsar signals and receivers.** Will independent labs confirm Xona's accuracy claims, and which receiver makers announce support before the 2027 service start?
+- **Celeste's accuracy numbers.** The ranging works; now the positioning performance figures decide how competitive Europe's LEO layer is.
+- **NavIC's NVS-03.** Did it launch on time, and does it restore the capability India wants?
+- **Pentagon follow-through.** Whether FORTRESS America gets funded PNT lines, and how the services answer the GAO consolidation recommendation.
+
+## References
+
+1. [Electrek — Waymo adds nearly 250 square miles of robotaxi coverage in 5 cities](https://electrek.co/2026/10/27/waymo-expansion-250-square-miles-five-cities/)
+2. [The National — Dubai announces lane closures on Emirates Road for self-driving taxi tests](https://www.thenationalnews.com/news/uae/2026/10/26/dubai-announces-lane-closures-on-emirates-road-from-monday-to-allow-for-self-driving-taxi-tests/)
+3. [electrive — Wayve and Uber launch autonomous rides in London](https://electrive.com/2026/09/03/wayve-and-uber-launch-autonomous-rides-in-london)
+4. [Pony AI Inc. — Form 6-K, second quarter 2026 results](https://www.sec.gov/Archives/edgar/data/0001969302/000110465926098113/tm2623382d1_ex99-1.htm)
+5. [Inside GNSS — 6 Pulsar satellites launched into LEO, marking the start of Xona's production constellation](https://insidegnss.com/6-pulsar-satellites-launched-into-leo-marking-the-start-of-xonas-production-constellation/)
+6. [Inside GNSS — ESA's Celeste demonstrates end-to-end LEO-PNT in orbit](https://insidegnss.com/esas-celeste-demonstrates-end-to-end-leo-pnt-in-orbit/)
+7. [Inside GNSS — ESA adds four Galileo G2 satellites, funds Norwegian work on jamming and spoofing resilience](https://insidegnss.com/esa-adds-four-galileo-g2-satellites-funds-norwegian-work-on-jamming-and-spoofing-resilience/)
+8. [Inside GNSS — Beyond connectivity: exploiting Starlink direct-to-cell signals for PNT](https://insidegnss.com/beyond-connectivity-exploiting-starlink-direct-to-cell-signals-for-pnt/)
+9. [Inside GNSS — ION GNSS+ 2026: trust, resilience and a sky getting fuller](https://insidegnss.com/ion-gnss-2026-trust-resilience-and-a-sky-getting-fuller/)
+10. [Inside GNSS — GAO report details progress and remaining work as DOD fields new GPS and complementary PNT capabilities](https://insidegnss.com/gao-report-details-progress-and-remaining-work-as-dod-fields-new-gps-and-complementary-pnt-capabilities/)
+11. [Inside GNSS — FORTRESS America: will PNT resilience become a Pentagon priority?](https://insidegnss.com/fortress-america-will-pnt-resilience-become-a-pentagon-priority/)
+12. [GPS World — India to launch NVS-03 satellite to bolster NavIC](https://www.gpsworld.com/india-to-launch-nvs-03-satellite-to-bolster-navic/)
+13. [GPS World — PlanetiQ launches GNOMES-10, expanding high-precision GNSS-RO constellation](https://www.gpsworld.com/planetiq-launches-gnomes-10-expanding-high-precision-gnss-ro-constellation/)
+14. [GPS World — Drone positioning board spots GNSS spoofing in less than 1 second](https://www.gpsworld.com/drone-positioning-board-spots-gnss-spoofing-in-less-than-1-second/)
+15. [Inside GNSS — AIS-GNSS fusion strengthens maritime navigation](https://insidegnss.com/ais-gnss-fusion-strengthens-maritime-navigation/)
+
+---
+
+*Market fundamentals anchored to the EUSPA EO and GNSS Market Report, Issue 2, © EUSPA 2024. Third-party analyst forecasts are labelled as estimates and vary widely — read them as direction, not destiny. Sources are numbered in the References above.*
